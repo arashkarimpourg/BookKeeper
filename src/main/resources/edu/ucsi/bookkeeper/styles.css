@@ -1,14 +1,13 @@
 .rounded-corner-pane {
-    -fx-background-color: white;
-    -fx-background-radius: 20;
-    -fx-border-color: black;
+    -fx-background-color: #1B1F30;
+    -fx-background-radius: 7;
+    -fx-border-color: #3C3D45;
     -fx-border-width: 1;
-    -fx-border-radius: 20;
+    -fx-border-radius: 7;
 }
 
 .title-bar {
-    -fx-background-color: #303F9F;
-    -fx-background-radius: 20 20 0 0;
+    -fx-background-radius: 7 7 0 0;
     -fx-border-color: transparent;
 }
 

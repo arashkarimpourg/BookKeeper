@@ -2,6 +2,7 @@ package edu.ucsi.bookkeeper;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -33,6 +34,7 @@ public class BookKeeper extends Application {
         HBox titleBar = new HBox();
         titleBar.getStyleClass().add("title-bar");
         titleBar.setPadding(new Insets(10));
+        titleBar.setAlignment(Pos.CENTER_RIGHT);
 
         Button closeButton = new Button("X");
         closeButton.getStyleClass().add("window-button");
@@ -46,7 +48,7 @@ public class BookKeeper extends Application {
         minimizeButton.getStyleClass().add("window-button");
         minimizeButton.setOnAction(event -> primaryStage.setIconified(true));
 
-        titleBar.getChildren().addAll(closeButton, maximizeButton, minimizeButton);
+        titleBar.getChildren().addAll(minimizeButton, maximizeButton, closeButton);
 
         // Content Pane
         Pane contentPane = new Pane();
