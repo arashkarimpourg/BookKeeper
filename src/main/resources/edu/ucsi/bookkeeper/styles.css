@@ -4,20 +4,18 @@
     -fx-border-color: #3C3D45;
     -fx-border-width: 1;
     -fx-border-radius: 7;
-    -fx-padding: 0;
+    -fx-padding: -2 -2 0 0;
 }
 
 .title-bar {
     -fx-background-radius: 0 7 0 0;
     -fx-border-color: transparent;
-    -fx-padding: 0;
 }
 
 .window-button {
     -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-padding: 6 16 6 16;
-    -fx-background-insets: 0;
+    -fx-padding: 8 16 8 16;
 }
 
 .window-button:hover {
