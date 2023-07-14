@@ -27,6 +27,49 @@ public class BookKeeper extends Application {
         VBox leftSidebar = new VBox();
         leftSidebar.getStyleClass().add("left-sidebar");
         leftSidebar.setPrefWidth(200);
+        leftSidebar.setFillWidth(true);
+        leftSidebar.setAlignment(Pos.CENTER);
+        leftSidebar.setSpacing(4);
+
+        Button usersTab = new Button("Users");
+        usersTab.getStyleClass().add("sidebar-button");
+        usersTab.setOnAction(event -> {
+            // Logic to change content pane for Button 1
+        });
+        usersTab.setMaxWidth(Double.MAX_VALUE);
+
+        // Imports the PNG file while avoiding NullPointerException
+        InputStream imageStreamUsers = getClass().getResourceAsStream("images/side-bar/users.png");
+        if (imageStreamUsers != null) {
+            Image usersImage = new Image(imageStreamUsers);
+            ImageView usersIcon = new ImageView(usersImage);
+            usersIcon.setFitWidth(26);
+            usersIcon.setFitHeight(26);
+            usersTab.setGraphic(usersIcon);
+        } else {
+            System.err.println("Unable to load users.png");
+        }
+
+        Button booksTab = new Button("Books");
+        booksTab.getStyleClass().add("sidebar-button");
+        booksTab.setOnAction(event -> {
+            // Logic to change content pane for Button 2
+        });
+        booksTab.setMaxWidth(Double.MAX_VALUE);
+
+        // Imports the PNG file while avoiding NullPointerException
+        InputStream imageStreamBooks = getClass().getResourceAsStream("images/side-bar/books.png");
+        if (imageStreamBooks != null) {
+            Image booksImage = new Image(imageStreamBooks);
+            ImageView booksIcon = new ImageView(booksImage);
+            booksIcon.setFitWidth(26);
+            booksIcon.setFitHeight(26);
+            booksTab.setGraphic(booksIcon);
+        } else {
+            System.err.println("Unable to load books.png");
+        }
+
+        leftSidebar.getChildren().addAll(usersTab, booksTab);
 
         // Right Pane
         VBox rightPane = new VBox();

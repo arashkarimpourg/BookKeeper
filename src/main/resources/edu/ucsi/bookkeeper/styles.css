@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "UI Font";
+    src: url("fonts/sui.ttf");
+}
+
+@font-face {
+    font-family: "UI Font Bold";
+    src: url("fonts/sui-bold.ttf");
+}
+
 .rounded-corner-pane {
     -fx-background-color: #1B1F30;
     -fx-background-radius: 7;
@@ -36,4 +46,25 @@
 
 #close-button:pressed {
     -fx-background-color: #B3271C;
+}
+
+.left-sidebar {
+    -fx-padding: 20;
+}
+
+.sidebar-button {
+    -fx-background-radius: 6;
+    -fx-background-color: #282D3A;
+    -fx-text-fill: white;
+    -fx-padding: 4 6 4 6;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13;
+    -fx-alignment: baseline-left;
+}
+.sidebar-button:hover {
+    -fx-background-color: #242937;
+}
+
+.sidebar-button:pressed {
+    -fx-background-color: #282D3A;
 }
