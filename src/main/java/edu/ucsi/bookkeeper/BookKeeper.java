@@ -22,6 +22,7 @@ public class BookKeeper extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
     private boolean isUserEditPaneVisible = false;
+    private boolean isBookEditPaneVisible = false;
 
     @Override
     public void start(Stage primaryStage) {
@@ -71,11 +72,8 @@ public class BookKeeper extends Application {
 
         // Create user tab
         Button userTab = new Button("Users");
-        userTab.getStyleClass().add("sidebar-button");
+        userTab.getStyleClass().setAll("sidebar-button", "sidebar-button-selected");
         userTab.setMaxWidth(Double.MAX_VALUE);
-        userTab.setOnAction(event -> {
-            // Logic to change userContentPane for userTab
-        });
 
         // Null check for user tab icon
         InputStream imageStreamUser = getClass().getResourceAsStream("images/sidebar/user.png");
@@ -93,9 +91,6 @@ public class BookKeeper extends Application {
         Button bookTab = new Button("Books");
         bookTab.getStyleClass().add("sidebar-button");
         bookTab.setMaxWidth(Double.MAX_VALUE);
-        bookTab.setOnAction(event -> {
-            // Logic to change userContentPane for bookTab
-        });
 
         // Null check for book tab icon
         InputStream imageStreamBook = getClass().getResourceAsStream("images/sidebar/book.png");
@@ -193,7 +188,7 @@ public class BookKeeper extends Application {
 
         // Create user content pane title
         Label userContentPaneTitle = new Label("Users");
-        userContentPaneTitle.setId("user-content-pane-title");
+        userContentPaneTitle.getStyleClass().add("main-pane-title");
 
         // Create user edit button
         Button userEditButton = new Button("EDIT USER");
@@ -211,8 +206,53 @@ public class BookKeeper extends Application {
         // Add user content pane and user edit pane to user pane
         userPane.getChildren().addAll(userContentPane, userEditPane);
 
+        // Create book pane
+        StackPane bookPane = new StackPane();
+        bookPane.setId("book-pane");
+
+        // Create book content pane
+        VBox bookContentPane = new VBox();
+        bookContentPane.setId("book-content-pane");
+
+        // Create book content pane title
+        Label bookContentPaneTitle = new Label("Books");
+        bookContentPaneTitle.getStyleClass().add("main-pane-title");
+
+        // Create book edit button
+        Button bookEditButton = new Button("EDIT BOOK");
+        bookEditButton.setOnAction(e -> toggleBookEditPane(bookPane));
+
+        // Add book content pane and book edit title to book content pane
+        bookContentPane.getChildren().addAll(bookContentPaneTitle, bookEditButton);
+
+        // Create book edit pane
+        VBox bookEditPane = new VBox();
+        bookEditPane.setId("book-edit-pane");
+        bookEditPane.setTranslateX(bookContentPane.getWidth());
+        bookEditPane.setVisible(false);
+
+        // Add book content pane and book edit pane to book pane
+        bookPane.getChildren().addAll(bookContentPane, bookEditPane);
+
         // Set action for back button
         backButton.setOnAction(e -> toggleUserEditPane(userPane));
+
+        // Set action for user tab
+        userTab.setOnAction(event -> {
+            mainPane.getChildren().clear();
+            mainPane.getChildren().add(userPane);
+            userTab.getStyleClass().setAll("sidebar-button", "sidebar-button-selected");
+            bookTab.getStyleClass().setAll("sidebar-button");
+
+        });
+
+        // Set action for book tab
+        bookTab.setOnAction(event -> {
+            mainPane.getChildren().clear();
+            mainPane.getChildren().add(bookPane);
+            bookTab.getStyleClass().setAll("sidebar-button", "sidebar-button-selected");
+            userTab.getStyleClass().setAll("sidebar-button");
+        });
 
         // Add user pane to main pane
         mainPane.getChildren().addAll(userPane);
@@ -280,6 +320,27 @@ public class BookKeeper extends Application {
             slideOut.setOnFinished(e -> userEditPane.setVisible(false));
             slideOut.play();
             isUserEditPaneVisible = false;
+        }
+    }
+
+    private void toggleBookEditPane(StackPane bookPane) {
+        VBox bookEditPane = (VBox) bookPane.getChildren().get(1);
+
+        if (!isBookEditPaneVisible) {
+            bookEditPane.setVisible(true);
+
+            TranslateTransition slideIn = new TranslateTransition(Duration.millis(1000), bookEditPane);
+            slideIn.setFromX(bookEditPane.getWidth());
+            slideIn.setToX(0);
+            slideIn.play();
+            isBookEditPaneVisible = true;
+        } else {
+            TranslateTransition slideOut = new TranslateTransition(Duration.millis(1000), bookEditPane);
+            slideOut.setFromX(0);
+            slideOut.setToX(bookEditPane.getWidth());
+            slideOut.setOnFinished(e -> bookEditPane.setVisible(false));
+            slideOut.play();
+            isBookEditPaneVisible = false;
         }
     }
 

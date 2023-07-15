@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Added two buttons to the sidebar.">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/title-bar/back.png" afterDir="false" />
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Cleaned up the code.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/fonts/sui-bold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/fonts/segoe-ui-bold.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/fonts/sui.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/fonts/segoe-ui.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/side-bar/books.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/sidebar/book.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/side-bar/users.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/sidebar/user.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/title-bar/close.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/window-controls-pane/close.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/title-bar/maximize.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/window-controls-pane/maximize.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/title-bar/minimize.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/window-controls-pane/minimize.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +116,23 @@
       <option name="project" value="LOCAL" />
       <updated>1689338546549</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Cleaned up the code.">
+      <option name="closed" value="true" />
+      <created>1689402224593</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1689402224593</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Cleaned up the code.">
+      <option name="closed" value="true" />
+      <created>1689402247357</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1689402247357</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +154,7 @@
     <MESSAGE value="Use PNG files for maximize, minimize and close buttons." />
     <MESSAGE value="Title bar is finished." />
     <MESSAGE value="Added two buttons to the sidebar." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added two buttons to the sidebar." />
+    <MESSAGE value="Cleaned up the code." />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up the code." />
   </component>
 </project>

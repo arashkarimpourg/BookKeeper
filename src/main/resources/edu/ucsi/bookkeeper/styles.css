@@ -77,10 +77,14 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13;
     -fx-alignment: baseline-left;
-    -fx-background-color: #282D3A;
+    -fx-background-color: transparent;
     -fx-background-radius: 6;
     -fx-text-fill: white;
     -fx-padding: 4 6 4 6;
+}
+
+.sidebar-button-selected {
+    -fx-background-color: #282D3A;
 }
 
 .sidebar-button:hover {
@@ -91,11 +95,7 @@
     -fx-background-color: #282D3A;
 }
 
-#user-content-pane {
-    -fx-background-color: green;
-}
-
-#user-content-pane-title {
+.main-pane-title {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28;
     -fx-text-fill: white;
