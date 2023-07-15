@@ -1,14 +1,14 @@
 @font-face {
-    font-family: "UI Font";
-    src: url("fonts/sui.ttf");
+    font-family: "Segoe UI";
+    src: url("fonts/segoe-ui.ttf");
 }
 
 @font-face {
-    font-family: "UI Font Bold";
-    src: url("fonts/sui-bold.ttf");
+    font-family: "Segoe UI Bold";
+    src: url("fonts/segoe-ui-bold.ttf");
 }
 
-.rounded-corner-pane {
+.round-corners {
     -fx-background-color: #1B1F30;
     -fx-background-radius: 7;
     -fx-border-color: #3C3D45;
@@ -17,22 +17,43 @@
     -fx-padding: -2 -2 0 0;
 }
 
-.title-bar {
+#title-bar {
+    -fx-padding: 7 5 7 5;
+    -fx-text-fill: white;
+}
+
+#back-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5;
+    -fx-padding: 12;
+    -fx-alignment: baseline-left;
+}
+#back-button:hover {
+    -fx-background-color: #282D3A;
+}
+
+#title {
+    -fx-font-family: "Segoe UI";
+    -fx-text-fill: white;
+    -fx-padding: 13 6 13 6;
+}
+
+.window-controls-pane {
     -fx-background-radius: 0 7 0 0;
     -fx-border-color: transparent;
 }
 
-.window-button {
+.window-controls-button {
     -fx-background-radius: 0;
     -fx-background-color: transparent;
     -fx-padding: 8 16 8 16;
 }
 
-.window-button:hover {
+.window-controls-button:hover {
     -fx-background-color: #2D2D2D;
 }
 
-.window-button:pressed {
+.window-controls-button:pressed {
      -fx-background-color: #292929;
 }
 
@@ -48,23 +69,38 @@
     -fx-background-color: #B3271C;
 }
 
-.left-sidebar {
+#sidebar {
     -fx-padding: 20;
 }
 
 .sidebar-button {
-    -fx-background-radius: 6;
-    -fx-background-color: #282D3A;
-    -fx-text-fill: white;
-    -fx-padding: 4 6 4 6;
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13;
     -fx-alignment: baseline-left;
+    -fx-background-color: #282D3A;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+    -fx-padding: 4 6 4 6;
 }
+
 .sidebar-button:hover {
     -fx-background-color: #242937;
 }
 
 .sidebar-button:pressed {
     -fx-background-color: #282D3A;
+}
+
+#user-content-pane {
+    -fx-background-color: green;
+}
+
+#user-content-pane-title {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 28;
+    -fx-text-fill: white;
+}
+
+#user-edit-pane {
+    -fx-background-color: red;
 }
