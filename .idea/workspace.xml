@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Cleaned up the code.">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Tab functionality done.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
@@ -41,7 +41,7 @@
     "full.screen.before.presentation.mode": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Arash/OneDrive/Repository/ASH/BookKeeper"
+    "last_opened_file_path": "C:/Users/Arash/OneDrive/Repository/CAB/SlidingPane"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -132,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689402247357</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Tab functionality done.">
+      <option name="closed" value="true" />
+      <created>1689418239931</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1689418239931</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,6 +163,7 @@
     <MESSAGE value="Title bar is finished." />
     <MESSAGE value="Added two buttons to the sidebar." />
     <MESSAGE value="Cleaned up the code." />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up the code." />
+    <MESSAGE value="Tab functionality done." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tab functionality done." />
   </component>
 </project>

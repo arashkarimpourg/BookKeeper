@@ -2,20 +2,25 @@ package edu.ucsi.bookkeeper;
 
 import javafx.application.Application;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.paint.Color;
 
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
+import java.util.Optional;
 
 public class BookKeeper extends Application {
 
@@ -24,9 +29,19 @@ public class BookKeeper extends Application {
     private boolean isUserEditPaneVisible = false;
     private boolean isBookEditPaneVisible = false;
 
+    private ListView<Item> listView;
+    private ObservableList<Item> items;
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+        // Create ListView and ObservableList
+        listView = new ListView<>();
+        items = FXCollections.observableArrayList();
+
+        // Set custom cell factory for the ListView
+        listView.setCellFactory(listView -> new CustomListCell());
 
         // Create main window
         BorderPane root = new BorderPane();
@@ -175,7 +190,7 @@ public class BookKeeper extends Application {
         windowControlsPane.getChildren().addAll(minimizeButton, maximizeButton, closeButton);
 
         // Create main pane
-        Pane mainPane = new Pane();
+        StackPane mainPane = new StackPane();
         mainPane.setId("main-pane");
 
         // Create user pane
@@ -185,17 +200,99 @@ public class BookKeeper extends Application {
         // Create user content pane
         VBox userContentPane = new VBox();
         userContentPane.setId("user-content-pane");
+        userContentPane.setFillWidth(true);
 
         // Create user content pane title
         Label userContentPaneTitle = new Label("Users");
         userContentPaneTitle.getStyleClass().add("main-pane-title");
+
+        // Create Add button
+        Button addButton = new Button("Add");
+        addButton.getStyleClass().add("add-button");
+        addButton.setOnAction(event -> addItem());
+
+        // Create HBox for Add button
+        HBox addPane = new HBox();
+        addPane.getStyleClass().add("add-pane");
+        addPane.getChildren().add(addButton);
+        addPane.setAlignment(Pos.CENTER_LEFT);
+
+        // Create import icon
+        ImageView importIcon = null;
+        InputStream imageStreamImport = getClass().getResourceAsStream("images/file-pane/import.png");
+        if (imageStreamImport != null) {
+            Image importImage = new Image(imageStreamImport);
+            importIcon = new ImageView(importImage);
+            importIcon.setFitWidth(26);
+            importIcon.setFitHeight(26);
+            importIcon.getStyleClass().add("fila-pane-icon");
+        } else {
+            System.err.println("Unable to load import.png");
+        }
+
+        // Create labels for text lines
+        Label importLabel = new Label("Import");
+        importLabel.getStyleClass().add("file-pane-label");
+        Label importInfoLabel = new Label("From text file");
+        importInfoLabel.getStyleClass().add("file-pane-info-label");
+
+        // Create HBox to hold icon and labels
+        HBox importButtonContent = new HBox();
+        importButtonContent.getChildren().addAll(importIcon, new VBox(importLabel, importInfoLabel));
+
+        // Create button and set its content to the HBox
+        Button importButton = new Button();
+        importButton.getStyleClass().add("file-button");
+        importButton.setGraphic(importButtonContent);
+        importButton.setPrefWidth(150);
+
+        importButton.setOnAction(event -> importFromFile());
+
+        // Create export icon
+        ImageView exportIcon = null;
+        InputStream imageStreamExport = getClass().getResourceAsStream("images/file-pane/export.png");
+        if (imageStreamExport != null) {
+            Image exportImage = new Image(imageStreamExport);
+            exportIcon = new ImageView(exportImage);
+            exportIcon.setFitWidth(26);
+            exportIcon.setFitHeight(26);
+            exportIcon.getStyleClass().add("fila-pane-icon");
+        } else {
+            System.err.println("Unable to load export.png");
+        }
+
+        // Create labels for text lines
+        Label exportLabel = new Label("Export");
+        exportLabel.getStyleClass().add("file-pane-label");
+        Label exportInfoLabel = new Label("To text file");
+        exportInfoLabel.getStyleClass().add("file-pane-info-label");
+
+        // Create HBox to hold icon and labels
+        HBox exportButtonContent = new HBox();
+        exportButtonContent.getChildren().addAll(exportIcon, new VBox(exportLabel, exportInfoLabel));
+
+        // Create button and set its content to the HBox
+        Button exportButton = new Button();
+        exportButton.getStyleClass().add("file-button");
+        exportButton.setGraphic(exportButtonContent);
+        exportButton.setPrefWidth(150);
+
+        exportButton.setOnAction(event -> exportToFile());
+
+        // Create HBox for Import and Export buttons
+        HBox filePane = new HBox();
+        filePane.getStyleClass().add("file-pane");
+        filePane.getChildren().addAll(importButton, exportButton);
+        filePane.setAlignment(Pos.BASELINE_RIGHT);
 
         // Create user edit button
         Button userEditButton = new Button("EDIT USER");
         userEditButton.setOnAction(e -> toggleUserEditPane(userPane));
 
         // Add user content pane and user edit title to user content pane
-        userContentPane.getChildren().addAll(userContentPaneTitle, userEditButton);
+        userContentPane.getChildren().addAll(userContentPaneTitle, filePane, userEditButton, addPane, listView);
+
+        VBox.setVgrow(listView, Priority.ALWAYS);
 
         // Create user edit pane
         VBox userEditPane = new VBox();
@@ -243,7 +340,7 @@ public class BookKeeper extends Application {
             mainPane.getChildren().add(userPane);
             userTab.getStyleClass().setAll("sidebar-button", "sidebar-button-selected");
             bookTab.getStyleClass().setAll("sidebar-button");
-
+            VBox.setVgrow(userPane, Priority.ALWAYS);
         });
 
         // Set action for book tab
@@ -254,11 +351,17 @@ public class BookKeeper extends Application {
             userTab.getStyleClass().setAll("sidebar-button");
         });
 
+        StackPane.setAlignment(userPane, Pos.TOP_LEFT);
+
         // Add user pane to main pane
         mainPane.getChildren().addAll(userPane);
 
         // Add window controls pane and main pane to right pane
         rightPane.getChildren().addAll(windowControlsPane, mainPane);
+
+
+
+        BorderPane.setMargin(leftPane, new Insets(0, 10, 0, 0));
 
         // Add left pane & right pane to main window
         root.setLeft(leftPane);
@@ -300,6 +403,9 @@ public class BookKeeper extends Application {
             primaryStage.setX(event.getScreenX() - xOffset);
             primaryStage.setY(event.getScreenY() - yOffset);
         });
+
+        // Import items from file on application startup
+        importFromFile();
     }
 
     private void toggleUserEditPane(StackPane userPane) {
@@ -344,6 +450,222 @@ public class BookKeeper extends Application {
         }
     }
 
+    private void importFromFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Import Items");
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                ObservableList<Item> importedItems = FXCollections.observableArrayList();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(",");
+                    if (parts.length == 3) {
+                        String firstName = parts[0];
+                        String lastName = parts[1];
+                        int id = Integer.parseInt(parts[2]);
+                        importedItems.add(new Item(firstName, lastName, id));
+                    }
+                }
+                items.setAll(importedItems);
+                listView.setItems(items);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private void exportToFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Export Items");
+        File file = fileChooser.showSaveDialog(null);
+        if (file != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+                for (Item item : items) {
+                    writer.write(item.getFirstName() + "," + item.getLastName() + "," + item.getId());
+                    writer.newLine();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void addItem() {
+        Dialog<Item> dialog = new Dialog<>();
+        dialog.setTitle("Add Item");
+
+        // Set the button types (OK and Cancel)
+        ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
+
+        // Create labels and text fields for item attributes
+        Label firstNameLabel = new Label("First Name:");
+        TextField firstNameField = new TextField();
+
+        Label lastNameLabel = new Label("Last Name:");
+        TextField lastNameField = new TextField();
+
+        Label idLabel = new Label("ID:");
+        TextField idField = new TextField();
+
+        // Create a grid pane and add labels and text fields
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.addRow(0, firstNameLabel, firstNameField);
+        gridPane.addRow(1, lastNameLabel, lastNameField);
+        gridPane.addRow(2, idLabel, idField);
+
+        dialog.getDialogPane().setContent(gridPane);
+
+        // Request focus on the first name field by default
+        firstNameField.requestFocus();
+
+        // Convert the result to an item when the add button is clicked
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == addButton) {
+                String firstName = firstNameField.getText();
+                String lastName = lastNameField.getText();
+                int id = Integer.parseInt(idField.getText());
+                return new Item(firstName, lastName, id);
+            }
+            return null;
+        });
+
+        Optional<Item> result = dialog.showAndWait();
+        result.ifPresent(item -> {
+            items.add(item);
+            listView.setItems(items);
+        });
+    }
+
+    private class CustomListCell extends ListCell<Item> {
+        private final HBox cellContainer;
+
+        public CustomListCell() {
+            cellContainer = new HBox(10);
+            cellContainer.setPadding(new Insets(5));
+
+            Button editButton = new Button("Edit");
+            editButton.setOnAction(event -> editItem(getItem()));
+
+            Button deleteButton = new Button("Delete");
+            deleteButton.setOnAction(event -> deleteItem(getItem()));
+
+            cellContainer.getChildren().addAll(editButton, deleteButton);
+        }
+
+        @Override
+        protected void updateItem(Item item, boolean empty) {
+            super.updateItem(item, empty);
+            if (empty || item == null) {
+                setGraphic(null);
+            } else {
+                Label label = new Label(item.getFirstName() + " " + item.getLastName());
+                label.setFont(Font.font(14));
+                setGraphic(new HBox(10, label, cellContainer));
+            }
+        }
+    }
+
+    private void editItem(Item item) {
+        if (item != null) {
+            Dialog<Item> dialog = new Dialog<>();
+            dialog.setTitle("Edit Item");
+
+            // Set the button types (OK and Cancel)
+            ButtonType saveButton = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().addAll(saveButton, ButtonType.CANCEL);
+
+            // Create labels and text fields for item attributes
+            Label firstNameLabel = new Label("First Name:");
+            TextField firstNameField = new TextField(item.getFirstName());
+
+            Label lastNameLabel = new Label("Last Name:");
+            TextField lastNameField = new TextField(item.getLastName());
+
+            Label idLabel = new Label("ID:");
+            TextField idField = new TextField(String.valueOf(item.getId()));
+
+            // Create a grid pane and add labels and text fields
+            GridPane gridPane = new GridPane();
+            gridPane.setHgap(10);
+            gridPane.setVgap(10);
+            gridPane.addRow(0, firstNameLabel, firstNameField);
+            gridPane.addRow(1, lastNameLabel, lastNameField);
+            gridPane.addRow(2, idLabel, idField);
+
+            dialog.getDialogPane().setContent(gridPane);
+
+            // Request focus on the first name field by default
+            firstNameField.requestFocus();
+
+            // Convert the result to an item when the save button is clicked
+            dialog.setResultConverter(dialogButton -> {
+                if (dialogButton == saveButton) {
+                    item.setFirstName(firstNameField.getText());
+                    item.setLastName(lastNameField.getText());
+                    item.setId(Integer.parseInt(idField.getText()));
+                    return item;
+                }
+                return null;
+            });
+
+            dialog.showAndWait();
+        }
+    }
+
+    private void deleteItem(Item item) {
+        if (item != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Delete Item");
+            alert.setContentText("Are you sure you want to delete this item?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                items.remove(item);
+            }
+        }
+    }
+
+    private static class Item {
+        private String firstName;
+        private String lastName;
+        private int id;
+
+        public Item(String firstName, String lastName, int id) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.id = id;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setFirstName(String firstName) {
+            this.firstName = firstName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+    }
     public static void main(String[] args) {
         launch(args);
     }

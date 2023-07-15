@@ -99,8 +99,102 @@
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28;
     -fx-text-fill: white;
+    -fx-padding: 28 10 16 10;
 }
 
 #user-edit-pane {
-    -fx-background-color: red;
+    -fx-background-color: blue;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+}
+
+.list-cell {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13;
+    -fx-alignment: baseline-left;
+    -fx-background-color: #242937;
+    -fx-background-radius: 6;
+    -fx-text-fill: white;
+}
+
+.list-cell:hover {
+    -fx-background-color: #282D3A;
+}
+
+.list-cell:pressed {
+    -fx-background-color: #212736;
+}
+
+.list-cell .label {
+    -fx-background-color: orange;
+    -fx-padding: 20px 40px;
+    -fx-border-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.add-button {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13;
+    -fx-alignment: baseline-left;
+    -fx-background-color: #4CC2FF;
+    -fx-background-radius: 5;
+    -fx-text-fill: black;
+    -fx-padding: 7 15 7 15;
+}
+
+.add-button:hover {
+    -fx-background-color: #49B3EB;
+}
+
+.add-button:pressed {
+    -fx-background-color: #41A1D5;
+    -fx-text-fill: #22526C;
+}
+
+.file-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-padding: 10 30 10 10;
+}
+
+.file-button:hover {
+    -fx-background-color: #242937;
+    -fx-padding: 10 30 10 10;
+}
+
+.file-button:pressed {
+    -fx-background-color: #242937;
+    -fx-padding: 10 30 10 10;
+}
+
+.file-pane {
+    -fx-padding: 20 20 20 20;
+}
+
+.file-pane-icon {
+}
+
+.file-pane-label {
+    -fx-font-family: "Segoe UI Bold";
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+    -fx-padding: 0 0 4 10;
+}
+
+.file-pane-info-label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12;
+    -fx-text-fill: #A3A6AC;
+    -fx-padding: 0 0 0 10;
+}
+
+#user-pane {
+    -fx-padding: 0;
+}
+
+#user-edit-pane {
+    -fx-padding: 0;
 }
