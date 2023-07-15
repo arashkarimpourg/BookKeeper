@@ -33,6 +33,10 @@ public class BookKeeper extends Application {
     private StackPane userPane;
     private VBox userEditPane;
 
+    private TextField firstNameField;
+    private TextField lastNameField;
+    private TextField idField;
+
     private int generateId() {
         // Generate a unique ID based on the current timestamp
         return (int) System.currentTimeMillis();
@@ -459,15 +463,15 @@ public class BookKeeper extends Application {
         userEditPane.getChildren().clear();
 
         // Create text fields
-        TextField firstNameField = new TextField();
+        firstNameField = new TextField();
         firstNameField.setPromptText("First Name");
         firstNameField.setText(item.getFirstName());
 
-        TextField lastNameField = new TextField();
+        lastNameField = new TextField();
         lastNameField.setPromptText("Last Name");
         lastNameField.setText(item.getLastName());
 
-        TextField idField = new TextField();
+        idField = new TextField();
         idField.setPromptText("ID");
         idField.setText(String.valueOf(item.getId()));
 

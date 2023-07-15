@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Sliding pane fixed.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Edit and delete functionalities for users.">
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +154,23 @@
       <option name="project" value="LOCAL" />
       <updated>1689444475442</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Edit and delete functionality for users.">
+      <option name="closed" value="true" />
+      <created>1689450503888</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1689450503888</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Edit and delete functionalities for users.">
+      <option name="closed" value="true" />
+      <created>1689450550238</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1689450550238</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,6 +196,8 @@
     <MESSAGE value="Tab functionality done." />
     <MESSAGE value="Fixed content not using the full width of window bug." />
     <MESSAGE value="Sliding pane fixed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Sliding pane fixed." />
+    <MESSAGE value="Edit and delete functionality for users." />
+    <MESSAGE value="Edit and delete functionalities for users." />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit and delete functionalities for users." />
   </component>
 </project>
