@@ -5,6 +5,7 @@ import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -23,7 +24,7 @@ import java.net.URL;
 import java.util.Optional;
 
 public class BookKeeper extends Application {
-
+    private StackPane userPane;
     private double xOffset = 0;
     private double yOffset = 0;
     private boolean isUserEditPaneVisible = false;
@@ -41,7 +42,7 @@ public class BookKeeper extends Application {
         items = FXCollections.observableArrayList();
 
         // Set custom cell factory for the ListView
-        listView.setCellFactory(listView -> new CustomListCell());
+        listView.setCellFactory(listView -> new CustomListCell(userPane));
 
         // Create main window
         BorderPane root = new BorderPane();
@@ -194,7 +195,7 @@ public class BookKeeper extends Application {
         mainPane.setId("main-pane");
 
         // Create user pane
-        StackPane userPane = new StackPane();
+        this.userPane = new StackPane();
         userPane.setId("user-pane");
 
         // Create user content pane
@@ -285,23 +286,20 @@ public class BookKeeper extends Application {
         filePane.getChildren().addAll(importButton, exportButton);
         filePane.setAlignment(Pos.BASELINE_RIGHT);
 
-        // Create user edit button
-        Button userEditButton = new Button("EDIT USER");
-        userEditButton.setOnAction(e -> toggleUserEditPane(userPane));
-
         // Add user content pane and user edit title to user content pane
-        userContentPane.getChildren().addAll(userContentPaneTitle, filePane, userEditButton, addPane, listView);
+        userContentPane.getChildren().addAll(userContentPaneTitle, filePane, addPane, listView);
 
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         // Create user edit pane
         VBox userEditPane = new VBox();
         userEditPane.setId("user-edit-pane");
-        userEditPane.setTranslateX(userContentPane.getWidth());
         userEditPane.setVisible(false);
 
         // Add user content pane and user edit pane to user pane
         userPane.getChildren().addAll(userContentPane, userEditPane);
+
+        userEditPane.setTranslateX(userContentPane.getWidth());
 
         // Create book pane
         StackPane bookPane = new StackPane();
@@ -332,7 +330,7 @@ public class BookKeeper extends Application {
         bookPane.getChildren().addAll(bookContentPane, bookEditPane);
 
         // Set action for back button
-        backButton.setOnAction(e -> toggleUserEditPane(userPane));
+        //backButton.setOnAction(e -> toggleUserEditPane(userPane));
 
         // Set action for user tab
         userTab.setOnAction(event -> {
@@ -408,7 +406,7 @@ public class BookKeeper extends Application {
         importFromFile();
     }
 
-    private void toggleUserEditPane(StackPane userPane) {
+    private void toggleUserEditPane(StackPane userPane, Item item) {
         VBox userEditPane = (VBox) userPane.getChildren().get(1);
 
         if (!isUserEditPaneVisible) {
@@ -419,15 +417,60 @@ public class BookKeeper extends Application {
             slideIn.setToX(0);
             slideIn.play();
             isUserEditPaneVisible = true;
+
+            // Clear existing text fields
+            clearUserEditFields(userEditPane);
+
+            // Populate text fields if item is provided
+            if (item != null) {
+                populateUserEditFields(userEditPane, item);
+            }
         } else {
             TranslateTransition slideOut = new TranslateTransition(Duration.millis(1000), userEditPane);
             slideOut.setFromX(0);
             slideOut.setToX(userEditPane.getWidth());
-            slideOut.setOnFinished(e -> userEditPane.setVisible(false));
+            slideOut.setOnFinished(e -> {
+                userEditPane.setVisible(false);
+
+                // Clear text fields after animation finishes
+                clearUserEditFields(userEditPane);
+            });
             slideOut.play();
             isUserEditPaneVisible = false;
         }
     }
+
+    private void clearUserEditFields(VBox userEditPane) {
+        for (Node node : userEditPane.getChildren()) {
+            if (node instanceof TextField) {
+                ((TextField) node).clear();
+            }
+        }
+    }
+
+    private void populateUserEditFields(VBox userEditPane, Item item) {
+        for (Node node : userEditPane.getChildren()) {
+            if (node instanceof TextField) {
+                TextField textField = (TextField) node;
+                String property = textField.getId().replace("edit-", "");
+                switch (property) {
+                    case "firstName":
+                        textField.setText(item.getFirstName());
+                        break;
+                    case "lastName":
+                        textField.setText(item.getLastName());
+                        break;
+                    case "id":
+                        textField.setText(String.valueOf(item.getId()));
+                        break;
+                    default:
+                        // Handle additional properties if needed
+                        break;
+                }
+            }
+        }
+    }
+
 
     private void toggleBookEditPane(StackPane bookPane) {
         VBox bookEditPane = (VBox) bookPane.getChildren().get(1);
@@ -493,63 +536,31 @@ public class BookKeeper extends Application {
     }
 
     private void addItem() {
-        Dialog<Item> dialog = new Dialog<>();
-        dialog.setTitle("Add Item");
-
-        // Set the button types (OK and Cancel)
-        ButtonType addButton = new ButtonType("Add", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(addButton, ButtonType.CANCEL);
-
-        // Create labels and text fields for item attributes
-        Label firstNameLabel = new Label("First Name:");
-        TextField firstNameField = new TextField();
-
-        Label lastNameLabel = new Label("Last Name:");
-        TextField lastNameField = new TextField();
-
-        Label idLabel = new Label("ID:");
-        TextField idField = new TextField();
-
-        // Create a grid pane and add labels and text fields
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.addRow(0, firstNameLabel, firstNameField);
-        gridPane.addRow(1, lastNameLabel, lastNameField);
-        gridPane.addRow(2, idLabel, idField);
-
-        dialog.getDialogPane().setContent(gridPane);
-
-        // Request focus on the first name field by default
-        firstNameField.requestFocus();
-
-        // Convert the result to an item when the add button is clicked
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == addButton) {
-                String firstName = firstNameField.getText();
-                String lastName = lastNameField.getText();
-                int id = Integer.parseInt(idField.getText());
-                return new Item(firstName, lastName, id);
-            }
-            return null;
-        });
-
-        Optional<Item> result = dialog.showAndWait();
-        result.ifPresent(item -> {
-            items.add(item);
-            listView.setItems(items);
-        });
+        toggleUserEditPane(userPane, null);
     }
+
+    private void editItem(StackPane userPane, Item item) {
+        toggleUserEditPane(userPane, item);
+    }
+
 
     private class CustomListCell extends ListCell<Item> {
         private final HBox cellContainer;
+        private final StackPane userPane;
 
-        public CustomListCell() {
+        public CustomListCell(StackPane userPane) {
+            this.userPane = userPane;
+
             cellContainer = new HBox(10);
             cellContainer.setPadding(new Insets(5));
 
             Button editButton = new Button("Edit");
-            editButton.setOnAction(event -> editItem(getItem()));
+            editButton.setOnAction(event -> {
+                Item item = getItem();
+                if (item != null) {
+                    editItem(userPane, item);
+                }
+            });
 
             Button deleteButton = new Button("Delete");
             deleteButton.setOnAction(event -> deleteItem(getItem()));
@@ -567,53 +578,6 @@ public class BookKeeper extends Application {
                 label.setFont(Font.font(14));
                 setGraphic(new HBox(10, label, cellContainer));
             }
-        }
-    }
-
-    private void editItem(Item item) {
-        if (item != null) {
-            Dialog<Item> dialog = new Dialog<>();
-            dialog.setTitle("Edit Item");
-
-            // Set the button types (OK and Cancel)
-            ButtonType saveButton = new ButtonType("Save", ButtonBar.ButtonData.OK_DONE);
-            dialog.getDialogPane().getButtonTypes().addAll(saveButton, ButtonType.CANCEL);
-
-            // Create labels and text fields for item attributes
-            Label firstNameLabel = new Label("First Name:");
-            TextField firstNameField = new TextField(item.getFirstName());
-
-            Label lastNameLabel = new Label("Last Name:");
-            TextField lastNameField = new TextField(item.getLastName());
-
-            Label idLabel = new Label("ID:");
-            TextField idField = new TextField(String.valueOf(item.getId()));
-
-            // Create a grid pane and add labels and text fields
-            GridPane gridPane = new GridPane();
-            gridPane.setHgap(10);
-            gridPane.setVgap(10);
-            gridPane.addRow(0, firstNameLabel, firstNameField);
-            gridPane.addRow(1, lastNameLabel, lastNameField);
-            gridPane.addRow(2, idLabel, idField);
-
-            dialog.getDialogPane().setContent(gridPane);
-
-            // Request focus on the first name field by default
-            firstNameField.requestFocus();
-
-            // Convert the result to an item when the save button is clicked
-            dialog.setResultConverter(dialogButton -> {
-                if (dialogButton == saveButton) {
-                    item.setFirstName(firstNameField.getText());
-                    item.setLastName(lastNameField.getText());
-                    item.setId(Integer.parseInt(idField.getText()));
-                    return item;
-                }
-                return null;
-            });
-
-            dialog.showAndWait();
         }
     }
 

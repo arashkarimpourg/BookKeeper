@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Tab functionality done.">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fixed content not using the full width of window bug.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +139,15 @@
       <option name="project" value="LOCAL" />
       <updated>1689418239931</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Fixed content not using the full width of window bug.">
+      <option name="closed" value="true" />
+      <created>1689442304251</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1689442304251</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +171,7 @@
     <MESSAGE value="Added two buttons to the sidebar." />
     <MESSAGE value="Cleaned up the code." />
     <MESSAGE value="Tab functionality done." />
-    <option name="LAST_COMMIT_MESSAGE" value="Tab functionality done." />
+    <MESSAGE value="Fixed content not using the full width of window bug." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed content not using the full width of window bug." />
   </component>
 </project>
