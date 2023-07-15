@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Edit and delete functionalities for users.">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Add button for users works.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -178,7 +179,23 @@
       <option name="project" value="LOCAL" />
       <updated>1689450841685</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Back button functionality for users.">
+      <option name="closed" value="true" />
+      <created>1689451142094</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1689451142094</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Add button for users works.">
+      <option name="closed" value="true" />
+      <created>1689452292608</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1689452292608</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -206,6 +223,8 @@
     <MESSAGE value="Sliding pane fixed." />
     <MESSAGE value="Edit and delete functionality for users." />
     <MESSAGE value="Edit and delete functionalities for users." />
-    <option name="LAST_COMMIT_MESSAGE" value="Edit and delete functionalities for users." />
+    <MESSAGE value="Back button functionality for users." />
+    <MESSAGE value="Add button for users works." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add button for users works." />
   </component>
 </project>

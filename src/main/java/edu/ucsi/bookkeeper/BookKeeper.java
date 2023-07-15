@@ -50,7 +50,7 @@ public class BookKeeper extends Application {
         items = FXCollections.observableArrayList();
 
         // Set custom cell factory for the ListView
-        listView.setCellFactory(listView -> new CustomListCell(userPane));
+        listView.setCellFactory(listView -> new CustomListCell(userPane, userEditPane));
 
         // Create main window
         BorderPane root = new BorderPane();
@@ -300,7 +300,7 @@ public class BookKeeper extends Application {
         VBox.setVgrow(listView, Priority.ALWAYS);
 
         // Create user edit pane
-        VBox userEditPane = new VBox();
+        userEditPane = new VBox();
         userEditPane.setId("user-edit-pane");
         userEditPane.setVisible(false);
 
@@ -340,7 +340,7 @@ public class BookKeeper extends Application {
         // Set action for back button
         backButton.setOnAction(event -> {
             if (isUserEditPaneVisible) {
-                toggleUserEditPane(userPane, null);
+                toggleUserEditPane(userPane);
             }
             // Otherwise, no action is needed
         });
@@ -419,14 +419,15 @@ public class BookKeeper extends Application {
         importFromFile();
     }
 
-    private void toggleUserEditPane(StackPane userPane, Item item) {
-        this.userEditPane = (VBox) userPane.getChildren().get(1);
+    private void toggleUserEditPane(StackPane userPane) {
+        VBox userContentPane = (VBox) userPane.getChildren().get(0);
+        VBox userEditPane = (VBox) userPane.getChildren().get(1);
 
         if (!isUserEditPaneVisible) {
             userEditPane.setVisible(true);
 
             TranslateTransition slideIn = new TranslateTransition(Duration.millis(1000), userEditPane);
-            slideIn.setFromX(userEditPane.getWidth());
+            slideIn.setFromX(userContentPane.getWidth());
             slideIn.setToX(0);
             slideIn.play();
             isUserEditPaneVisible = true;
@@ -434,14 +435,15 @@ public class BookKeeper extends Application {
             // Clear existing text fields
             clearUserEditFields(userEditPane);
 
-            // Populate text fields if item is provided
-            if (item != null) {
-                populateUserEditFields(userEditPane, item);
+            // Populate text fields if item is selected
+            Item selectedItem = listView.getSelectionModel().getSelectedItem();
+            if (selectedItem != null) {
+                populateUserEditFields(userEditPane, selectedItem);
             }
         } else {
             TranslateTransition slideOut = new TranslateTransition(Duration.millis(1000), userEditPane);
             slideOut.setFromX(0);
-            slideOut.setToX(userEditPane.getWidth());
+            slideOut.setToX(userContentPane.getWidth());
             slideOut.setOnFinished(e -> {
                 userEditPane.setVisible(false);
 
@@ -453,7 +455,6 @@ public class BookKeeper extends Application {
             listView.refresh();
         }
     }
-
 
     private void clearUserEditFields(VBox userEditPane) {
         for (Node node : userEditPane.getChildren()) {
@@ -489,13 +490,13 @@ public class BookKeeper extends Application {
             item.setId(Integer.parseInt(idField.getText()));
 
             // Hide the user edit pane
-            toggleUserEditPane(userPane, null);
+            toggleUserEditPane(userPane);
         });
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(event -> {
             // Hide the user edit pane without saving any changes
-            toggleUserEditPane(userPane, null);
+            toggleUserEditPane(userPane);
         });
 
         Button deleteButton = new Button("Delete");
@@ -508,7 +509,7 @@ public class BookKeeper extends Application {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 items.remove(item);
-                toggleUserEditPane(userPane, null);
+                toggleUserEditPane(userPane);
             }
         });
 
@@ -584,37 +585,30 @@ public class BookKeeper extends Application {
     }
 
     private void addItem() {
-        toggleUserEditPane(userPane, null);
-        firstNameField.setText("");
-        lastNameField.setText("");
-        idField.setText(String.valueOf(generateId()));
+        Item newItem = new Item("", "", generateId());
+        items.add(newItem);
+        listView.getSelectionModel().select(newItem);
+        toggleUserEditPane(userPane);
     }
 
-    private void editItem(StackPane userPane, Item item) {
-        toggleUserEditPane(userPane, item);
+    private void editItem(Item item, VBox userEditPane) {
+        toggleUserEditPane(userPane);
+
+        if (isUserEditPaneVisible) {
+            populateUserEditFields(userEditPane, item);
+        }
     }
 
     private class CustomListCell extends ListCell<Item> {
         private final HBox cellContainer;
         private final StackPane userPane;
+        private final VBox userEditPane;
 
-        public CustomListCell(StackPane userPane) {
+        public CustomListCell(StackPane userPane, VBox userEditPane) {
             this.userPane = userPane;
-
-            cellContainer = new HBox(10);
-            cellContainer.setPadding(new Insets(5));
-
-            Button editButton = new Button("Edit");
-            editButton.setOnAction(event -> {
-                Item item = getItem();
-                if (item != null) {
-                    editItem(userPane, item);
-                }
-            });
-
-            cellContainer.getChildren().addAll(editButton);
+            this.userEditPane = userEditPane;
+            this.cellContainer = new HBox();
         }
-
         @Override
         protected void updateItem(Item item, boolean empty) {
             super.updateItem(item, empty);
@@ -631,7 +625,7 @@ public class BookKeeper extends Application {
                 editButton.setOnAction(event -> {
                     Item clickedItem = getItem();
                     if (clickedItem != null) {
-                        editItem(userPane, clickedItem);
+                        editItem(clickedItem, userEditPane);
                     }
                 });
 
