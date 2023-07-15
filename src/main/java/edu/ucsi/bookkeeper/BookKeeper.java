@@ -338,7 +338,12 @@ public class BookKeeper extends Application {
         bookPane.getChildren().addAll(bookContentPane, bookEditPane);
 
         // Set action for back button
-        //backButton.setOnAction(e -> toggleUserEditPane(userPane));
+        backButton.setOnAction(event -> {
+            if (isUserEditPaneVisible) {
+                toggleUserEditPane(userPane, null);
+            }
+            // Otherwise, no action is needed
+        });
 
         // Set action for user tab
         userTab.setOnAction(event -> {
