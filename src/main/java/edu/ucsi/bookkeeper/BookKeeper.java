@@ -24,15 +24,19 @@ import java.net.URL;
 import java.util.Optional;
 
 public class BookKeeper extends Application {
-    private StackPane userPane;
     private double xOffset = 0;
     private double yOffset = 0;
     private boolean isUserEditPaneVisible = false;
     private boolean isBookEditPaneVisible = false;
-
     private ListView<Item> listView;
     private ObservableList<Item> items;
+    private StackPane userPane;
+    private VBox userEditPane;
 
+    private int generateId() {
+        // Generate a unique ID based on the current timestamp
+        return (int) System.currentTimeMillis();
+    }
     @Override
     public void start(Stage primaryStage) {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -407,7 +411,7 @@ public class BookKeeper extends Application {
     }
 
     private void toggleUserEditPane(StackPane userPane, Item item) {
-        VBox userEditPane = (VBox) userPane.getChildren().get(1);
+        this.userEditPane = (VBox) userPane.getChildren().get(1);
 
         if (!isUserEditPaneVisible) {
             userEditPane.setVisible(true);
@@ -437,8 +441,10 @@ public class BookKeeper extends Application {
             });
             slideOut.play();
             isUserEditPaneVisible = false;
+            listView.refresh();
         }
     }
+
 
     private void clearUserEditFields(VBox userEditPane) {
         for (Node node : userEditPane.getChildren()) {
@@ -449,28 +455,61 @@ public class BookKeeper extends Application {
     }
 
     private void populateUserEditFields(VBox userEditPane, Item item) {
-        for (Node node : userEditPane.getChildren()) {
-            if (node instanceof TextField) {
-                TextField textField = (TextField) node;
-                String property = textField.getId().replace("edit-", "");
-                switch (property) {
-                    case "firstName":
-                        textField.setText(item.getFirstName());
-                        break;
-                    case "lastName":
-                        textField.setText(item.getLastName());
-                        break;
-                    case "id":
-                        textField.setText(String.valueOf(item.getId()));
-                        break;
-                    default:
-                        // Handle additional properties if needed
-                        break;
-                }
-            }
-        }
-    }
+        // Clear the existing content
+        userEditPane.getChildren().clear();
 
+        // Create text fields
+        TextField firstNameField = new TextField();
+        firstNameField.setPromptText("First Name");
+        firstNameField.setText(item.getFirstName());
+
+        TextField lastNameField = new TextField();
+        lastNameField.setPromptText("Last Name");
+        lastNameField.setText(item.getLastName());
+
+        TextField idField = new TextField();
+        idField.setPromptText("ID");
+        idField.setText(String.valueOf(item.getId()));
+
+        // Create buttons
+        Button okButton = new Button("OK");
+        okButton.setOnAction(event -> {
+            // Update the item with the edited values
+            item.setFirstName(firstNameField.getText());
+            item.setLastName(lastNameField.getText());
+            item.setId(Integer.parseInt(idField.getText()));
+
+            // Hide the user edit pane
+            toggleUserEditPane(userPane, null);
+        });
+
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(event -> {
+            // Hide the user edit pane without saving any changes
+            toggleUserEditPane(userPane, null);
+        });
+
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Delete Item");
+            alert.setContentText("Are you sure you want to delete this item?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                items.remove(item);
+                toggleUserEditPane(userPane, null);
+            }
+        });
+
+
+        // Create a container for the buttons
+        HBox buttonPane = new HBox(10, okButton, cancelButton, deleteButton);
+
+        // Add the components to the user edit pane
+        userEditPane.getChildren().addAll(firstNameField, lastNameField, idField, buttonPane);
+    }
 
     private void toggleBookEditPane(StackPane bookPane) {
         VBox bookEditPane = (VBox) bookPane.getChildren().get(1);
@@ -537,12 +576,14 @@ public class BookKeeper extends Application {
 
     private void addItem() {
         toggleUserEditPane(userPane, null);
+        firstNameField.setText("");
+        lastNameField.setText("");
+        idField.setText(String.valueOf(generateId()));
     }
 
     private void editItem(StackPane userPane, Item item) {
         toggleUserEditPane(userPane, item);
     }
-
 
     private class CustomListCell extends ListCell<Item> {
         private final HBox cellContainer;
@@ -562,10 +603,7 @@ public class BookKeeper extends Application {
                 }
             });
 
-            Button deleteButton = new Button("Delete");
-            deleteButton.setOnAction(event -> deleteItem(getItem()));
-
-            cellContainer.getChildren().addAll(editButton, deleteButton);
+            cellContainer.getChildren().addAll(editButton);
         }
 
         @Override
@@ -576,21 +614,21 @@ public class BookKeeper extends Application {
             } else {
                 Label label = new Label(item.getFirstName() + " " + item.getLastName());
                 label.setFont(Font.font(14));
+
+                // Clear the cellContainer before re-initializing it
+                cellContainer.getChildren().clear();
+
+                Button editButton = new Button("Edit");
+                editButton.setOnAction(event -> {
+                    Item clickedItem = getItem();
+                    if (clickedItem != null) {
+                        editItem(userPane, clickedItem);
+                    }
+                });
+
+                cellContainer.getChildren().addAll(editButton);
+
                 setGraphic(new HBox(10, label, cellContainer));
-            }
-        }
-    }
-
-    private void deleteItem(Item item) {
-        if (item != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm Delete");
-            alert.setHeaderText("Delete Item");
-            alert.setContentText("Are you sure you want to delete this item?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                items.remove(item);
             }
         }
     }

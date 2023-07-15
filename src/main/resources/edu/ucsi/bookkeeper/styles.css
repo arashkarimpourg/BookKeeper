@@ -103,7 +103,8 @@
 }
 
 #user-edit-pane {
-    -fx-background-color: blue;
+    -fx-background-color: #1B1F30;
+    -fx-padding: 0;
 }
 
 .list-view {
@@ -192,9 +193,5 @@
 }
 
 #user-pane {
-    -fx-padding: 0;
-}
-
-#user-edit-pane {
     -fx-padding: 0;
 }
