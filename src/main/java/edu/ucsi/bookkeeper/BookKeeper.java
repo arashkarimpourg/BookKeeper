@@ -2,13 +2,16 @@ package edu.ucsi.bookkeeper;
 
 import javafx.application.Application;
 import javafx.animation.TranslateTransition;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javafx.geometry.Pos;
@@ -28,7 +31,7 @@ public class BookKeeper extends Application {
     private double yOffset = 0;
     private boolean isUserEditPaneVisible = false;
     private boolean isBookEditPaneVisible = false;
-    private ListView<Item> listView;
+    private TableView<Item> tableView;
     private ObservableList<Item> items;
     private StackPane userPane;
     private VBox userEditPane;
@@ -45,13 +48,37 @@ public class BookKeeper extends Application {
     public void start(Stage primaryStage) {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
-        // Create ListView and ObservableList
-        listView = new ListView<>();
+        // Create TableView and ObservableList
+        tableView = new TableView<>();
         items = FXCollections.observableArrayList();
-        listView.getStyleClass().add("list-view");
+        tableView.getStyleClass().add("list-view");
 
-        // Set custom cell factory for the ListView
-        listView.setCellFactory(listView -> new CustomListCell(userPane, userEditPane));
+        // Set custom cell factory for the TableView
+        tableView.setRowFactory(tv -> {
+            TableRow<Item> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                    Item item = row.getItem();
+                    if (item != null) {
+                        editItem(item, userEditPane);
+                    }
+                }
+            });
+            return row;
+        });
+
+        // Create columns for the TableView
+        TableColumn<Item, String> firstNameColumn = new TableColumn<>("First Name");
+        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+
+        TableColumn<Item, String> lastNameColumn = new TableColumn<>("Last Name");
+        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+
+        TableColumn<Item, Integer> idColumn = new TableColumn<>("ID");
+        idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+
+        // Add columns to the TableView
+        tableView.getColumns().addAll(firstNameColumn, lastNameColumn, idColumn);
 
         // Create main window
         BorderPane root = new BorderPane();
@@ -296,9 +323,9 @@ public class BookKeeper extends Application {
         filePane.setAlignment(Pos.BASELINE_RIGHT);
 
         // Add user content pane and user edit title to user content pane
-        userContentPane.getChildren().addAll(userContentPaneTitle, filePane, addPane, listView);
+        userContentPane.getChildren().addAll(userContentPaneTitle, filePane, addPane, tableView);
 
-        VBox.setVgrow(listView, Priority.ALWAYS);
+        VBox.setVgrow(tableView, Priority.ALWAYS);
 
         // Create user edit pane
         userEditPane = new VBox();
@@ -420,6 +447,54 @@ public class BookKeeper extends Application {
         importFromFile();
     }
 
+    private static class Item {
+        private StringProperty firstName;
+        private StringProperty lastName;
+        private IntegerProperty id;
+
+        public Item(String firstName, String lastName, int id) {
+            this.firstName = new SimpleStringProperty(firstName);
+            this.lastName = new SimpleStringProperty(lastName);
+            this.id = new SimpleIntegerProperty(id);
+        }
+
+        public StringProperty firstNameProperty() {
+            return firstName;
+        }
+
+        public StringProperty lastNameProperty() {
+            return lastName;
+        }
+
+        public IntegerProperty idProperty() {
+            return id;
+        }
+
+        public String getFirstName() {
+            return firstName.get();
+        }
+
+        public String getLastName() {
+            return lastName.get();
+        }
+
+        public int getId() {
+            return id.get();
+        }
+
+        public void setFirstName(String firstName) {
+            this.firstName.set(firstName);
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName.set(lastName);
+        }
+
+        public void setId(int id) {
+            this.id.set(id);
+        }
+    }
+
     private void toggleUserEditPane(StackPane userPane) {
         VBox userContentPane = (VBox) userPane.getChildren().get(0);
         VBox userEditPane = (VBox) userPane.getChildren().get(1);
@@ -437,7 +512,7 @@ public class BookKeeper extends Application {
             clearUserEditFields(userEditPane);
 
             // Populate text fields if item is selected
-            Item selectedItem = listView.getSelectionModel().getSelectedItem();
+            Item selectedItem = tableView.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
                 populateUserEditFields(userEditPane, selectedItem);
             }
@@ -453,7 +528,7 @@ public class BookKeeper extends Application {
             });
             slideOut.play();
             isUserEditPaneVisible = false;
-            listView.refresh();
+            tableView.refresh();
         }
     }
 
@@ -561,7 +636,7 @@ public class BookKeeper extends Application {
                     }
                 }
                 items.setAll(importedItems);
-                listView.setItems(items);
+                tableView.setItems(items);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -586,105 +661,17 @@ public class BookKeeper extends Application {
     }
 
     private void addItem() {
-        Item newItem = new Item("", "", generateId());
-        items.add(newItem);
-        listView.getSelectionModel().select(newItem);
-        toggleUserEditPane(userPane);
+        Item item = new Item("First Name", "Last Name", generateId());
+        items.add(item);
+        tableView.getSelectionModel().select(item);
+        editItem(item, userEditPane);
     }
 
     private void editItem(Item item, VBox userEditPane) {
+        tableView.getSelectionModel().select(item);
         toggleUserEditPane(userPane);
-
-        if (isUserEditPaneVisible) {
-            populateUserEditFields(userEditPane, item);
-        }
     }
 
-    private class CustomListCell extends ListCell<Item> {
-        private final HBox cellContainer;
-        private final StackPane userPane;
-        private final VBox userEditPane;
-
-        public CustomListCell(StackPane userPane, VBox userEditPane) {
-            this.userPane = userPane;
-            this.userEditPane = userEditPane;
-            this.cellContainer = new HBox();
-        }
-
-        @Override
-        protected void updateItem(Item item, boolean empty) {
-            super.updateItem(item, empty);
-            if (empty || item == null) {
-                setGraphic(null);
-            } else {
-                Label idLabel = new Label(item.getId() + " ");
-                idLabel.getStyleClass().add("id-label");
-                idLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
-
-                Label nameLabel = new Label(item.getFirstName() + " " + item.getLastName());
-                nameLabel.getStyleClass().add("name-label");
-                nameLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
-
-                // Create an HBox to hold the labels side by side
-                HBox labelsBox = new HBox(idLabel, nameLabel);
-                labelsBox.getStyleClass().add("labels-box");
-
-                // Create the "Edit" button
-                Button editButton = new Button("Edit");
-                editButton.setOnAction(event -> {
-                    Item clickedItem = getItem();
-                    if (clickedItem != null) {
-                        editItem(clickedItem, userEditPane);
-                    }
-                });
-
-                // Create a BorderPane to hold the labels and the button
-                BorderPane itemPane = new BorderPane();
-                itemPane.getStyleClass().add("item-pane");
-                itemPane.setCenter(labelsBox);
-                itemPane.setRight(editButton);
-
-                setGraphic(itemPane);
-            }
-        }
-
-    }
-
-    private static class Item {
-        private String firstName;
-        private String lastName;
-        private int id;
-
-        public Item(String firstName, String lastName, int id) {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.id = id;
-        }
-
-        public String getFirstName() {
-            return firstName;
-        }
-
-        public String getLastName() {
-            return lastName;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-    }
     public static void main(String[] args) {
         launch(args);
     }
