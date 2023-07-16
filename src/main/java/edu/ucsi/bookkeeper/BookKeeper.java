@@ -48,6 +48,7 @@ public class BookKeeper extends Application {
         // Create ListView and ObservableList
         listView = new ListView<>();
         items = FXCollections.observableArrayList();
+        listView.getStyleClass().add("list-view");
 
         // Set custom cell factory for the ListView
         listView.setCellFactory(listView -> new CustomListCell(userPane, userEditPane));
@@ -609,18 +610,26 @@ public class BookKeeper extends Application {
             this.userEditPane = userEditPane;
             this.cellContainer = new HBox();
         }
+
         @Override
         protected void updateItem(Item item, boolean empty) {
             super.updateItem(item, empty);
             if (empty || item == null) {
                 setGraphic(null);
             } else {
-                Label label = new Label(item.getFirstName() + " " + item.getLastName());
-                label.setFont(Font.font(14));
+                Label idLabel = new Label(item.getId() + " ");
+                idLabel.getStyleClass().add("id-label");
+                idLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
 
-                // Clear the cellContainer before re-initializing it
-                cellContainer.getChildren().clear();
+                Label nameLabel = new Label(item.getFirstName() + " " + item.getLastName());
+                nameLabel.getStyleClass().add("name-label");
+                nameLabel.setStyle("-fx-background-color: transparent; -fx-text-fill: white;");
 
+                // Create an HBox to hold the labels side by side
+                HBox labelsBox = new HBox(idLabel, nameLabel);
+                labelsBox.getStyleClass().add("labels-box");
+
+                // Create the "Edit" button
                 Button editButton = new Button("Edit");
                 editButton.setOnAction(event -> {
                     Item clickedItem = getItem();
@@ -629,11 +638,16 @@ public class BookKeeper extends Application {
                     }
                 });
 
-                cellContainer.getChildren().addAll(editButton);
+                // Create a BorderPane to hold the labels and the button
+                BorderPane itemPane = new BorderPane();
+                itemPane.getStyleClass().add("item-pane");
+                itemPane.setCenter(labelsBox);
+                itemPane.setRight(editButton);
 
-                setGraphic(new HBox(10, label, cellContainer));
+                setGraphic(itemPane);
             }
         }
+
     }
 
     private static class Item {
