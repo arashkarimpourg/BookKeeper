@@ -81,9 +81,7 @@ public class BookKeeper extends Application {
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
 
         // Add columns to the TableView
-        tableView.getColumns().add(firstNameColumn);
-        tableView.getColumns().add(lastNameColumn);
-        tableView.getColumns().add(idColumn);
+        tableView.getColumns().addAll(firstNameColumn, lastNameColumn, idColumn);
 
         // Create main window
         BorderPane root = new BorderPane();
@@ -677,15 +675,13 @@ public class BookKeeper extends Application {
         Item item = new Item("First Name", "Last Name", generateId());
         items.add(item);
         tableView.getSelectionModel().select(item);
-        editItem(item);
+        editItem(item, userEditPane);
     }
 
-
-    private void editItem(Item item) {
+    private void editItem(Item item, VBox userEditPane) {
         tableView.getSelectionModel().select(item);
         toggleUserEditPane(userPane);
     }
-
 
     public static void main(String[] args) {
         launch(args);
