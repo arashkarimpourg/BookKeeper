@@ -281,6 +281,7 @@ public class BookKeeper extends Application {
         // Create HBox to hold icon and labels
         HBox importButtonContent = new HBox();
         importButtonContent.getChildren().addAll(importIcon, new VBox(importLabel, importInfoLabel));
+	    importButtonContent.setAlignment(Pos.CENTER);
 
         // Create button and set its content to the HBox
         Button importButton = new Button();
@@ -312,6 +313,7 @@ public class BookKeeper extends Application {
         // Create HBox to hold icon and labels
         HBox exportButtonContent = new HBox();
         exportButtonContent.getChildren().addAll(exportIcon, new VBox(exportLabel, exportInfoLabel));
+	    exportButtonContent.setAlignment(Pos.CENTER);
 
         // Create button and set its content to the HBox
         Button exportButton = new Button();
