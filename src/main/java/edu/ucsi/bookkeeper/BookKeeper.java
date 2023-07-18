@@ -51,16 +51,19 @@ public class BookKeeper extends Application {
         // Create TableView and ObservableList
         tableView = new TableView<>();
         items = FXCollections.observableArrayList();
-        tableView.getStyleClass().add("list-view");
+        tableView.getStyleClass().add("table-view");
+
 
         // Set custom cell factory for the TableView
         tableView.setRowFactory(tv -> {
             TableRow<Item> row = new TableRow<>();
+            row.getStyleClass().add("table-row");
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && !row.isEmpty()) {
+                if (event.getClickCount() == 1 && !row.isEmpty()) {
                     Item item = row.getItem();
                     if (item != null) {
-                        editItem(item, userEditPane);
+                        toggleUserEditPane(userPane);
+                        populateUserEditFields(userEditPane, item);
                     }
                 }
             });
@@ -448,9 +451,9 @@ public class BookKeeper extends Application {
     }
 
     private static class Item {
-        private StringProperty firstName;
-        private StringProperty lastName;
-        private IntegerProperty id;
+        private final StringProperty firstName;
+        private final StringProperty lastName;
+        private final IntegerProperty id;
 
         public Item(String firstName, String lastName, int id) {
             this.firstName = new SimpleStringProperty(firstName);
@@ -510,12 +513,6 @@ public class BookKeeper extends Application {
 
             // Clear existing text fields
             clearUserEditFields(userEditPane);
-
-            // Populate text fields if item is selected
-            Item selectedItem = tableView.getSelectionModel().getSelectedItem();
-            if (selectedItem != null) {
-                populateUserEditFields(userEditPane, selectedItem);
-            }
         } else {
             TranslateTransition slideOut = new TranslateTransition(Duration.millis(1000), userEditPane);
             slideOut.setFromX(0);
@@ -619,30 +616,44 @@ public class BookKeeper extends Application {
     }
 
     private void importFromFile() {
+        File defaultFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/users.txt"); // Specify the path to your default text file
+
+        if (defaultFile.exists()) {
+            importFromFile(defaultFile);
+        } else {
+            openImportDialog();
+        }
+    }
+
+    private void importFromFile(File file) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            ObservableList<Item> importedItems = FXCollections.observableArrayList();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length == 3) {
+                    String firstName = parts[0];
+                    String lastName = parts[1];
+                    int id = Integer.parseInt(parts[2]);
+                    importedItems.add(new Item(firstName, lastName, id));
+                }
+            }
+            items.setAll(importedItems);
+            tableView.setItems(items);
+        } catch (IOException e) {
+            e.printStackTrace();
+            openImportDialog();
+        }
+    }
+
+    private void openImportDialog() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Import Items");
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                ObservableList<Item> importedItems = FXCollections.observableArrayList();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(",");
-                    if (parts.length == 3) {
-                        String firstName = parts[0];
-                        String lastName = parts[1];
-                        int id = Integer.parseInt(parts[2]);
-                        importedItems.add(new Item(firstName, lastName, id));
-                    }
-                }
-                items.setAll(importedItems);
-                tableView.setItems(items);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            importFromFile(file);
         }
     }
-
 
     private void exportToFile() {
         FileChooser fileChooser = new FileChooser();

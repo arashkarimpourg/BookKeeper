@@ -128,39 +128,6 @@
     -fx-background-color: transparent;
 }
 
-.item-pane .label {
-    -fx-background-color: transparent;
-    -fx-padding: 0;
-    -fx-border-radius: 0;
-    -fx-cursor: default;
-}
-
-.item-pane {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 13;
-    -fx-alignment: baseline-left;
-    -fx-background-color: #242937;
-    -fx-background-radius: 6;
-    -fx-text-fill: white;
-    -fx-padding: 0px;
-    -fx-margin-bottom: 10px;
-}
-
-.item-pane:hover {
-    -fx-background-color: #282D3A;
-}
-
-.item-pane:pressed {
-    -fx-background-color: #212736;
-}
-
-.item-pane .label {
-    -fx-background-color: orange;
-    -fx-padding: 20px 40px;
-    -fx-border-radius: 10px;
-    -fx-cursor: hand;
-}
-
 .add-button {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13;
@@ -169,6 +136,7 @@
     -fx-background-radius: 5;
     -fx-text-fill: black;
     -fx-padding: 7 15 7 15;
+    -fx-margin-bottom: 30;
 }
 
 .add-button:hover {
@@ -221,3 +189,102 @@
 #user-pane {
     -fx-padding: 0;
 }
+
+.table-view {
+    -fx-background-color: transparent; // Removes extra border around table
+}
+
+.table-view:focused {
+    -fx-background-color: transparent; // Removes blue border around table when focused
+}
+
+.table-view .column-header,
+.table-view .column-header-background {
+    visibility: hidden; // Makes header row transparent
+    -fx-font-size: 6; // Changes spacing between Add button and rows
+}
+
+.table-view .table-row-cell:empty {
+    -fx-background-color: transparent; // Hides empty rows
+}
+
+.table-view .table-cell {
+    -fx-border-width: 0; // Removes separators between cells
+}
+
+.table-row-cell {
+    -fx-padding: 10;
+}
+
+.table-row:filled {
+    -fx-background-color: #262B3B;
+    -fx-background-radius: 8;
+    -fx-border-color: #181D29;
+    -fx-border-size: 1;
+}
+
+.table-row:filled:hover {
+    -fx-background-color: #2D3242;
+}
+
+.table-row:filled:pressed {
+    -fx-background-color: #212737;
+}
+
+/*
+.table-row {
+    -fx-background-color: #1B1F30; // Removes color from empty rows
+}
+
+.table-row:filled {
+    -fx-background-color: #262B3B;
+    -fx-background-radius: 8;
+    -fx-padding: 10 5 10 5;
+    -fx-border-size: 1;
+    -fx-border-color: #181D29;
+}
+
+.table-row:filled:hover {
+    -fx-background-color: #2D3242;
+}
+
+.table-row:filled:pressed {
+    -fx-background-color: #212737;
+}
+
+.table-row .label, .table-row .text-field {
+    -fx-background-color: #1B1F30;
+    -fx-text-fill: white;
+}
+
+#user-content-pane {
+    -fx-margin: 10px;
+}
+*/
+/*
+.table-view {
+    -fx-background-color: #1B1F30;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #1B1F30;
+    -fx-text-fill: white;
+}
+
+.table-row:filled .text {
+    -fx-text-fill: white !important;
+}*/
+/*
+.table-view .column-header {
+    -fx-background-color: #1B1F30;
+    -fx-text-fill: #1B1F30;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell {
+    -fx-border-width: 0;
+}*/
