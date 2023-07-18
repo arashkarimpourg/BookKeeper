@@ -675,10 +675,10 @@ public class BookKeeper extends Application {
         Item item = new Item("First Name", "Last Name", generateId());
         items.add(item);
         tableView.getSelectionModel().select(item);
-        editItem(item, userEditPane);
+        editItem(item);
     }
 
-    private void editItem(Item item, VBox userEditPane) {
+    private void editItem(Item item) {
         tableView.getSelectionModel().select(item);
         toggleUserEditPane(userPane);
     }
