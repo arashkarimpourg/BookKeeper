@@ -81,7 +81,9 @@ public class BookKeeper extends Application {
         idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
 
         // Add columns to the TableView
-        tableView.getColumns().addAll(firstNameColumn, lastNameColumn, idColumn);
+        tableView.getColumns().add(firstNameColumn);
+        tableView.getColumns().add(lastNameColumn);
+        tableView.getColumns().add(idColumn);
 
         // Create main window
         BorderPane root = new BorderPane();
