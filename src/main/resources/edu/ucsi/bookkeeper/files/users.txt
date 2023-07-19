@@ -1,0 +1,10 @@
+Tony,Stark,1001,ironman@starkindustries.com
+Steve,Rogers,1002,captainamerica@avengers.com
+Peter,Parker,1003,spiderman@dailybugle.com
+Diana,Prince,1004,wonderwoman@themyscira.com
+Bruce,Wayne,1005,batman@wayneenterprises.com
+Clark,Kent,1006,superman@dailyplanet.com
+Natasha,Romanoff,1007,blackwidow@shield.com
+Thor,Odinson,1008,thor@asgard.com
+Bruce,Banner,1009,hulk@gammalab.com
+T'Challa,Black Panther,1010,blackpanther@wakanda.gov

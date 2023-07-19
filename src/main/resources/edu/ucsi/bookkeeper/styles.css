@@ -128,6 +128,10 @@
     -fx-background-color: transparent;
 }
 
+.add-pane {
+    -fx-padding: 0 0 6 1;
+}
+
 .add-button {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13;
@@ -136,7 +140,6 @@
     -fx-background-radius: 5;
     -fx-text-fill: black;
     -fx-padding: 7 15 7 15;
-    -fx-margin-bottom: 30;
 }
 
 .add-button:hover {
@@ -190,45 +193,48 @@
     -fx-padding: 0;
 }
 
-.table-view {
-    -fx-background-color: transparent; // Removes extra border around table
+.table-pane {
+    -fx-spacing: 3; // Space between rows
 }
 
-.table-view:focused {
-    -fx-background-color: transparent; // Removes blue border around table when focused
+.gender-icon {
+    -fx-background-color: transparent;
 }
 
-.table-view .column-header,
-.table-view .column-header-background {
-    visibility: hidden; // Makes header row transparent
-    -fx-font-size: 6; // Changes spacing between Add button and rows
-}
-
-.table-view .table-row-cell:empty {
-    -fx-background-color: transparent; // Hides empty rows
-}
-
-.table-view .table-cell {
-    -fx-border-width: 0; // Removes separators between cells
-}
-
-.table-row-cell {
-    -fx-padding: 10;
-}
-
-.table-row:filled {
+.row-pane {
+    -fx-background-radius: 5;
     -fx-background-color: #262B3B;
-    -fx-background-radius: 8;
-    -fx-border-color: #181D29;
     -fx-border-size: 1;
+    -fx-border-radius: 5;
+    -fx-border-color: #181D29;
+    -fx-padding: 18 10 18 10;
+    -fx-spacing: 10; // Space between columns
 }
 
-.table-row:filled:hover {
-    -fx-background-color: #2D3242;
+.main-label, .main-label .label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 14;
+    -fx-text-fill: white;
 }
 
-.table-row:filled:pressed {
+.detail-label, .detail-label .label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12;
+    -fx-text-fill: white;
+}
+
+.row-pane:hover {
+    -fx-background-color: #2D3244;
+    -fx-border-size: 1;
+    -fx-border-radius: 5;
+}
+
+.row-pane:pressed {
     -fx-background-color: #212737;
+}
+
+.forward-icon {
+    -fx-background-color: transparent;
 }
 
 /*

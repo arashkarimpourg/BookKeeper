@@ -24,6 +24,7 @@ import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class BookKeeper extends Application {
@@ -32,58 +33,64 @@ public class BookKeeper extends Application {
     private boolean isUserEditPaneVisible = false;
     private boolean isBookEditPaneVisible = false;
     private TableView<Item> tableView;
+    private VBox tablePane;
     private ObservableList<Item> items;
+    private final ArrayList<Item> importedItems = new ArrayList<>();
+
     private StackPane userPane;
     private VBox userEditPane;
 
     private TextField firstNameField;
     private TextField lastNameField;
     private TextField idField;
+    private TextField emailField;
 
     private int generateId() {
         // Generate a unique ID based on the current timestamp
         return (int) System.currentTimeMillis();
     }
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
+        // Initialize items list
+        items = FXCollections.observableArrayList();
+
+
         // Create TableView and ObservableList
         tableView = new TableView<>();
-        items = FXCollections.observableArrayList();
-        tableView.getStyleClass().add("table-view");
-
-
         // Set custom cell factory for the TableView
-        tableView.setRowFactory(tv -> {
-            TableRow<Item> row = new TableRow<>();
-            row.getStyleClass().add("table-row");
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 1 && !row.isEmpty()) {
-                    Item item = row.getItem();
-                    if (item != null) {
-                        toggleUserEditPane(userPane);
-                        populateUserEditFields(userEditPane, item);
-                    }
-                }
-            });
-            return row;
-        });
+//        tableView.setRowFactory(tv -> {
+//            TableRow<Item> row = new TableRow<>();
+//            row.getStyleClass().add("table-row");
+//            row.setOnMouseClicked(event -> {
+//                if (event.getClickCount() == 1 && !row.isEmpty()) {
+//                    Item item = row.getItem();
+//                    if (item != null) {
+//                        toggleUserEditPane(userPane);
+//                        populateUserEditFields(userEditPane, item);
+//                    }
+//                }
+//            });
+//            return row;
+//        });
+
 
         // Create columns for the TableView
-        TableColumn<Item, String> firstNameColumn = new TableColumn<>("First Name");
-        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-
-        TableColumn<Item, String> lastNameColumn = new TableColumn<>("Last Name");
-        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-
-        TableColumn<Item, Integer> idColumn = new TableColumn<>("ID");
-        idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
-
-        // Add columns to the TableView
-        tableView.getColumns().add(firstNameColumn);
-        tableView.getColumns().add(lastNameColumn);
-        tableView.getColumns().add(idColumn);
+//        TableColumn<Item, String> firstNameColumn = new TableColumn<>("First Name");
+//        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+//
+//        TableColumn<Item, String> lastNameColumn = new TableColumn<>("Last Name");
+//        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+//
+//        TableColumn<Item, Integer> idColumn = new TableColumn<>("ID");
+//        idColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+//
+//        // Add columns to the TableView
+//        tableView.getColumns().add(firstNameColumn);
+//        tableView.getColumns().add(lastNameColumn);
+//        tableView.getColumns().add(idColumn);
 
         // Create main window
         BorderPane root = new BorderPane();
@@ -287,8 +294,7 @@ public class BookKeeper extends Application {
         importButton.getStyleClass().add("file-button");
         importButton.setGraphic(importButtonContent);
         importButton.setPrefWidth(150);
-
-        importButton.setOnAction(event -> importFromFile());
+        importButton.setOnAction(event -> openImportDialog());
 
         // Create export icon
         ImageView exportIcon = null;
@@ -327,8 +333,12 @@ public class BookKeeper extends Application {
         filePane.getChildren().addAll(importButton, exportButton);
         filePane.setAlignment(Pos.BASELINE_RIGHT);
 
+        // Create table
+        tablePane = new VBox();
+        tablePane.getStyleClass().add("table-pane");
+
         // Add user content pane and user edit title to user content pane
-        userContentPane.getChildren().addAll(userContentPaneTitle, filePane, addPane, tableView);
+        userContentPane.getChildren().addAll(userContentPaneTitle, filePane, addPane, tablePane);
 
         VBox.setVgrow(tableView, Priority.ALWAYS);
 
@@ -403,8 +413,7 @@ public class BookKeeper extends Application {
         // Add window controls pane and main pane to right pane
         rightPane.getChildren().addAll(windowControlsPane, mainPane);
 
-
-
+        // TODO: Remove this
         BorderPane.setMargin(leftPane, new Insets(0, 10, 0, 0));
 
         // Add left pane & right pane to main window
@@ -449,18 +458,22 @@ public class BookKeeper extends Application {
         });
 
         // Import items from file on application startup
-        importFromFile();
+
+        File defaultFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/users.txt"); // Specify the path to your default text file
+        importFromFile(defaultFile);
     }
 
     private static class Item {
         private final StringProperty firstName;
         private final StringProperty lastName;
         private final IntegerProperty id;
+        private final StringProperty email;
 
-        public Item(String firstName, String lastName, int id) {
+        public Item(String firstName, String lastName, int id, String email) {
             this.firstName = new SimpleStringProperty(firstName);
             this.lastName = new SimpleStringProperty(lastName);
             this.id = new SimpleIntegerProperty(id);
+            this.email = new SimpleStringProperty(email);
         }
 
         public StringProperty firstNameProperty() {
@@ -474,6 +487,7 @@ public class BookKeeper extends Application {
         public IntegerProperty idProperty() {
             return id;
         }
+        public StringProperty emailProperty() { return email; }
 
         public String getFirstName() {
             return firstName.get();
@@ -487,6 +501,10 @@ public class BookKeeper extends Application {
             return id.get();
         }
 
+        public String getEmail() {
+            return email.get();
+        }
+
         public void setFirstName(String firstName) {
             this.firstName.set(firstName);
         }
@@ -497,6 +515,10 @@ public class BookKeeper extends Application {
 
         public void setId(int id) {
             this.id.set(id);
+        }
+
+        public void setEmail(String email) {
+            this.email.set(email);
         }
     }
 
@@ -539,7 +561,89 @@ public class BookKeeper extends Application {
         }
     }
 
-    private void populateUserEditFields(VBox userEditPane, Item item) {
+
+
+
+    private void populateUserEditFields(HBox rowPane, Item item) {
+        // Clear the existing content
+        rowPane.getChildren().clear();
+
+        // Create text fields
+        TextField firstNameField = new TextField();
+        firstNameField.setPromptText("First Name");
+        firstNameField.setText(item.getFirstName());
+
+        TextField lastNameField = new TextField();
+        lastNameField.setPromptText("Last Name");
+        lastNameField.setText(item.getLastName());
+
+        TextField idField = new TextField();
+        idField.setPromptText("ID");
+        idField.setText(String.valueOf(item.getId()));
+
+        // Create buttons
+        Button okButton = new Button("OK");
+        okButton.setOnAction(event -> {
+            // Update the item with the edited values
+            item.setFirstName(firstNameField.getText());
+            item.setLastName(lastNameField.getText());
+            item.setId(Integer.parseInt(idField.getText()));
+            item.setEmail(emailField.getText());
+
+            // Refresh the rowPane to reflect the changes
+            populateTableRowPane(rowPane, item);
+
+            // Hide the user edit pane
+            toggleUserEditPane(userPane);
+        });
+
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(event -> {
+            // Restore the original content of the rowPane
+            populateTableRowPane(rowPane, item);
+
+            // Hide the user edit pane without saving any changes
+            toggleUserEditPane(userPane);
+        });
+
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Delete Item");
+            alert.setContentText("Are you sure you want to delete this item?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Remove the item from the data source
+                items.remove(item);
+
+                // Remove the rowPane from the tablePane
+                tablePane.getChildren().remove(rowPane);
+            }
+        });
+
+        // Add the components to the rowPane
+        rowPane.getChildren().addAll(firstNameField, lastNameField, idField, okButton, cancelButton, deleteButton);
+    }
+
+    private void populateTableRowPane(HBox rowPane, Item item) {
+        // Clear the existing content
+        rowPane.getChildren().clear();
+
+        // Create and add labels or text fields to display the item's properties
+        Label firstNameLabel = new Label("First Name: " + item.getFirstName());
+        Label lastNameLabel = new Label("Last Name: " + item.getLastName());
+        Label idLabel = new Label("ID: " + item.getId());
+
+        rowPane.getChildren().addAll(firstNameLabel, lastNameLabel, idLabel);
+    }
+
+
+
+
+
+    private void populateUserEditFields2(VBox userEditPane, Item item) {
         // Clear the existing content
         userEditPane.getChildren().clear();
 
@@ -563,6 +667,7 @@ public class BookKeeper extends Application {
             item.setFirstName(firstNameField.getText());
             item.setLastName(lastNameField.getText());
             item.setId(Integer.parseInt(idField.getText()));
+            item.setEmail(emailField.getText());
 
             // Hide the user edit pane
             toggleUserEditPane(userPane);
@@ -593,7 +698,7 @@ public class BookKeeper extends Application {
         HBox buttonPane = new HBox(10, okButton, cancelButton, deleteButton);
 
         // Add the components to the user edit pane
-        userEditPane.getChildren().addAll(firstNameField, lastNameField, idField, buttonPane);
+        userEditPane.getChildren().addAll(firstNameField, lastNameField, idField, emailField, buttonPane);
     }
 
     private void toggleBookEditPane(StackPane bookPane) {
@@ -617,31 +722,23 @@ public class BookKeeper extends Application {
         }
     }
 
-    private void importFromFile() {
-        File defaultFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/users.txt"); // Specify the path to your default text file
-
-        if (defaultFile.exists()) {
-            importFromFile(defaultFile);
-        } else {
-            openImportDialog();
-        }
-    }
-
     private void importFromFile(File file) {
+        importedItems.clear(); // Clear the ArrayList before importing
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            ObservableList<Item> importedItems = FXCollections.observableArrayList();
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 3) {
+                if (parts.length == 4) {
                     String firstName = parts[0];
                     String lastName = parts[1];
                     int id = Integer.parseInt(parts[2]);
-                    importedItems.add(new Item(firstName, lastName, id));
+                    String email = parts[3];
+                    importedItems.add(new Item(firstName, lastName, id, email));
                 }
             }
-            items.setAll(importedItems);
-            tableView.setItems(items);
+            updateTablePane(importedItems);
+
         } catch (IOException e) {
             e.printStackTrace();
             openImportDialog();
@@ -664,7 +761,7 @@ public class BookKeeper extends Application {
         if (file != null) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (Item item : items) {
-                    writer.write(item.getFirstName() + "," + item.getLastName() + "," + item.getId());
+                    writer.write(item.getFirstName() + "," + item.getLastName() + "," + item.getId() + "," + item.getEmail());
                     writer.newLine();
                 }
             } catch (IOException e) {
@@ -674,7 +771,7 @@ public class BookKeeper extends Application {
     }
 
     private void addItem() {
-        Item item = new Item("First Name", "Last Name", generateId());
+        Item item = new Item("First Name", "Last Name", generateId(), "Email");
         items.add(item);
         tableView.getSelectionModel().select(item);
         editItem(item);
@@ -683,6 +780,88 @@ public class BookKeeper extends Application {
     private void editItem(Item item) {
         tableView.getSelectionModel().select(item);
         toggleUserEditPane(userPane);
+    }
+    private void updateTablePane(ArrayList<Item> items) {
+        // Clear existing rows
+        tablePane.getChildren().clear();
+
+        for (Item item : items) {
+            // Create male icon
+            ImageView maleIcon = null;
+            InputStream imageStreamMale = getClass().getResourceAsStream("images/male.png");
+            if (imageStreamMale != null) {
+                Image maleImage = new Image(imageStreamMale);
+                maleIcon = new ImageView(maleImage);
+                maleIcon.setFitWidth(32);
+                maleIcon.setFitHeight(32);
+                maleIcon.getStyleClass().add("gender-icon");
+            } else {
+                System.err.println("Unable to load male.png");
+            }
+
+            // Create female icon
+            ImageView femaleIcon = null;
+            InputStream imageStreamFemale = getClass().getResourceAsStream("images/female.png");
+            if (imageStreamFemale != null) {
+                Image femaleImage = new Image(imageStreamFemale);
+                femaleIcon = new ImageView(femaleImage);
+                femaleIcon.setFitWidth(32);
+                femaleIcon.setFitHeight(32);
+                femaleIcon.getStyleClass().add("gender-icon");
+            } else {
+                System.err.println("Unable to load female.png");
+            }
+
+            // Create forward icon
+            ImageView forwardIcon = null;
+            InputStream imageStreamForward = getClass().getResourceAsStream("images/forward.png");
+            if (imageStreamForward != null) {
+                Image forwardImage = new Image(imageStreamForward);
+                forwardIcon = new ImageView(forwardImage);
+                forwardIcon.setFitWidth(12);
+                forwardIcon.setFitHeight(12);
+                forwardIcon.getStyleClass().add("forward-icon");
+            } else {
+                System.err.println("Unable to load forward.png");
+            }
+
+            // Create name field
+            Label firstNameLabel = new Label(item.getFirstName());
+            firstNameLabel.getStyleClass().add("main-label");
+            Label lastNameLabel = new Label(item.getLastName());
+            lastNameLabel.getStyleClass().add("detail-label");
+            VBox nameField = new VBox(firstNameLabel, lastNameLabel);
+            nameField.setPrefWidth(200); // Custom width
+
+            // Create id & email field
+            Label idLabel = new Label(String.valueOf(item.getId()));
+            idLabel.getStyleClass().add("main-label");
+            Label emailLabel = new Label("arashkarimpourg@gmail.com");
+            emailLabel.getStyleClass().add("detail-label");
+            VBox idEmailField = new VBox(idLabel, emailLabel);
+
+            // Add spacer field to right-align forward icon
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+
+            // Create row pane
+            HBox rowPane = new HBox(maleIcon, nameField, idEmailField, spacer, forwardIcon);
+            rowPane.getStyleClass().add("row-pane");
+            rowPane.setAlignment(Pos.CENTER_LEFT); // Vertically centers forward icon
+
+            // Add click handler to row pane
+            rowPane.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1) {
+                    editItem(item);
+                    toggleUserEditPane(userPane);
+                    populateUserEditFields(userPane, item);
+                }
+            });
+
+            // Add row pane to table pane
+            tablePane.getChildren().add(rowPane);
+        }
+
     }
 
     public static void main(String[] args) {
