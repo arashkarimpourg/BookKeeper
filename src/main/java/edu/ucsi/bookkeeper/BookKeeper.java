@@ -6,8 +6,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -28,22 +26,19 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public class BookKeeper extends Application {
+
+    private final ArrayList<Item> importedItems = new ArrayList<>();
     private double xOffset = 0;
     private double yOffset = 0;
     private boolean isUserEditPaneVisible = false;
     private boolean isBookEditPaneVisible = false;
-    private TableView<Item> tableView;
     private VBox tablePane;
-    private ObservableList<Item> items;
-    private final ArrayList<Item> importedItems = new ArrayList<>();
-
     private StackPane userPane;
-    private VBox userEditPane;
-
     private TextField firstNameField;
     private TextField lastNameField;
     private TextField idField;
     private TextField emailField;
+    private TextField genderField;
 
     private int generateId() {
         // Generate a unique ID based on the current timestamp
@@ -55,11 +50,10 @@ public class BookKeeper extends Application {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         // Initialize items list
-        items = FXCollections.observableArrayList();
-
+        //items = FXCollections.observableArrayList();
 
         // Create TableView and ObservableList
-        tableView = new TableView<>();
+//        tableView = new TableView<>();
         // Set custom cell factory for the TableView
 //        tableView.setRowFactory(tv -> {
 //            TableRow<Item> row = new TableRow<>();
@@ -340,10 +334,10 @@ public class BookKeeper extends Application {
         // Add user content pane and user edit title to user content pane
         userContentPane.getChildren().addAll(userContentPaneTitle, filePane, addPane, tablePane);
 
-        VBox.setVgrow(tableView, Priority.ALWAYS);
+//        VBox.setVgrow(tableView, Priority.ALWAYS);
 
         // Create user edit pane
-        userEditPane = new VBox();
+        VBox userEditPane = new VBox();
         userEditPane.setId("user-edit-pane");
         userEditPane.setVisible(false);
 
@@ -468,26 +462,15 @@ public class BookKeeper extends Application {
         private final StringProperty lastName;
         private final IntegerProperty id;
         private final StringProperty email;
+        private final StringProperty gender;
 
-        public Item(String firstName, String lastName, int id, String email) {
+        public Item(String firstName, String lastName, int id, String email, String gender) {
             this.firstName = new SimpleStringProperty(firstName);
             this.lastName = new SimpleStringProperty(lastName);
             this.id = new SimpleIntegerProperty(id);
             this.email = new SimpleStringProperty(email);
+            this.gender = new SimpleStringProperty(gender);
         }
-
-        public StringProperty firstNameProperty() {
-            return firstName;
-        }
-
-        public StringProperty lastNameProperty() {
-            return lastName;
-        }
-
-        public IntegerProperty idProperty() {
-            return id;
-        }
-        public StringProperty emailProperty() { return email; }
 
         public String getFirstName() {
             return firstName.get();
@@ -504,6 +487,7 @@ public class BookKeeper extends Application {
         public String getEmail() {
             return email.get();
         }
+        public String getGender() { return gender.get(); }
 
         public void setFirstName(String firstName) {
             this.firstName.set(firstName);
@@ -520,6 +504,7 @@ public class BookKeeper extends Application {
         public void setEmail(String email) {
             this.email.set(email);
         }
+        public void setGender(String gender) { this.gender.set(gender); }
     }
 
     private void toggleUserEditPane(StackPane userPane) {
@@ -549,7 +534,7 @@ public class BookKeeper extends Application {
             });
             slideOut.play();
             isUserEditPaneVisible = false;
-            tableView.refresh();
+            updateTablePane(importedItems);
         }
     }
 
@@ -561,12 +546,9 @@ public class BookKeeper extends Application {
         }
     }
 
-
-
-
-    private void populateUserEditFields(HBox rowPane, Item item) {
+    private void populateUserEditFields(HBox rowBox, Item item) {
         // Clear the existing content
-        rowPane.getChildren().clear();
+        rowBox.getChildren().clear();
 
         // Create text fields
         TextField firstNameField = new TextField();
@@ -581,6 +563,14 @@ public class BookKeeper extends Application {
         idField.setPromptText("ID");
         idField.setText(String.valueOf(item.getId()));
 
+        TextField emailField = new TextField();
+        emailField.setPromptText("Email");
+        emailField.setText(String.valueOf(item.getEmail()));
+
+        TextField genderField = new TextField();
+        genderField.setPromptText("Gender");
+        genderField.setText(String.valueOf(item.getGender()));
+
         // Create buttons
         Button okButton = new Button("OK");
         okButton.setOnAction(event -> {
@@ -589,9 +579,10 @@ public class BookKeeper extends Application {
             item.setLastName(lastNameField.getText());
             item.setId(Integer.parseInt(idField.getText()));
             item.setEmail(emailField.getText());
+            item.setGender(genderField.getText());
 
-            // Refresh the rowPane to reflect the changes
-            populateTableRowPane(rowPane, item);
+            // Refresh the rowBox to reflect the changes
+            populateTableRowBox(rowBox, item);
 
             // Hide the user edit pane
             toggleUserEditPane(userPane);
@@ -599,44 +590,45 @@ public class BookKeeper extends Application {
 
         Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(event -> {
-            // Restore the original content of the rowPane
-            populateTableRowPane(rowPane, item);
+            // Restore the original content of the rowBox
+            populateTableRowBox(rowBox, item);
 
             // Hide the user edit pane without saving any changes
             toggleUserEditPane(userPane);
         });
 
         Button deleteButton = new Button("Delete");
-        deleteButton.setOnAction(event -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm Delete");
-            alert.setHeaderText("Delete Item");
-            alert.setContentText("Are you sure you want to delete this item?");
+//        deleteButton.setOnAction(event -> {
+//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setTitle("Confirm Delete");
+//            alert.setHeaderText("Delete Item");
+//            alert.setContentText("Are you sure you want to delete this item?");
+//
+//            Optional<ButtonType> result = alert.showAndWait();
+//            if (result.isPresent() && result.get() == ButtonType.OK) {
+//                // Remove the item from the data source
+//                items.remove(item);
+//
+//                // Remove the rowBox from the tablePane
+//                tablePane.getChildren().remove(rowBox);
+//            }
+//        });
 
-            Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                // Remove the item from the data source
-                items.remove(item);
-
-                // Remove the rowPane from the tablePane
-                tablePane.getChildren().remove(rowPane);
-            }
-        });
-
-        // Add the components to the rowPane
-        rowPane.getChildren().addAll(firstNameField, lastNameField, idField, okButton, cancelButton, deleteButton);
+        // Add the components to the rowBox
+        rowBox.getChildren().addAll(firstNameField, lastNameField, idField, genderField, okButton, cancelButton, deleteButton);
     }
 
-    private void populateTableRowPane(HBox rowPane, Item item) {
+    private void populateTableRowBox(HBox rowBox, Item item) {
         // Clear the existing content
-        rowPane.getChildren().clear();
+        rowBox.getChildren().clear();
 
         // Create and add labels or text fields to display the item's properties
+        // FIXME: Add emailLabel & genderLabel?
         Label firstNameLabel = new Label("First Name: " + item.getFirstName());
         Label lastNameLabel = new Label("Last Name: " + item.getLastName());
         Label idLabel = new Label("ID: " + item.getId());
 
-        rowPane.getChildren().addAll(firstNameLabel, lastNameLabel, idLabel);
+        rowBox.getChildren().addAll(firstNameLabel, lastNameLabel, idLabel);
     }
 
 
@@ -660,6 +652,14 @@ public class BookKeeper extends Application {
         idField.setPromptText("ID");
         idField.setText(String.valueOf(item.getId()));
 
+        emailField = new TextField();
+        emailField.setPromptText("Email");
+        emailField.setText(item.getEmail());
+
+        genderField = new TextField();
+        genderField.setPromptText("Gender");
+        genderField.setText(item.getGender());
+
         // Create buttons
         Button okButton = new Button("OK");
         okButton.setOnAction(event -> {
@@ -668,6 +668,7 @@ public class BookKeeper extends Application {
             item.setLastName(lastNameField.getText());
             item.setId(Integer.parseInt(idField.getText()));
             item.setEmail(emailField.getText());
+            item.setGender(genderField.getText());
 
             // Hide the user edit pane
             toggleUserEditPane(userPane);
@@ -687,10 +688,9 @@ public class BookKeeper extends Application {
             alert.setContentText("Are you sure you want to delete this item?");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                items.remove(item);
-                toggleUserEditPane(userPane);
-            }
+//            if (result.isPresent() && result.get() == ButtonType.OK) {
+//                items.remove(item);
+//            }
         });
 
 
@@ -698,7 +698,7 @@ public class BookKeeper extends Application {
         HBox buttonPane = new HBox(10, okButton, cancelButton, deleteButton);
 
         // Add the components to the user edit pane
-        userEditPane.getChildren().addAll(firstNameField, lastNameField, idField, emailField, buttonPane);
+        userEditPane.getChildren().addAll(firstNameField, lastNameField, idField, emailField, genderField, buttonPane);
     }
 
     private void toggleBookEditPane(StackPane bookPane) {
@@ -729,12 +729,13 @@ public class BookKeeper extends Application {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length == 4) {
+                if (parts.length == 5) {
                     String firstName = parts[0];
                     String lastName = parts[1];
                     int id = Integer.parseInt(parts[2]);
                     String email = parts[3];
-                    importedItems.add(new Item(firstName, lastName, id, email));
+                    String gender = parts[4];
+                    importedItems.add(new Item(firstName, lastName, id, email, gender));
                 }
             }
             updateTablePane(importedItems);
@@ -760,8 +761,14 @@ public class BookKeeper extends Application {
         File file = fileChooser.showSaveDialog(null);
         if (file != null) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                for (Item item : items) {
-                    writer.write(item.getFirstName() + "," + item.getLastName() + "," + item.getId() + "," + item.getEmail());
+                for (Item item : importedItems) {
+                    String line = String.format("%s,%s,%d,%s,%s",
+                            item.getFirstName(),
+                            item.getLastName(),
+                            item.getId(),
+                            item.getEmail(),
+                            item.getGender());
+                    writer.write(line);
                     writer.newLine();
                 }
             } catch (IOException e) {
@@ -771,14 +778,14 @@ public class BookKeeper extends Application {
     }
 
     private void addItem() {
-        Item item = new Item("First Name", "Last Name", generateId(), "Email");
-        items.add(item);
-        tableView.getSelectionModel().select(item);
+        Item item = new Item("First Name", "Last Name", generateId(), "Email", "Gender");
+        //items.add(item);
+//        tableView.getSelectionModel().select(item);
         editItem(item);
     }
 
     private void editItem(Item item) {
-        tableView.getSelectionModel().select(item);
+//        tableView.getSelectionModel().select(item);
         toggleUserEditPane(userPane);
     }
     private void updateTablePane(ArrayList<Item> items) {
@@ -786,6 +793,7 @@ public class BookKeeper extends Application {
         tablePane.getChildren().clear();
 
         for (Item item : items) {
+
             // Create male icon
             ImageView maleIcon = null;
             InputStream imageStreamMale = getClass().getResourceAsStream("images/male.png");
@@ -812,6 +820,14 @@ public class BookKeeper extends Application {
                 System.err.println("Unable to load female.png");
             }
 
+            // Create gender icon
+            ImageView genderIcon;
+            if (item.getGender().equals("male")) {
+                genderIcon = maleIcon;
+            } else {
+                genderIcon = femaleIcon;
+            }
+
             // Create forward icon
             ImageView forwardIcon = null;
             InputStream imageStreamForward = getClass().getResourceAsStream("images/forward.png");
@@ -831,12 +847,12 @@ public class BookKeeper extends Application {
             Label lastNameLabel = new Label(item.getLastName());
             lastNameLabel.getStyleClass().add("detail-label");
             VBox nameField = new VBox(firstNameLabel, lastNameLabel);
-            nameField.setPrefWidth(200); // Custom width
+            nameField.setPrefWidth(180); // Custom width
 
             // Create id & email field
             Label idLabel = new Label(String.valueOf(item.getId()));
             idLabel.getStyleClass().add("main-label");
-            Label emailLabel = new Label("arashkarimpourg@gmail.com");
+            Label emailLabel = new Label(item.getEmail());
             emailLabel.getStyleClass().add("detail-label");
             VBox idEmailField = new VBox(idLabel, emailLabel);
 
@@ -845,7 +861,7 @@ public class BookKeeper extends Application {
             HBox.setHgrow(spacer, Priority.ALWAYS);
 
             // Create row pane
-            HBox rowPane = new HBox(maleIcon, nameField, idEmailField, spacer, forwardIcon);
+            HBox rowPane = new HBox(genderIcon, nameField, idEmailField, spacer, forwardIcon);
             rowPane.getStyleClass().add("row-pane");
             rowPane.setAlignment(Pos.CENTER_LEFT); // Vertically centers forward icon
 
@@ -854,7 +870,6 @@ public class BookKeeper extends Application {
                 if (event.getClickCount() == 1) {
                     editItem(item);
                     toggleUserEditPane(userPane);
-                    populateUserEditFields(userPane, item);
                 }
             });
 
