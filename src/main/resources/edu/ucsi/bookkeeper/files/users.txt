@@ -1,10 +1,10 @@
-Tony,Stark,1001,ironman@starkindustries.com,male
-Natasha,Romanoff,1007,blackwidow@shield.com,female
-Steve,Rogers,1002,captainamerica@avengers.com,male
-Peter,Parker,1003,spiderman@dailybugle.com,male
-Diana,Prince,1004,wonderwoman@themyscira.com,female
-Bruce,Wayne,1005,batman@wayneenterprises.com,male
-Clark,Kent,1006,superman@dailyplanet.com,male
-Thor,Odinson,1008,thor@asgard.com,male
-Bruce,Banner,1009,hulk@gammalab.com,male
-T'Challa,Black Panther,1010,blackpanther@wakanda.gov,male
+Tony,Stark,1001,ironman@starkindustries.com,Male
+Natasha,Romanoff,1007,blackwidow@shield.com,Female
+Steve,Rogers,1002,captainamerica@avengers.com,Male
+Peter,Parker,1003,spiderman@dailybugle.com,Male
+Diana,Prince,1004,wonderwoman@themyscira.com,Female
+Bruce,Wayne,1005,batman@wayneenterprises.com,Male
+Clark,Kent,1006,superman@dailyplanet.com,Male
+Thor,Odinson,1008,thor@asgard.com,Male
+Bruce,Banner,1009,hulk@gammalab.com,Male
+T'Challa,Black Panther,1010,blackpanther@wakanda.gov,Male

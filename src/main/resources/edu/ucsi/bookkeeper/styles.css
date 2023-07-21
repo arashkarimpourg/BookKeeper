@@ -14,7 +14,6 @@
     -fx-border-color: #3C3D45;
     -fx-border-width: 1;
     -fx-border-radius: 7;
-    -fx-padding: -2 -2 0 0;
 }
 
 #title-bar {
@@ -95,44 +94,31 @@
     -fx-background-color: #282D3A;
 }
 
-.main-pane-title {
+.main-title {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 28;
     -fx-text-fill: white;
     -fx-padding: 28 10 16 10;
 }
 
-#user-content-pane {
+.user-content-pane {
     -fx-padding: 0 28 0 0;
 }
 
-#user-edit-pane {
+.user-edit-pane {
+    -fx-padding: 0 28 0 0;
     -fx-background-color: #1B1F30;
-    -fx-padding: 40;
+    -fx-background-radius: 7;
+    /*-fx-border-color: #3C3D45;
+    -fx-border-width: 0 0 40 0;
+    -fx-border-radius: 7;*/
 }
 
-.list-view {
-    -fx-background-color: transparent;
-}
-
-.list-cell {
-    -fx-background-color: transparent;
-    -fx-padding: 8 0 0 0;
-}
-
-.labels-box {
-    -fx-background-color: transparent;
-}
-
-.id-label, .name-label {
-    -fx-background-color: transparent;
-}
-
-.add-pane {
+.button-pane {
     -fx-padding: 0 0 6 1;
 }
 
-.add-button {
+.important-button {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13;
     -fx-alignment: baseline-left;
@@ -142,11 +128,11 @@
     -fx-padding: 7 15 7 15;
 }
 
-.add-button:hover {
+.important-button:hover {
     -fx-background-color: #49B3EB;
 }
 
-.add-button:pressed {
+.important-button:pressed {
     -fx-background-color: #41A1D5;
     -fx-text-fill: #22526C;
 }
@@ -172,9 +158,6 @@
     -fx-padding: 20 20 20 20;
 }
 
-.file-pane-icon {
-}
-
 .file-pane-label {
     -fx-font-family: "Segoe UI Bold";
     -fx-font-size: 14;
@@ -189,16 +172,9 @@
     -fx-padding: 0 0 0 10;
 }
 
-#user-pane {
-    -fx-padding: 0;
-}
-
 .table-pane {
     -fx-spacing: 3; // Space between rows
-}
-
-.gender-icon {
-    -fx-background-color: transparent;
+    -fx-background-color: #1b1f30;
 }
 
 .row-pane {
@@ -220,7 +196,7 @@
 .detail-label, .detail-label .label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 12;
-    -fx-text-fill: white;
+    -fx-text-fill: #C1C3C7;
 }
 
 .row-pane:hover {
@@ -233,64 +209,141 @@
     -fx-background-color: #212737;
 }
 
-.forward-icon {
+.gender-icon, .forward-icon {
     -fx-background-color: transparent;
 }
 
-/*
-.table-row {
-    -fx-background-color: #1B1F30; // Removes color from empty rows
-}
-
-.table-row:filled {
-    -fx-background-color: #262B3B;
-    -fx-background-radius: 8;
-    -fx-padding: 10 5 10 5;
+.text-field {
+    -fx-background-color: #323849;
+    -fx-background-radius: 4;
     -fx-border-size: 1;
-    -fx-border-color: #181D29;
+    -fx-border-color: #353A4C #353A4C #9C9FA7 #353A4C;
+    -fx-border-radius: 4;
+    -fx-padding: 6 12 6 12;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13;
+    -fx-text-fill: white;
 }
 
-.table-row:filled:hover {
-    -fx-background-color: #2D3242;
+.choice-box {
+    -fx-background-color: #323849;
+    -fx-background-radius: 4;
+    -fx-border-size: 1;
+    -fx-border-color: #353A4C;
+    -fx-border-radius: 4;
+    -fx-padding: 2 12 2 12;
 }
 
-.table-row:filled:pressed {
+.choice-box .label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13;
+    -fx-text-fill: white;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #2c2c2e;
+    -fx-background-radius: 8;
+    -fx-border-color: #14171D;
+    -fx-border-size: 1;
+    -fx-border-radius: 8;
+    -fx-padding: 4;
+}
+
+.choice-box .menu-item {
+    -fx-border-size: 2;
+    -fx-border-color: transparent;
+    -fx-padding: 5 10 5 0;
+}
+
+.choice-box .menu-item:hover, .choice-box .menu-item:selected {
+    -fx-background-color: #373B41;
+    -fx-background-radius: 4;
+}
+
+.choice-box .menu-item:pressed {
+    -fx-background-color: #2F3439;
+}
+
+.choice-box .menu-item:pressed .label {
+    -fx-text-fill: #C1C3C7;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #38383B;
+    -fx-background-radius: 4;
+    -fx-border-size: 0 0 0 10;
+    -fx-border-color: #38383B #38383B #38383B #4CC2FF;
+    -fx-border-radius: 4;
+    -fx-text-fill: #C1C3C7;
+}
+
+.choice-box .menu-item .radio {
+    -fx-opacity: 0;
+}
+
+.choice-box .arrow { /* DEFAULT ARROW */
+    -fx-background-color: white;
+}
+
+.edit-row {
+    -fx-background-color: #262B3C;
+    -fx-background-radius: 4;
+    -fx-border-size: 1;
+    -fx-border-radius: 4;
+    -fx-border-color: #171D2B;
+    -fx-padding: 18 10 18 10;
+    -fx-spacing: 10; // Space between columns*/
+}
+
+.edit-row:hover {
+    -fx-background-color: #2D3244;
+    -fx-border-size: 1;
+    -fx-border-radius: 5;
+}
+
+.edit-row:pressed {
     -fx-background-color: #212737;
 }
 
-.table-row .label, .table-row .text-field {
-    -fx-background-color: #1B1F30;
-    -fx-text-fill: white;
+.user-edit-fields {
+    /*-fx-spacing: 30;*/
 }
 
-#user-content-pane {
-    -fx-margin: 10px;
-}
-*/
-/*
-.table-view {
-    -fx-background-color: #1B1F30;
-    -fx-text-fill: white;
+.fields-pane {
+    -fx-spacing: 4;
 }
 
-.table-view .column-header-background {
-    -fx-background-color: #1B1F30;
-    -fx-text-fill: white;
-}
-
-.table-row:filled .text {
-    -fx-text-fill: white !important;
-}*/
-/*
-.table-view .column-header {
-    -fx-background-color: #1B1F30;
-    -fx-text-fill: #1B1F30;
-}
-
-.table-view .column-header-background {
+.scroll-pane {
     -fx-background-color: transparent;
 }
 
-.table-view .table-cell {
-    -fx-border-width: 0;
-}*/
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.thumb {
+    -fx-background-color: #989A9D;
+    -fx-border-width: 6;
+    -fx-border-color: #1b1f30;
+    -fx-border-radius: 10;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+     /*-fx-pref-width: 0;  /*Set the width of the buttons to zero */
+     /*-fx-pref-height: 0; /* Set the height of the buttons to zero */
+     -fx-background-color: transparent; /* Make the buttons background transparent */
+ }
+ .scroll-bar:vertical .increment-arrow,
+ .scroll-bar:vertical .decrement-arrow {
+     -fx-background-color: transparent; /* Make the arrows background transparent */
+ }
