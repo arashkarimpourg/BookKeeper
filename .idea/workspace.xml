@@ -7,10 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="User edit is functional.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fixed close button styling.">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/maximize.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/minimize.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -280,7 +279,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690131785556</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="User edit is functional.">
+      <option name="closed" value="true" />
+      <created>1690194128394</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1690194128394</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Fixed close button styling.">
+      <option name="closed" value="true" />
+      <created>1690194643832</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1690194643832</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -317,6 +332,7 @@
     <MESSAGE value="Fixed gender icon." />
     <MESSAGE value="User edit layout looks okay." />
     <MESSAGE value="User edit is functional." />
-    <option name="LAST_COMMIT_MESSAGE" value="User edit is functional." />
+    <MESSAGE value="Fixed close button styling." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed close button styling." />
   </component>
 </project>

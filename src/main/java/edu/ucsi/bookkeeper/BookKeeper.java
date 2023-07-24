@@ -78,7 +78,7 @@ public class BookKeeper extends Application {
 		// Create back button
 		Button backButton = new Button();
 		backButton.getStyleClass().add("back-button");
-		InputStream imageStreamBack = getClass().getResourceAsStream("images/title-bar/back.png");
+		InputStream imageStreamBack = getClass().getResourceAsStream("images/back.png");
 		if (imageStreamBack != null) {
 			Image backImage = new Image(imageStreamBack);
 			ImageView backIcon = new ImageView(backImage);
@@ -207,8 +207,8 @@ public class BookKeeper extends Application {
 
 		// Create close window button
 		Button closeButton = new Button();
-		closeButton.getStyleClass().addAll("close-button", "window-controls-button");
-		InputStream imageStreamClose = getClass().getResourceAsStream("images/window-controls-pane/close.png");
+		closeButton.getStyleClass().add("close-button");
+		InputStream imageStreamClose = getClass().getResourceAsStream("images/close.png");
 		if (imageStreamClose != null) {
 			Image closeImage = new Image(imageStreamClose);
 			ImageView closeIcon = new ImageView(closeImage);
@@ -223,7 +223,7 @@ public class BookKeeper extends Application {
 		// Create maximize window button
 		Button maximizeButton = new Button();
 		maximizeButton.getStyleClass().add("window-controls-button");
-		InputStream imageStreamMaximize = getClass().getResourceAsStream("images/window-controls-pane/maximize.png");
+		InputStream imageStreamMaximize = getClass().getResourceAsStream("images/maximize.png");
 		if (imageStreamMaximize != null) {
 			Image maximizeImage = new Image(imageStreamMaximize);
 			ImageView maximizeIcon = new ImageView(maximizeImage);
@@ -238,7 +238,7 @@ public class BookKeeper extends Application {
 		// Create minimize window button
 		Button minimizeButton = new Button();
 		minimizeButton.getStyleClass().add("window-controls-button");
-		InputStream imageStreamMinimize = getClass().getResourceAsStream("images/window-controls-pane/minimize.png");
+		InputStream imageStreamMinimize = getClass().getResourceAsStream("images/minimize.png");
 		if (imageStreamMinimize != null) {
 			Image minimizeImage = new Image(imageStreamMinimize);
 			ImageView minimizeIcon = new ImageView(minimizeImage);
@@ -344,7 +344,7 @@ public class BookKeeper extends Application {
 		userTablePane.getStyleClass().add("table-pane");
 
 		Region plusEmptySpace = new Region();
-		plusEmptySpace.setPrefHeight(4);
+		plusEmptySpace.setPrefHeight(3);
 
 		// Create plus pane
 		HBox plusButtonPane = new HBox();
@@ -757,9 +757,6 @@ public class BookKeeper extends Application {
 		userEditFilePane.setAlignment(Pos.BASELINE_RIGHT);
 		userEditFilePane.getStyleClass().add("file-pane");
 		userEditFilePane.getChildren().addAll(deleteUserButton);
-
-		// Hides "Delete" button if adding
-		//userEditFilePane.setManaged(!isEdit);
 
 		ImageView userEditIcon = null;
 		VBox userEditLabelPane;
