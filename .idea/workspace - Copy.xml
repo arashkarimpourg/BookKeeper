@@ -7,8 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fixed close button styling.">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Rename: Change CSS classes from 'add-button' to 'delete-button'&#10;&#10;Corrected the CSS class names to align with previous Java code modifications. All 'add-button' classes are now accurately named 'delete-button'.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,22 +39,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Arash/OneDrive/Repository/ASH/BookKeeper&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "full.screen.before.presentation.mode": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Arash/OneDrive/Repository/ASH/BookKeeper",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Arash\OneDrive\Repository\ASH\BookKeeper\src\main\resources\edu\ucsi\bookkeeper\fonts" />
@@ -294,7 +295,39 @@
       <option name="project" value="LOCAL" />
       <updated>1690194643832</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Fixed close button styling.">
+      <option name="closed" value="true" />
+      <created>1690314059778</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1690314059778</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Add app icon">
+      <option name="closed" value="true" />
+      <created>1690341577077</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1690341577077</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Refactor: Move setPrefWidth definitions to CSS&#10;&#10;Moved all setPrefWidth method calls from Java files to CSS for improved code clarity.">
+      <option name="closed" value="true" />
+      <created>1690343348620</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1690343348620</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Rename: Change CSS classes from 'add-button' to 'delete-button'&#10;&#10;Corrected the CSS class names to align with previous Java code modifications. All 'add-button' classes are now accurately named 'delete-button'.">
+      <option name="closed" value="true" />
+      <created>1690343708361</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1690343708361</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -332,6 +365,9 @@
     <MESSAGE value="User edit layout looks okay." />
     <MESSAGE value="User edit is functional." />
     <MESSAGE value="Fixed close button styling." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed close button styling." />
+    <MESSAGE value="Add app icon" />
+    <MESSAGE value="Refactor: Move setPrefWidth definitions to CSS&#10;&#10;Moved all setPrefWidth method calls from Java files to CSS for improved code clarity." />
+    <MESSAGE value="Rename: Change CSS classes from 'add-button' to 'delete-button'&#10;&#10;Corrected the CSS class names to align with previous Java code modifications. All 'add-button' classes are now accurately named 'delete-button'." />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename: Change CSS classes from 'add-button' to 'delete-button'&#10;&#10;Corrected the CSS class names to align with previous Java code modifications. All 'add-button' classes are now accurately named 'delete-button'." />
   </component>
 </project>
