@@ -58,15 +58,17 @@
      -fx-background-color: #292929;
 }
 
-#close-button {
+.close-button {
+    -fx-background-color: transparent;
     -fx-background-radius: 0 7 0 0;
+    -fx-padding: 8 16 8 16;
 }
 
-#close-button:hover {
+.close-button:hover {
     -fx-background-color: #C42B1C;
 }
 
-#close-button:pressed {
+.close-button:pressed {
     -fx-background-color: #B3271C;
 }
 
