@@ -1,0 +1,3 @@
+1984,George Orwell,1949,Dystopian novel about a totalitarian regime,Male
+To Kill a Mockingbird,Harper Lee,1960,Novel about racial injustice in a small Southern town,Female
+The Great Gatsby,F. Scott Fitzgerald,1925,Story about the decay of American Dream in the 1920s,Male
