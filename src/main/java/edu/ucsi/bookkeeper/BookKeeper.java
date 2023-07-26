@@ -852,7 +852,7 @@ public class BookKeeper extends Application {
 				userItem.setId(Integer.parseInt(userIdField.getText()));
 				userItem.setEmail(emailField.getText());
 				userItem.setGender(genderField.getValue());
-				//toggleUserEditPane(userPane);
+				toggleUserEditPane(userPane);
 			});
 		} else {
 			// Set button text to "Add" for adding
@@ -872,6 +872,7 @@ public class BookKeeper extends Application {
 
 				// Add the new user to the importedUserItems ArrayList
 				importedUserItems.add(newUser);
+				toggleUserEditPane(userPane);
 			});
 		}
 
