@@ -559,6 +559,27 @@ public class BookKeeper extends Application {
 			System.err.println("Unable to find styles.css");
 		}
 
+		String[] iconFiles = {
+				"images/app-24.png",
+				"images/app-32.png",
+				"images/app-48.png",
+				"images/app-64.png",
+				"images/app-72.png"
+		};
+
+		for (String iconFile : iconFiles) {
+			InputStream imageStream = getClass().getResourceAsStream(iconFile);
+			if (imageStream != null) {
+				Image appIcon = new Image(imageStream);
+				primaryStage.getIcons().add(appIcon);
+			} else {
+				System.err.println("Unable to load " + iconFile);
+			}
+		}
+
+
+
+
 		// Set scene
 		primaryStage.setScene(scene);
 		primaryStage.show();
