@@ -151,9 +151,6 @@
     -fx-padding: 0 22 0 0;
     -fx-background-color: #202020;
     -fx-background-radius: 7;
-    -fx-border-radius: 0 0 7 0;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: #3f3f3f;
 }
 
 .button-pane {
@@ -435,7 +432,7 @@
 }
 
 .fields-pane {
-    -fx-spacing: 4; // Space between rows in edit pane
+    -fx-spacing: 4; /* Space between rows in edit pane */
 }
 
 /* Scrollbar */
