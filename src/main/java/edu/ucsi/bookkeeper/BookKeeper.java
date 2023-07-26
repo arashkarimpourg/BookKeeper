@@ -38,14 +38,6 @@ public class BookKeeper extends Application {
 	private StackPane bookPane;
 	private VBox bookTablePane;
 	private VBox bookEditPane;
-	private TextField firstNameField;
-	private TextField lastNameField;
-	private TextField userIdField;
-	private TextField emailField;
-	private TextField genderField;
-
-
-	private TextField bookTitleField;
 
 	ImageView userIcon;
 	ImageView activeUserIcon;
@@ -613,12 +605,12 @@ public class BookKeeper extends Application {
 		});
 
 		// Import items from files on application startup
-		File defaultUserFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/users.txt"); // Specify the path to your default text file
+		File defaultUserFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Users.txt"); // Specify the path to your default text file
 		importFromUserFile(defaultUserFile);
 
 		// FIXME - Import books.txt on startup
-//        File defaultBookFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/books.txt"); // Specify the path to your default text file
-//        importFromBookFile(defaultBookFile);
+        File defaultBookFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Books.txt"); // Specify the path to your default text file
+        importFromBookFile(defaultBookFile);
 	}
 
 	private static class UserItem {
@@ -705,6 +697,35 @@ public class BookKeeper extends Application {
 	}
 
 	private void populateUserEditFields(VBox userEditFieldsPane, UserItem userItem, boolean isEdit) {
+		// Create text field for first name
+		TextField firstNameField = new TextField();
+		firstNameField.setPrefWidth(300);
+		firstNameField.getStyleClass().add("text-field");
+		firstNameField.setText(userItem.getFirstName());
+		
+		// Create text field for last name
+		TextField lastNameField = new TextField();
+		lastNameField.setPrefWidth(300);
+		lastNameField.getStyleClass().add("text-field");
+		lastNameField.setText(userItem.getLastName());
+
+		// Create text field for user ID
+		TextField userIdField = new TextField();
+		userIdField.setPrefWidth(300);
+		userIdField.getStyleClass().add("text-field");
+		userIdField.setText(String.valueOf(userItem.getId()));
+
+		// Create text field for email
+		TextField emailField = new TextField();
+		emailField.setPrefWidth(300);
+		emailField.getStyleClass().add("text-field");
+		emailField.setText(String.valueOf(userItem.getEmail()));
+		
+		// Create choice box for gender
+		ChoiceBox<String> genderField = new ChoiceBox<>();
+		genderField.setPrefWidth(120);
+		genderField.getItems().addAll("Male", "Female");		
+		
 		// Clear the existing content
 		userEditFieldsPane.getChildren().clear();
 
@@ -830,7 +851,7 @@ public class BookKeeper extends Application {
 				userItem.setLastName(lastNameField.getText());
 				userItem.setId(Integer.parseInt(userIdField.getText()));
 				userItem.setEmail(emailField.getText());
-				userItem.setGender(genderField.getText());
+				userItem.setGender(genderField.getValue());
 				//toggleUserEditPane(userPane);
 			});
 		} else {
@@ -844,7 +865,7 @@ public class BookKeeper extends Application {
 				String lastName = lastNameField.getText();
 				int id = Integer.parseInt(userIdField.getText());
 				String email = emailField.getText();
-				String gender = genderField.getText();
+				String gender = genderField.getValue();
 
 				// Create a new UserItem object
 				UserItem newUser = new UserItem(firstName, lastName, id, email, gender);
@@ -884,12 +905,6 @@ public class BookKeeper extends Application {
 		Region firstNameSpacer = new Region();
 		HBox.setHgrow(firstNameSpacer, Priority.ALWAYS);
 
-		// Create text field for first name
-		TextField firstNameField = new TextField();
-		firstNameField.setPrefWidth(300);
-		firstNameField.getStyleClass().add("text-field");
-		firstNameField.setText(userItem.getFirstName());
-
 		// Create row for first name
 		HBox firstNamePane = new HBox(firstNameIcon, firstNameLabel, firstNameSpacer, firstNameField);
 		firstNamePane.setAlignment(Pos.CENTER_LEFT);
@@ -915,12 +930,6 @@ public class BookKeeper extends Application {
 		// Create spacer between "Last name" label & text field
 		Region lastNameSpacer = new Region();
 		HBox.setHgrow(lastNameSpacer, Priority.ALWAYS);
-
-		// Create text field for last name
-		TextField lastNameField = new TextField();
-		lastNameField.setPrefWidth(300);
-		lastNameField.getStyleClass().add("text-field");
-		lastNameField.setText(userItem.getLastName());
 
 		// Create row for last name
 		HBox lastNamePane = new HBox(lastNameIcon, lastNameLabel, lastNameSpacer, lastNameField);
@@ -954,12 +963,6 @@ public class BookKeeper extends Application {
 		Region userIdSpacer = new Region();
 		HBox.setHgrow(userIdSpacer, Priority.ALWAYS);
 
-		// Create text field for user ID
-		TextField userIdField = new TextField();
-		userIdField.setPrefWidth(300);
-		userIdField.getStyleClass().add("text-field");
-		userIdField.setText(String.valueOf(userItem.getId()));
-
 		// Create row for user ID
 		HBox userIdPane = new HBox(userIdIcon, userIdLabelPane, userIdSpacer, userIdField);
 		userIdPane.setAlignment(Pos.CENTER_LEFT);
@@ -992,12 +995,6 @@ public class BookKeeper extends Application {
 		Region emailSpacer = new Region();
 		HBox.setHgrow(emailSpacer, Priority.ALWAYS);
 
-		// Create text field for email
-		TextField emailField = new TextField();
-		emailField.setPrefWidth(300);
-		emailField.getStyleClass().add("text-field");
-		emailField.setText(String.valueOf(userItem.getEmail()));
-
 		// Create row for email
 		HBox emailPane = new HBox(emailIcon, emailLabelPane, emailSpacer, emailField);
 		emailPane.setAlignment(Pos.CENTER_LEFT);
@@ -1022,11 +1019,6 @@ public class BookKeeper extends Application {
 		// Create spacer between "Gender" label and choice box
 		Region genderSpacer = new Region();
 		HBox.setHgrow(genderSpacer, Priority.ALWAYS);
-
-		// Create choice box for gender
-		ChoiceBox<String> genderField = new ChoiceBox<>();
-		genderField.setPrefWidth(120);
-		genderField.getItems().addAll("Male", "Female");
 
 		// Set default value in choice box for gender
 		if (userItem.getGender().equals("Male")) {
@@ -1087,47 +1079,35 @@ public class BookKeeper extends Application {
 	}
 
 	private static class BookItem {
-		private final StringProperty bookTitle;
-		private final StringProperty lastName;
-		private final IntegerProperty id;
-		private final StringProperty email;
-		private final StringProperty gender;
+		private final StringProperty title;
+		private final StringProperty author;
+		private final IntegerProperty isbn;
+		private final StringProperty info;
+		private final StringProperty subject;
 
-		public BookItem(String bookTitle, String lastName, int id, String email, String gender) {
-			this.bookTitle = new SimpleStringProperty(bookTitle);
-			this.lastName = new SimpleStringProperty(lastName);
-			this.id = new SimpleIntegerProperty(id);
-			this.email = new SimpleStringProperty(email);
-			this.gender = new SimpleStringProperty(gender);
+		public BookItem(String title, String author, int isbn, String info, String subject) {
+			this.title = new SimpleStringProperty(title);
+			this.author = new SimpleStringProperty(author);
+			this.isbn = new SimpleIntegerProperty(isbn);
+			this.info = new SimpleStringProperty(info);
+			this.subject = new SimpleStringProperty(subject);
 		}
 
-		public String getBookTitle() {
-			return bookTitle.get();
-		}
-		public String getLastName() {
-			return lastName.get();
-		}
-		public int getId() {
-			return id.get();
-		}
-		public String getEmail() {
-			return email.get();
-		}
-		public String getGender() { return gender.get(); }
+		public String getTitle() { return title.get(); }
+		public String getAuthor() { return author.get(); }
+		public int getIsbn() { return isbn.get(); }
+		public String getInfo() { return info.get(); }
+		public String getSubject() { return subject.get(); }
 
-		public void setBookTitle(String bookTitle) {
-			this.bookTitle.set(bookTitle);
+		public void setTitle(String title) { this.title.set(title); }
+		public void setAuthor(String author) {
+			this.author.set(author);
 		}
-		public void setLastName(String lastName) {
-			this.lastName.set(lastName);
+		public void setIsbn(int isbn) {
+			this.isbn.set(isbn);
 		}
-		public void setId(int id) {
-			this.id.set(id);
-		}
-		public void setEmail(String email) {
-			this.email.set(email);
-		}
-		public void setGender(String gender) { this.gender.set(gender); }
+		public void setInfo(String info) { this.info.set(info); }
+		public void setGender(String subject) { this.subject.set(subject); }
 	}
 
 	private void toggleBookEditPane(StackPane bookPane) {
@@ -1170,6 +1150,35 @@ public class BookKeeper extends Application {
 	}
 
 	private void populateBookEditFields(VBox bookEditFieldsPane, BookItem bookItem) {
+		// Create title field
+		TextField titleField = new TextField();
+		titleField.getStyleClass().add("text-field");
+		titleField.setText(bookItem.getTitle());
+
+		// Create author field
+		TextField authorField = new TextField();
+		authorField.getStyleClass().add("text-field");
+		authorField.setText(bookItem.getAuthor());
+
+		// Create isbn field
+		TextField isbnField = new TextField();
+		isbnField.getStyleClass().add("text-field");
+		isbnField.setText(String.valueOf(bookItem.getIsbn()));
+
+		// Create email name field
+		TextField infoField = new TextField();
+		infoField.getStyleClass().add("text-field");
+		infoField.setText(String.valueOf(bookItem.getInfo()));
+		
+		// Create gender choice box
+		ChoiceBox<String> subjectField = new ChoiceBox<>();
+		subjectField.getItems().addAll("Male", "Female");
+
+		
+		
+		
+		
+		
 
 		// Create book edit title label
 		Label bookEditTitleLabel = new Label("Edit Book");
@@ -1227,11 +1236,11 @@ public class BookKeeper extends Application {
 		okBookButton.getStyleClass().add("important-button");
 		okBookButton.setOnAction(event -> {
 			// Update the bookItem with the edited values
-			bookItem.setBookTitle(bookTitleField.getText());
-			bookItem.setLastName(lastNameField.getText());
-			bookItem.setId(Integer.parseInt(userIdField.getText()));
-			bookItem.setEmail(emailField.getText());
-			bookItem.setGender(genderField.getText());
+			bookItem.setTitle(titleField.getText());
+			bookItem.setAuthor(authorField.getText());
+			bookItem.setIsbn(Integer.parseInt(isbnField.getText()));
+			bookItem.setInfo(infoField.getText());
+			bookItem.setGender(subjectField.getValue());
 
 			// Hide the book edit pane
 			toggleBookEditPane(bookPane);
@@ -1254,62 +1263,52 @@ public class BookKeeper extends Application {
 		bookEditFieldsPane.getChildren().clear();
 
 		// Create first name icon
-		ImageView bookTitleIcon = null;
-		InputStream imageStreamBookTitle = getClass().getResourceAsStream("images/first-name.png");
-		if (imageStreamBookTitle != null) {
-			Image bookTitleImage = new Image(imageStreamBookTitle);
-			bookTitleIcon = new ImageView(bookTitleImage);
-			bookTitleIcon.setFitWidth(24);
-			bookTitleIcon.setFitHeight(24);
-			bookTitleIcon.getStyleClass().add("edit-icon");
+		ImageView titleIcon = null;
+		InputStream imageStreamTitle = getClass().getResourceAsStream("images/first-name.png");
+		if (imageStreamTitle != null) {
+			Image titleImage = new Image(imageStreamTitle);
+			titleIcon = new ImageView(titleImage);
+			titleIcon.setFitWidth(24);
+			titleIcon.setFitHeight(24);
+			titleIcon.getStyleClass().add("edit-icon");
 		} else {
 			System.err.println("Unable to load first-name.png");
 		}
 
 		// Create first name label
-		Label bookTitleLabel = new Label("Title");
-		bookTitleLabel.getStyleClass().add("main-label");
-		bookTitleLabel.setPrefWidth(210);
-
-		// Create first name field
-		TextField bookTitleField = new TextField();
-		bookTitleField.getStyleClass().add("text-field");
-		bookTitleField.setText(bookItem.getBookTitle());
+		Label titleLabel = new Label("Title");
+		titleLabel.getStyleClass().add("main-label");
+		titleLabel.setPrefWidth(210);
 
 		// Create first name pane
-		HBox bookTitlePane = new HBox(bookTitleIcon, bookTitleLabel, bookTitleField);
-		bookTitlePane.getStyleClass().add("edit-row");
-		bookTitlePane.setAlignment(Pos.CENTER_LEFT);
-		HBox.setHgrow(bookTitleField, Priority.ALWAYS);
+		HBox titlePane = new HBox(titleIcon, titleLabel, titleField);
+		titlePane.getStyleClass().add("edit-row");
+		titlePane.setAlignment(Pos.CENTER_LEFT);
+		HBox.setHgrow(titleField, Priority.ALWAYS);
 
 		// Create last name icon
-		ImageView lastNameIcon = null;
-		InputStream imageStreamLastName = getClass().getResourceAsStream("images/last-name.png");
-		if (imageStreamLastName != null) {
-			Image lastNameImage = new Image(imageStreamLastName);
-			lastNameIcon = new ImageView(lastNameImage);
-			lastNameIcon.setFitWidth(24);
-			lastNameIcon.setFitHeight(24);
-			lastNameIcon.getStyleClass().add("edit-icon");
+		ImageView authorIcon = null;
+		InputStream imageStreamAuthor = getClass().getResourceAsStream("images/last-name.png");
+		if (imageStreamAuthor != null) {
+			Image authorImage = new Image(imageStreamAuthor);
+			authorIcon = new ImageView(authorImage);
+			authorIcon.setFitWidth(24);
+			authorIcon.setFitHeight(24);
+			authorIcon.getStyleClass().add("edit-icon");
 		} else {
 			System.err.println("Unable to load last-name.png");
 		}
 
 		// Create last name label
-		Label lastNameLabel = new Label("Last Name");
-		lastNameLabel.getStyleClass().add("main-label");
-		lastNameLabel.setPrefWidth(210);
-
-		// Create last name field
-		TextField lastNameField = new TextField();
-		lastNameField.getStyleClass().add("text-field");
-		lastNameField.setText(bookItem.getLastName());
+		Label authorLabel = new Label("Last Name");
+		authorLabel.getStyleClass().add("main-label");
+		authorLabel.setPrefWidth(210);
 
 		// Create last name pane
-		HBox lastNamePane = new HBox(lastNameIcon, lastNameLabel, lastNameField);
-		lastNamePane.getStyleClass().add("edit-row");
-		lastNamePane.setAlignment(Pos.CENTER_LEFT);
-		HBox.setHgrow(lastNameField, Priority.ALWAYS);
+		HBox authorPane = new HBox(authorIcon, authorLabel, authorField);
+		authorPane.getStyleClass().add("edit-row");
+		authorPane.setAlignment(Pos.CENTER_LEFT);
+		HBox.setHgrow(authorField, Priority.ALWAYS);
 
 		// Create id icon
 		ImageView idIcon = null;
@@ -1336,16 +1335,11 @@ public class BookKeeper extends Application {
 		// Create email label pane
 		VBox idLabelPane = new VBox(idLabel, idDetailLabel);
 
-		// Create id name field
-		TextField idField = new TextField();
-		idField.getStyleClass().add("text-field");
-		idField.setText(String.valueOf(bookItem.getId()));
-
 		// Create id name pane
-		HBox idPane = new HBox(idIcon, idLabelPane, idField);
+		HBox idPane = new HBox(idIcon, idLabelPane, isbnField);
 		idPane.getStyleClass().add("edit-row");
 		idPane.setAlignment(Pos.CENTER_LEFT);
-		HBox.setHgrow(idField, Priority.ALWAYS);
+		HBox.setHgrow(isbnField, Priority.ALWAYS);
 
 		// Create email icon
 		ImageView emailIcon = null;
@@ -1372,16 +1366,11 @@ public class BookKeeper extends Application {
 		// Create email label pane
 		VBox emailLabelPane = new VBox(emailLabel, emailDetailLabel);
 
-		// Create email name field
-		TextField emailField = new TextField();
-		emailField.getStyleClass().add("text-field");
-		emailField.setText(String.valueOf(bookItem.getEmail()));
-
 		// Create email name pane
-		HBox emailPane = new HBox(emailIcon, emailLabelPane, emailField);
+		HBox emailPane = new HBox(emailIcon, emailLabelPane, infoField);
 		emailPane.getStyleClass().add("edit-row");
 		emailPane.setAlignment(Pos.CENTER_LEFT);
-		HBox.setHgrow(emailField, Priority.ALWAYS);
+		HBox.setHgrow(infoField, Priority.ALWAYS);
 
 		// Create gender icon
 		ImageView genderIcon = null;
@@ -1400,25 +1389,22 @@ public class BookKeeper extends Application {
 		Label genderLabel = new Label("Gender");
 		genderLabel.getStyleClass().add("main-label");
 		genderLabel.setPrefWidth(210);
-
-		// Create gender choice box
-		ChoiceBox<String> genderChoiceBox = new ChoiceBox<>();
-		genderChoiceBox.getItems().addAll("Male", "Female");
-		if (bookItem.getGender().equals("Male")) { // Set default selection
-			genderChoiceBox.setValue("Male");
+		
+		if (bookItem.getSubject().equals("Male")) { // Set default selection
+			subjectField.setValue("Male");
 		} else {
-			genderChoiceBox.setValue("Female");
+			subjectField.setValue("Female");
 		}
 
 		// Create gender pane
-		HBox genderPane = new HBox(genderIcon, genderLabel, genderChoiceBox);
+		HBox genderPane = new HBox(genderIcon, genderLabel, subjectField);
 		genderPane.getStyleClass().add("edit-row");
 		genderPane.setAlignment(Pos.CENTER_LEFT);
-		HBox.setHgrow(genderChoiceBox, Priority.ALWAYS);
+		HBox.setHgrow(subjectField, Priority.ALWAYS);
 
 
 		// Create row pane
-		VBox fieldsPane = new VBox(bookTitlePane, lastNamePane, idPane, emailPane, genderPane);
+		VBox fieldsPane = new VBox(titlePane, authorPane, idPane, emailPane, genderPane);
 		fieldsPane.getStyleClass().add("fields-pane");
 		fieldsPane.setAlignment(Pos.CENTER_LEFT);
 
@@ -1434,12 +1420,12 @@ public class BookKeeper extends Application {
 			while ((line = reader.readLine()) != null) {
 				String[] parts = line.split(",");
 				if (parts.length == 5) {
-					String bookTitle = parts[0];
+					String firstName = parts[0];
 					String lastName = parts[1];
 					int id = Integer.parseInt(parts[2]);
 					String email = parts[3];
 					String gender = parts[4];
-					importedUserItems.add(new UserItem(bookTitle, lastName, id, email, gender));
+					importedUserItems.add(new UserItem(firstName, lastName, id, email, gender));
 				}
 			}
 			updateUserTablePane(importedUserItems);
@@ -1628,11 +1614,11 @@ public class BookKeeper extends Application {
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 				for (BookItem bookItem : importedBookItems) {
 					String line = String.format("%s,%s,%d,%s,%s",
-							bookItem.getBookTitle(),
-							bookItem.getLastName(),
-							bookItem.getId(),
-							bookItem.getEmail(),
-							bookItem.getGender());
+							bookItem.getTitle(),
+							bookItem.getAuthor(),
+							bookItem.getIsbn(),
+							bookItem.getInfo(),
+							bookItem.getSubject());
 					writer.write(line);
 					writer.newLine();
 				}
@@ -1684,7 +1670,7 @@ public class BookKeeper extends Application {
 
 			// Create gender icon
 			ImageView genderIcon;
-			if (bookItem.getGender().equals("Male")) {
+			if (bookItem.getSubject().equals("Male")) {
 				genderIcon = maleIcon;
 			} else {
 				genderIcon = femaleIcon;
@@ -1708,16 +1694,16 @@ public class BookKeeper extends Application {
 			imageSpacer.setPrefWidth(200);
 
 			// Create name field
-			Label firstNameLabel = new Label(bookItem.getBookTitle());
+			Label firstNameLabel = new Label(bookItem.getTitle());
 			firstNameLabel.getStyleClass().add("main-label");
-			Label lastNameLabel = new Label(bookItem.getLastName());
+			Label lastNameLabel = new Label(bookItem.getAuthor());
 			lastNameLabel.getStyleClass().add("detail-label");
 			VBox nameField = new VBox(firstNameLabel, lastNameLabel);
 
 			// Create id & email field
-			Label idLabel = new Label(String.valueOf(bookItem.getId()));
+			Label idLabel = new Label(String.valueOf(bookItem.getIsbn()));
 			idLabel.getStyleClass().add("main-label");
-			Label emailLabel = new Label(bookItem.getEmail());
+			Label emailLabel = new Label(bookItem.getInfo());
 			emailLabel.getStyleClass().add("detail-label");
 			VBox idEmailField = new VBox(idLabel, emailLabel);
 
