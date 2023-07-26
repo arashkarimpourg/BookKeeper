@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.util.Duration;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -224,7 +225,17 @@ public class BookKeeper extends Application {
 		} else {
 			System.err.println("Unable to load maximize.png");
 		}
-		maximizeButton.setOnAction(event -> primaryStage.setMaximized(!primaryStage.isMaximized()));
+
+		maximizeButton.setOnAction(event -> {
+			if (primaryStage.isMaximized()) {
+				primaryStage.setMaximized(false);
+				primaryStage.setWidth(950);
+				primaryStage.setHeight(702);
+			} else {
+				primaryStage.setMaximized(true);
+				primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+			}
+		});
 
 		// Create minimize window button
 		Button minimizeButton = new Button();
