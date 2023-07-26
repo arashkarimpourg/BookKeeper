@@ -7,9 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix extra bottom border in maximized mode">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: Maximize button doesn't hide taskbar anymore">
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -357,15 +355,7 @@
       <option name="project" value="LOCAL" />
       <updated>1690358515891</updated>
     </task>
-    <task id="LOCAL-00036" summary="Fix extra bottom border in maximized mode">
-      <option name="closed" value="true" />
-      <created>1690358829227</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1690358829227</updated>
-    </task>
-    <option name="localTasksCounter" value="37" />
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -381,6 +371,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Title bar is finished." />
     <MESSAGE value="Added two buttons to the sidebar." />
     <MESSAGE value="Cleaned up the code." />
     <MESSAGE value="Tab functionality done." />
@@ -405,7 +396,6 @@
     <MESSAGE value="Add: App icon" />
     <MESSAGE value="Refactor: Move setPrefWidth properties to CSS" />
     <MESSAGE value="Fix: Maximize button doesn't hide taskbar anymore" />
-    <MESSAGE value="Fix extra bottom border in maximized mode" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix extra bottom border in maximized mode" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: Maximize button doesn't hide taskbar anymore" />
   </component>
 </project>

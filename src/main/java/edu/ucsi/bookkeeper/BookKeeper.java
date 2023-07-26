@@ -199,7 +199,7 @@ public class BookKeeper extends Application {
 
 		// Create close window button
 		Button closeButton = new Button();
-		closeButton.getStyleClass().addAll("close-button", "close-button-rounded");
+		closeButton.getStyleClass().add("close-button");
 		InputStream imageStreamClose = getClass().getResourceAsStream("images/close.png");
 		if (imageStreamClose != null) {
 			Image closeImage = new Image(imageStreamClose);
@@ -231,13 +231,9 @@ public class BookKeeper extends Application {
 				primaryStage.setMaximized(false);
 				primaryStage.setWidth(950);
 				primaryStage.setHeight(702);
-				root.getStyleClass().add("round-corners");
-				closeButton.getStyleClass().add("close-button-rounded");
 			} else {
 				primaryStage.setMaximized(true);
 				primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
-				root.getStyleClass().remove("round-corners");
-				closeButton.getStyleClass().remove("close-button-rounded");
 			}
 		});
 

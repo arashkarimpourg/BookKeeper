@@ -9,15 +9,12 @@
 }
 
 /* Main window */
-.root {
-    -fx-background-color: #202020;
-}
-
 .round-corners {
+    -fx-background-color: #202020;
     -fx-background-radius: 7;
-    -fx-border-radius: 7;
-    -fx-border-width: 1;
     -fx-border-color: #3f3f3f;
+    -fx-border-width: 1;
+    -fx-border-radius: 7;
 }
 
 /* Title bar*/
@@ -62,13 +59,9 @@
 }
 
 .close-button {
-    -fx-background-radius: 0;
     -fx-background-color: transparent;
-    -fx-padding: 8 16 8 16;
-}
-
-.close-button-rounded {
     -fx-background-radius: 0 7 0 0;
+    -fx-padding: 8 16 8 16;
 }
 
 .close-button:hover {
