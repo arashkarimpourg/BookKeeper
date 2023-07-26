@@ -79,6 +79,7 @@
 
 .left-pane {
     -fx-padding: 0 28 0 0;
+    -fx-pref-width: 250;
 }
 
 .sidebar-button {
@@ -170,6 +171,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 5;
     -fx-padding: 7 15 7 15;
+    -fx-pref-width: 90;
 }
 
 .normal-button:hover {
@@ -191,6 +193,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 5;
     -fx-padding: 7 15 7 15;
+    -fx-pref-width: 90;
 }
 
 .important-button:hover {
@@ -215,6 +218,7 @@
     -fx-background-radius: 5;
     -fx-text-fill: white;
     -fx-padding: 10 30 10 10;
+    -fx-pref-width: 150;
 }
 
 .file-button:hover {
@@ -225,6 +229,10 @@
 .file-button:pressed {
     -fx-background-color: #2d2d2d;
     -fx-padding: 10 30 10 10;
+}
+
+.delete-button {
+    -fx-pref-width: 169;
 }
 
 .file-pane {
@@ -255,6 +263,7 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 14;
     -fx-text-fill: white;
+    -fx-pref-width: 210;
 }
 
 .detail-label, .detail-label .label {
@@ -341,6 +350,7 @@
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13;
     -fx-text-fill: white;
+    -fx-pref-width: 300;
 }
 
 .text-field:hover {
@@ -360,6 +370,7 @@
     -fx-border-color: #3f3f3f #3a3a3a #3a3a3a #3a3a3a;
     -fx-border-radius: 4;
     -fx-padding: 2 12 2 12;
+    -fx-pref-width: 120;
 }
 
 .choice-box:hover {
@@ -477,4 +488,12 @@
 
 .cancel-apply-spacing {
     -fx-spacing: 10; /* Spacing between "Cancel" & "Add" buttons */
+}
+
+.image-spacer {
+    -fx-pref-width: 18;
+}
+
+.first-column {
+    -fx-pref-width: 210;
 }

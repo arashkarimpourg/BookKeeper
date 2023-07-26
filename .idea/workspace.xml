@@ -7,8 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: 'exportToBookFile()' is never used">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Add: App icon">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,7 +325,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690351942131</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Fix 'Add' button">
+      <option name="closed" value="true" />
+      <created>1690352118051</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1690352118051</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Add: App icon">
+      <option name="closed" value="true" />
+      <created>1690352412445</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1690352412445</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -339,8 +357,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Window with round corners and sidebar." />
-    <MESSAGE value="Border around the main window." />
     <MESSAGE value="Fixed border roundness and color." />
     <MESSAGE value="Use PNG files for maximize, minimize and close buttons." />
     <MESSAGE value="Title bar is finished." />
@@ -362,8 +378,10 @@
     <MESSAGE value="User edit is functional." />
     <MESSAGE value="Fixed close button styling." />
     <MESSAGE value="Resolve conflict in workspace.xml" />
-    <MESSAGE value="Fix Users.txt import at startup" />
-    <MESSAGE value="Fix: 'exportToBookFile()' is never used" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: 'exportToBookFile()' is never used" />
+    <MESSAGE value="Fix: Solved Users.txt import issue during startup" />
+    <MESSAGE value="Bugfix: 'exportToBookFile()' is never used" />
+    <MESSAGE value="Fix: 'Add' button" />
+    <MESSAGE value="Add: App icon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add: App icon" />
   </component>
 </project>

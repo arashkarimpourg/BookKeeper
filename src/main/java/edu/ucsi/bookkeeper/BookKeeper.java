@@ -60,7 +60,6 @@ public class BookKeeper extends Application {
 
 		// Create left pane
 		VBox leftPane = new VBox();
-		leftPane.setPrefWidth(250);
 		leftPane.getStyleClass().add("left-pane");
 
 		// Create title bar
@@ -290,7 +289,6 @@ public class BookKeeper extends Application {
 		Button importUserButton = new Button();
 		importUserButton.getStyleClass().add("file-button");
 		importUserButton.setGraphic(importUserButtonContent);
-		importUserButton.setPrefWidth(150);
 		importUserButton.setOnAction(event -> openImportUserDialog());
 
 		// Create export icon
@@ -321,7 +319,6 @@ public class BookKeeper extends Application {
 		Button exportUserButton = new Button();
 		exportUserButton.getStyleClass().add("file-button");
 		exportUserButton.setGraphic(exportUserButtonContent);
-		exportUserButton.setPrefWidth(150);
 
 		exportUserButton.setOnAction(event -> exportToUserFile());
 
@@ -455,7 +452,6 @@ public class BookKeeper extends Application {
 		Button importBookButton = new Button();
 		importBookButton.getStyleClass().add("file-button");
 		importBookButton.setGraphic(importBookButtonContent);
-		importBookButton.setPrefWidth(150);
 		importBookButton.setOnAction(event -> openImportBookDialog());
 
 		// Create export icon
@@ -486,7 +482,6 @@ public class BookKeeper extends Application {
 		Button exportBookButton = new Button();
 		exportBookButton.getStyleClass().add("file-button");
 		exportBookButton.setGraphic(exportBookButtonContent);
-		exportBookButton.setPrefWidth(150);
 
 		exportBookButton.setOnAction(event -> exportToBookFile());
 
@@ -576,9 +571,6 @@ public class BookKeeper extends Application {
 				System.err.println("Unable to load " + iconFile);
 			}
 		}
-
-
-
 
 		// Set scene
 		primaryStage.setScene(scene);
@@ -720,31 +712,26 @@ public class BookKeeper extends Application {
 	private void populateUserEditFields(VBox userEditFieldsPane, UserItem userItem, boolean isEdit) {
 		// Create text field for first name
 		TextField firstNameField = new TextField();
-		firstNameField.setPrefWidth(300);
 		firstNameField.getStyleClass().add("text-field");
 		firstNameField.setText(userItem.getFirstName());
 		
 		// Create text field for last name
 		TextField lastNameField = new TextField();
-		lastNameField.setPrefWidth(300);
 		lastNameField.getStyleClass().add("text-field");
 		lastNameField.setText(userItem.getLastName());
 
 		// Create text field for user ID
 		TextField userIdField = new TextField();
-		userIdField.setPrefWidth(300);
 		userIdField.getStyleClass().add("text-field");
 		userIdField.setText(String.valueOf(userItem.getId()));
 
 		// Create text field for email
 		TextField emailField = new TextField();
-		emailField.setPrefWidth(300);
 		emailField.getStyleClass().add("text-field");
 		emailField.setText(String.valueOf(userItem.getEmail()));
 		
 		// Create choice box for gender
 		ChoiceBox<String> genderField = new ChoiceBox<>();
-		genderField.setPrefWidth(120);
 		genderField.getItems().addAll("Male", "Female");		
 		
 		// Clear the existing content
@@ -790,8 +777,7 @@ public class BookKeeper extends Application {
 
 		// Create "Delete" button
 		Button deleteUserButton = new Button();
-		deleteUserButton.setPrefWidth(169);
-		deleteUserButton.getStyleClass().add("file-button");
+		deleteUserButton.getStyleClass().addAll("file-button", "delete-button");
 		deleteUserButton.setGraphic(inDeleteUserButton);
 
 		// Create pane for "Delete" button
@@ -856,11 +842,9 @@ public class BookKeeper extends Application {
 		// Create "Cancel" button
 		Button userCancelButton = new Button("Cancel");
 		userCancelButton.getStyleClass().add("normal-button");
-		userCancelButton.setPrefWidth(90);
 
 		// Create "Add/Apply" button
 		Button userOkButton = new Button();
-		userOkButton.setPrefWidth(90);
 		userOkButton.getStyleClass().add("important-button");
 		if (isEdit) {
 			// Set button text to "Apply" for editing
@@ -1237,9 +1221,8 @@ public class BookKeeper extends Application {
 
 		// Create button and set its content to the HBox
 		Button deleteBookButton = new Button();
-		deleteBookButton.getStyleClass().add("file-button");
+		deleteBookButton.getStyleClass().addAll("file-button", "delete-button");
 		deleteBookButton.setGraphic(deleteButtonContent);
-		deleteBookButton.setPrefWidth(169);
 		deleteBookButton.setOnAction(event -> {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 			alert.setTitle("Confirm Delete");
@@ -1300,7 +1283,6 @@ public class BookKeeper extends Application {
 		// Create first name label
 		Label titleLabel = new Label("Title");
 		titleLabel.getStyleClass().add("main-label");
-		titleLabel.setPrefWidth(210);
 
 		// Create first name pane
 		HBox titlePane = new HBox(titleIcon, titleLabel, titleField);
@@ -1324,7 +1306,6 @@ public class BookKeeper extends Application {
 		// Create last name label
 		Label authorLabel = new Label("Last Name");
 		authorLabel.getStyleClass().add("main-label");
-		authorLabel.setPrefWidth(210);
 
 		// Create last name pane
 		HBox authorPane = new HBox(authorIcon, authorLabel, authorField);
@@ -1348,7 +1329,6 @@ public class BookKeeper extends Application {
 		// Create id label
 		Label idLabel = new Label("ID");
 		idLabel.getStyleClass().add("main-label");
-		idLabel.setPrefWidth(210);
 
 		// Create id details label
 		Label idDetailLabel = new Label("Use official ID provided by university");
@@ -1379,7 +1359,6 @@ public class BookKeeper extends Application {
 		// Create email label
 		Label emailLabel = new Label("Email");
 		emailLabel.getStyleClass().add("main-label");
-		emailLabel.setPrefWidth(210);
 
 		// Create email details label
 		Label emailDetailLabel = new Label("Use official university email address");
@@ -1410,8 +1389,7 @@ public class BookKeeper extends Application {
 		// Create gender label
 		Label genderLabel = new Label("Gender");
 		genderLabel.getStyleClass().add("main-label");
-		genderLabel.setPrefWidth(210);
-		
+
 		if (bookItem.getSubject().equals("Male")) { // Set default selection
 			subjectField.setValue("Male");
 		} else {
@@ -1556,7 +1534,7 @@ public class BookKeeper extends Application {
 			}
 
 			Region userImageSpacer = new Region();
-			userImageSpacer.setPrefWidth(18);
+			userImageSpacer.getStyleClass().add("image-spacer");
 
 			// Create name field
 			Label firstNameLabel = new Label(userItem.getFirstName());
@@ -1565,7 +1543,7 @@ public class BookKeeper extends Application {
 			lastNameLabel.getStyleClass().add("detail-label");
 
 			VBox nameField = new VBox(firstNameLabel, lastNameLabel);
-			nameField.setPrefWidth(210); // Custom width
+			nameField.getStyleClass().add("first-column");
 
 			// Create id & email field
 			Label idLabel = new Label(String.valueOf(userItem.getId()));
@@ -1711,10 +1689,6 @@ public class BookKeeper extends Application {
 				System.err.println("Unable to load forward.png");
 			}
 
-			// Add spacer field to right-align forward icon
-			Region imageSpacer = new Region();
-			imageSpacer.setPrefWidth(200);
-
 			// Create name field
 			Label firstNameLabel = new Label(bookItem.getTitle());
 			firstNameLabel.getStyleClass().add("main-label");
@@ -1734,7 +1708,7 @@ public class BookKeeper extends Application {
 			HBox.setHgrow(spacer, Priority.ALWAYS);
 
 			// Create row pane
-			HBox rowPane = new HBox(genderIcon, imageSpacer, nameField, idEmailField, spacer, forwardIcon);
+			HBox rowPane = new HBox(genderIcon, nameField, idEmailField, spacer, forwardIcon);
 			rowPane.getStyleClass().add("view-row");
 			rowPane.setAlignment(Pos.CENTER_LEFT); // Vertically centers forward icon
 
