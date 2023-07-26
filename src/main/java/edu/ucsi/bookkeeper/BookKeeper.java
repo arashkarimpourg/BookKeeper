@@ -1,41 +1,43 @@
 package edu.ucsi.bookkeeper;
 
 import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.scene.layout.*;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Screen;
+import javafx.stage.FileChooser;
+import javafx.util.Duration;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
-import javafx.stage.Screen;
-import javafx.util.Duration;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.scene.paint.Color;
-
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
 
 public class BookKeeper extends Application {
+	private static final double RESIZE_SCALE_FACTOR = 0.005;
+
 	private final ArrayList<UserItem> importedUserItems = new ArrayList<>();
 	private final ArrayList<BookItem> importedBookItems = new ArrayList<>();
-	private double xOffset = 0;
-	private double yOffset = 0;
+
 	private boolean isUserEditPaneVisible = false;
 	private boolean isBookEditPaneVisible = false;
 
 	private StackPane userPane;
 	private VBox userTablePane;
 	private VBox userEditPane;
+
 	private StackPane bookPane;
 	private VBox bookTablePane;
 	private VBox bookEditPane;
@@ -43,6 +45,7 @@ public class BookKeeper extends Application {
 	ImageView userIcon;
 	ImageView activeUserIcon;
 	ImageView inactiveUserIcon;
+
 	ImageView bookIcon;
 	ImageView activeBookIcon;
 	ImageView inactiveBookIcon;
@@ -53,23 +56,14 @@ public class BookKeeper extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		// Remove default window decorations
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-		// Create main window
-		BorderPane root = new BorderPane();
-		root.getStyleClass().add("round-corners");
-
-		// Create left pane
-		VBox leftPane = new VBox();
-		leftPane.getStyleClass().add("left-pane");
-
-		// Create title bar
-		HBox titleBar = new HBox();
-		titleBar.getStyleClass().add("title-bar");
 
 		// Create back button
 		Button backButton = new Button();
 		backButton.getStyleClass().add("back-button");
+
+		// Import back button icon
 		InputStream imageStreamBack = getClass().getResourceAsStream("images/back.png");
 		if (imageStreamBack != null) {
 			Image backImage = new Image(imageStreamBack);
@@ -81,22 +75,14 @@ public class BookKeeper extends Application {
 			System.err.println("Unable to load back.png");
 		}
 
-		// Create window title
-		Label windowTitle = new Label("Book Keeper");
-		windowTitle.getStyleClass().add("window-title");
+		// Create main window title
+		Label mainWindowTitle = new Label("Book Keeper");
+		mainWindowTitle.getStyleClass().add("main-window-title");
 
-		// Add back button & window title to title bar
-		titleBar.getChildren().addAll(backButton, windowTitle);
-
-		// Create sidebar
-		VBox sideBar = new VBox();
-		sideBar.getStyleClass().add("side-bar");
-
-		// Create user tab
-		HBox userTab = new HBox();
-		userTab.getStyleClass().addAll("side-tab", "active-tab");
-		userTab.setMaxWidth(Double.MAX_VALUE);
-		userTab.setAlignment(Pos.CENTER_LEFT);
+		// Create title bar
+		HBox titleBar = new HBox();
+		titleBar.getStyleClass().add("title-bar");
+		titleBar.getChildren().addAll(backButton, mainWindowTitle);
 
 		// Import active tab icon
 		InputStream imageStreamActiveUser = getClass().getResourceAsStream("images/active.png");
@@ -134,14 +120,11 @@ public class BookKeeper extends Application {
 		// Create user tab label
 		Label userTabLabel = new Label("  Users");
 
-		// Add active icon, user icon, and user tab label to user tab
+		// Create user tab
+		HBox userTab = new HBox();
+		userTab.setAlignment(Pos.CENTER_LEFT); // Centers label vertically
+		userTab.getStyleClass().addAll("sidebar-tab", "active-tab");
 		userTab.getChildren().addAll(activeUserIcon, userIcon, userTabLabel);
-
-		// Create book tab
-		HBox bookTab = new HBox();
-		bookTab.getStyleClass().add("side-tab");
-		bookTab.setMaxWidth(Double.MAX_VALUE);
-		bookTab.setAlignment(Pos.CENTER_LEFT);
 
 		// Import active tab icon
 		InputStream imageStreamActiveBook = getClass().getResourceAsStream("images/active.png");
@@ -179,38 +162,56 @@ public class BookKeeper extends Application {
 		// Create book tab label
 		Label bookTabLabel = new Label("  Books");
 
-		// Add active icon, book icon, and book tab label to book tab
+		// Create book tab
+		HBox bookTab = new HBox();
+		bookTab.setAlignment(Pos.CENTER_LEFT); // Centers label vertically
+		bookTab.getStyleClass().add("sidebar-tab");
 		bookTab.getChildren().addAll(inactiveBookIcon, bookIcon, bookTabLabel);
 
-		// Add user & book tabs to sidebar
+		// Create sidebar
+		VBox sideBar = new VBox();
+		sideBar.getStyleClass().add("side-bar");
 		sideBar.getChildren().addAll(userTab, bookTab);
 
-		// Add title bar & sidebar to left pane
+		// Create left pane
+		VBox leftPane = new VBox();
+		leftPane.getStyleClass().add("left-pane");
 		leftPane.getChildren().addAll(titleBar, sideBar);
 
-		// Create right pane
-		VBox rightPane = new VBox();
-		rightPane.getStyleClass().add("right-pane");
 
-		// Create window controls pane
-		HBox windowControlsPane = new HBox();
-		windowControlsPane.getStyleClass().add("window-controls-pane");
-		windowControlsPane.setAlignment(Pos.TOP_RIGHT);
+
+		//todo
+		StackPane root = new StackPane();
+
+		// Create main window in border window
+		HBox appWindow = new HBox();
+		appWindow.getStyleClass().addAll("main-window", "round-corners");
 
 		// Create close window button
 		Button closeButton = new Button();
 		closeButton.getStyleClass().add("close-button");
-		InputStream imageStreamClose = getClass().getResourceAsStream("images/close.png");
-		if (imageStreamClose != null) {
-			Image closeImage = new Image(imageStreamClose);
-			ImageView closeIcon = new ImageView(closeImage);
-			closeIcon.setFitWidth(14);
-			closeIcon.setFitHeight(14);
-			closeButton.setGraphic(closeIcon);
+
+
+
+
+		// Create minimize window button
+		Button minimizeButton = new Button();
+		minimizeButton.getStyleClass().add("window-controls-button");
+
+		// Import minimize window button icon
+		InputStream imageStreamMinimize = getClass().getResourceAsStream("images/minimize.png");
+		if (imageStreamMinimize != null) {
+			Image minimizeImage = new Image(imageStreamMinimize);
+			ImageView minimizeIcon = new ImageView(minimizeImage);
+			minimizeIcon.setFitWidth(14);
+			minimizeIcon.setFitHeight(14);
+			minimizeButton.setGraphic(minimizeIcon);
 		} else {
-			System.err.println("Unable to load close.png");
+			System.err.println("Unable to load minimize.png");
 		}
-		closeButton.setOnAction(event -> primaryStage.close());
+
+		// Set action for minimize window button
+		minimizeButton.setOnAction(event -> primaryStage.setIconified(true));
 
 		// Create maximize window button
 		Button maximizeButton = new Button();
@@ -226,33 +227,41 @@ public class BookKeeper extends Application {
 			System.err.println("Unable to load maximize.png");
 		}
 
+		// Set action for maximize button
 		maximizeButton.setOnAction(event -> {
 			if (primaryStage.isMaximized()) {
 				primaryStage.setMaximized(false);
 				primaryStage.setWidth(950);
 				primaryStage.setHeight(702);
+				root.setStyle("-fx-padding: 10;"); // Adds resizing border
+				appWindow.getStyleClass().add("round-corners");
+				closeButton.getStyleClass().remove("close-button-maximized");
 			} else {
 				primaryStage.setMaximized(true);
 				primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+				//todo
+				root.setStyle("-fx-padding: 0;"); // Removes resizing border
+				appWindow.getStyleClass().remove("round-corners");
+				closeButton.getStyleClass().add("close-button-maximized");
 			}
 		});
 
-		// Create minimize window button
-		Button minimizeButton = new Button();
-		minimizeButton.getStyleClass().add("window-controls-button");
-		InputStream imageStreamMinimize = getClass().getResourceAsStream("images/minimize.png");
-		if (imageStreamMinimize != null) {
-			Image minimizeImage = new Image(imageStreamMinimize);
-			ImageView minimizeIcon = new ImageView(minimizeImage);
-			minimizeIcon.setFitWidth(14);
-			minimizeIcon.setFitHeight(14);
-			minimizeButton.setGraphic(minimizeIcon);
-		} else {
-			System.err.println("Unable to load minimize.png");
-		}
-		minimizeButton.setOnAction(event -> primaryStage.setIconified(true));
 
-		// Add buttons to window controls pane
+		InputStream imageStreamClose = getClass().getResourceAsStream("images/close.png");
+		if (imageStreamClose != null) {
+			Image closeImage = new Image(imageStreamClose);
+			ImageView closeIcon = new ImageView(closeImage);
+			closeIcon.setFitWidth(14);
+			closeIcon.setFitHeight(14);
+			closeButton.setGraphic(closeIcon);
+		} else {
+			System.err.println("Unable to load close.png");
+		}
+		closeButton.setOnAction(event -> primaryStage.close());
+
+		// Create window controls pane
+		HBox windowControlsPane = new HBox();
+		windowControlsPane.setAlignment(Pos.TOP_RIGHT); // Aligns window controls to top right
 		windowControlsPane.getChildren().addAll(minimizeButton, maximizeButton, closeButton);
 
 		// Create main pane
@@ -262,9 +271,9 @@ public class BookKeeper extends Application {
 		// Create user pane
 		this.userPane = new StackPane();
 
-		// Create user content pane
+		// Create user view pane
 		VBox userViewPane = new VBox();
-		userViewPane.getStyleClass().add("user-content-pane");
+		userViewPane.getStyleClass().add("user-view-pane");
 		userViewPane.setFillWidth(true);
 
 		// Create title for user view
@@ -403,8 +412,8 @@ public class BookKeeper extends Application {
 		userTab.setOnMouseClicked(event -> {
 			mainPane.getChildren().clear();
 			mainPane.getChildren().add(userPane);
-			userTab.getStyleClass().setAll("side-tab", "active-tab");
-			bookTab.getStyleClass().setAll("side-tab");
+			userTab.getStyleClass().setAll("sidebar-tab", "active-tab");
+			bookTab.getStyleClass().setAll("sidebar-tab");
 			userTab.getChildren().clear();
 			userTab.getChildren().addAll(activeUserIcon, userIcon, userTabLabel);
 			bookTab.getChildren().clear();
@@ -416,7 +425,7 @@ public class BookKeeper extends Application {
 
 		// Create book content pane
 		VBox bookViewPane = new VBox();
-		bookViewPane.getStyleClass().add("user-content-pane");
+		bookViewPane.getStyleClass().add("user-view-pane");
 		bookViewPane.setFillWidth(true);
 
 		// Create title for book view
@@ -532,8 +541,8 @@ public class BookKeeper extends Application {
 		bookTab.setOnMouseClicked(event -> {
 			mainPane.getChildren().clear();
 			mainPane.getChildren().add(bookPane);
-			bookTab.getStyleClass().setAll("side-tab", "active-tab");
-			userTab.getStyleClass().setAll("side-tab");
+			bookTab.getStyleClass().setAll("sidebar-tab", "active-tab");
+			userTab.getStyleClass().setAll("sidebar-tab");
 			bookTab.getChildren().clear();
 			bookTab.getChildren().addAll(activeBookIcon, bookIcon, bookTabLabel);
 			userTab.getChildren().clear();
@@ -543,21 +552,26 @@ public class BookKeeper extends Application {
 		StackPane.setAlignment(userPane, Pos.TOP_LEFT);
 		StackPane.setAlignment(bookPane, Pos.TOP_LEFT);
 
-		// Add user pane to main pane
+		// App starts with user pane visible
 		mainPane.getChildren().add(userPane);
 
-		// Add window controls pane and main pane to right pane
+		// Create right pane
+		VBox rightPane = new VBox();
+		rightPane.getStyleClass().add("right-pane");
 		rightPane.getChildren().addAll(windowControlsPane, mainPane);
 
-		// Add left pane & right pane to main window
-		root.setLeft(leftPane);
-		root.setCenter(rightPane);
+
+		appWindow.getChildren().addAll(leftPane, rightPane);
+		HBox.setHgrow(rightPane, Priority.ALWAYS);
+
+		// Create border window
+		root.getChildren().add(appWindow);
 
 		// Create scene
 		Scene scene = new Scene(root, 950, 702);
 		scene.setFill(Color.TRANSPARENT);
 
-		// Null checker for styles.css
+		// Null checker for stylesR.css
 		URL cssUrl = getClass().getResource("styles.css");
 		if (cssUrl != null) {
 			scene.getStylesheets().add(cssUrl.toExternalForm());
@@ -583,10 +597,15 @@ public class BookKeeper extends Application {
 			}
 		}
 
+		ResizeHelper.ResizeListener resizeListener = new ResizeHelper.ResizeListener(primaryStage);
+		root.setOnMousePressed(resizeListener::onMousePressed);
+		root.setOnMouseDragged(resizeListener::onMouseDragged);
+		root.setOnMouseMoved(resizeListener::onMouseMoved);
+
 		// Set scene
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
+/*
 		// Dragging the window
 		windowControlsPane.setOnMousePressed(event -> {
 			xOffset = event.getSceneX();
@@ -626,7 +645,7 @@ public class BookKeeper extends Application {
 		bookViewTitlePane.setOnMouseDragged(event -> {
 			primaryStage.setX(event.getScreenX() - xOffset);
 			primaryStage.setY(event.getScreenY() - yOffset);
-		});
+		});*/
 
 		// Import items from files on application startup
 		File defaultUserFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Users.txt"); // Specify the path to your default text file
@@ -1736,7 +1755,180 @@ public class BookKeeper extends Application {
 
 	}
 
-	public static void main(String[] args) {
-		launch(args);
+	private static class ResizeHelper {
+
+		private static final int RESIZE_MARGIN = 10;
+		private static boolean resizing;
+
+		static class ResizeListener {
+			private final Stage stage;
+			private Cursor cursor;
+			private double initialX;
+			private double initialY;
+
+			private ResizeListener(Stage stage) {
+				this.stage = stage;
+			}
+
+			void onMousePressed(javafx.scene.input.MouseEvent event) {
+				if (cursor != null) {
+					resizing = true;
+					initialX = event.getScreenX();
+					initialY = event.getScreenY();
+				}
+			}
+
+			void onMouseDragged(javafx.scene.input.MouseEvent event) {
+				if (resizing) {
+					double offsetX = event.getScreenX() - initialX;
+					double offsetY = event.getScreenY() - initialY;
+
+					if (cursor.equals(Cursor.NW_RESIZE)) {
+						resizeNW(offsetX, offsetY);
+					} else if (cursor.equals(Cursor.N_RESIZE)) {
+						resizeN(offsetY);
+					} else if (cursor.equals(Cursor.NE_RESIZE)) {
+						resizeNE(offsetX, offsetY);
+					} else if (cursor.equals(Cursor.W_RESIZE)) {
+						resizeW(offsetX);
+					} else if (cursor.equals(Cursor.E_RESIZE)) {
+						resizeE(offsetX);
+					} else if (cursor.equals(Cursor.SW_RESIZE)) {
+						resizeSW(offsetX, offsetY);
+					} else if (cursor.equals(Cursor.S_RESIZE)) {
+						resizeS(offsetY);
+					} else if (cursor.equals(Cursor.SE_RESIZE)) {
+						resizeSE(offsetX, offsetY);
+					}
+
+					initialX = event.getScreenX(); // Update the initial position for the next drag
+					initialY = event.getScreenY(); // Update the initial position for the next drag
+				}
+			}
+
+			void onMouseMoved(javafx.scene.input.MouseEvent event) {
+				if (isResizeZone(event)) {
+					stage.getScene().setCursor(cursor);
+				} else {
+					stage.getScene().setCursor(Cursor.DEFAULT);
+				}
+			}
+
+			private boolean isResizeZone(javafx.scene.input.MouseEvent event) {
+				double x = event.getX();
+				double y = event.getY();
+				double width = stage.getWidth();
+				double height = stage.getHeight();
+
+				// Get the bounds of the appWindow layout in local coordinates
+
+				cursor = null;
+
+				if (x < RESIZE_MARGIN) {
+					if (y < RESIZE_MARGIN) {
+						cursor = Cursor.NW_RESIZE;
+					} else if (y > height - RESIZE_MARGIN) {
+						cursor = Cursor.SW_RESIZE;
+					} else {
+						cursor = Cursor.W_RESIZE;
+					}
+				} else if (x > width - RESIZE_MARGIN) {
+					if (y < RESIZE_MARGIN) {
+						cursor = Cursor.NE_RESIZE;
+					} else if (y > height - RESIZE_MARGIN) {
+						cursor = Cursor.SE_RESIZE;
+					} else {
+						cursor = Cursor.E_RESIZE;
+					}
+				} else if (y < RESIZE_MARGIN) {
+					cursor = Cursor.N_RESIZE;
+				} else if (y > height - RESIZE_MARGIN) {
+					cursor = Cursor.S_RESIZE;
+				}
+
+				return cursor != null;
+			}
+
+			private void resizeNW(double offsetX, double offsetY) {
+				double scalingFactor = calculateScalingFactor();
+				double newWidth = stage.getWidth() - (offsetX * scalingFactor);
+				double newHeight = stage.getHeight() - (offsetY * scalingFactor);
+				double newX = stage.getX() + stage.getWidth() - newWidth;
+				double newY = stage.getY() + stage.getHeight() - newHeight;
+
+				resize(newWidth, newHeight, newX, newY);
+			}
+
+			private void resizeN(double offsetY) {
+				double newHeight = stage.getHeight() - offsetY;
+				double newY = stage.getY() + stage.getHeight() - newHeight;
+
+				resize(stage.getWidth(), newHeight, stage.getX(), newY);
+			}
+
+			private void resizeNE(double offsetX, double offsetY) {
+				double newWidth = stage.getWidth() + offsetX;
+				double newHeight = stage.getHeight() - offsetY;
+				double newY = stage.getY() + stage.getHeight() - newHeight;
+
+				resize(newWidth, newHeight, stage.getX(), newY);
+			}
+
+			private void resizeW(double offsetX) {
+				double newWidth = stage.getWidth() - offsetX;
+				double newX = stage.getX() + stage.getWidth() - newWidth;
+
+				resize(newWidth, stage.getHeight(), newX, stage.getY());
+			}
+
+			private void resizeE(double offsetX) {
+				double newWidth = stage.getWidth() + offsetX;
+
+				resize(newWidth, stage.getHeight(), stage.getX(), stage.getY());
+			}
+
+			private void resizeSW(double offsetX, double offsetY) {
+				double newWidth = stage.getWidth() - offsetX;
+				double newHeight = stage.getHeight() + offsetY;
+
+				resize(newWidth, newHeight, stage.getX(), stage.getY());
+			}
+
+			private void resizeS(double offsetY) {
+				double newHeight = stage.getHeight() + offsetY;
+
+				resize(stage.getWidth(), newHeight, stage.getX(), stage.getY());
+			}
+
+			private void resizeSE(double offsetX, double offsetY) {
+				double newWidth = stage.getWidth() + offsetX;
+				double newHeight = stage.getHeight() + offsetY;
+
+				resize(newWidth, newHeight, stage.getX(), stage.getY());
+			}
+
+			private double calculateScalingFactor() {
+				// Calculate a scaling factor based on the current window size
+				double scalingFactor = Math.max(RESIZE_SCALE_FACTOR * stage.getWidth(), RESIZE_SCALE_FACTOR * stage.getHeight());
+				return Math.min(scalingFactor, 1.0); // Limit the scaling factor to a maximum of 1.0
+			}
+
+			private void resize(double width, double height, double x, double y) {
+				double minWidth = stage.getMinWidth() > 0 ? stage.getMinWidth() : 0;
+				double minHeight = stage.getMinHeight() > 0 ? stage.getMinHeight() : 0;
+				double maxWidth = stage.getMaxWidth() > 0 ? stage.getMaxWidth() : Double.MAX_VALUE;
+				double maxHeight = stage.getMaxHeight() > 0 ? stage.getMaxHeight() : Double.MAX_VALUE;
+
+				width = Math.min(Math.max(width, minWidth), maxWidth);
+				height = Math.min(Math.max(height, minHeight), maxHeight);
+
+				stage.setX(x);
+				stage.setY(y);
+				stage.setWidth(width);
+				stage.setHeight(height);
+			}
+		}
 	}
+
+	public static void main(String[] args) { launch(args); }
 }
