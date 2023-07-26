@@ -488,7 +488,7 @@ public class BookKeeper extends Application {
 		exportBookButton.setGraphic(exportBookButtonContent);
 		exportBookButton.setPrefWidth(150);
 
-		exportBookButton.setOnAction(event -> exportToUserFile());
+		exportBookButton.setOnAction(event -> exportToBookFile());
 
 		// Create HBox for Import and Export buttons
 		HBox bookFilePane = new HBox();
