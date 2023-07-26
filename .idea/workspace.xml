@@ -8,52 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fixed close button styling.">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_26_2023_1_21_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_26_2023_1_21_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace - Copy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/files/Books.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/files/users.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/fonts/segoe-ui-bold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/fonts/segoe-ui.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/active.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/add.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/author.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/barcode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/book.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/category.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/close.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/edit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/email.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/expand.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/export.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/female.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/first-name.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/gender.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/id.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/import.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/inactive.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/information.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/last-name.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/male.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/maximize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/minimize.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/images/user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_26_2023_1_21_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_7_26_2023_1_21_PM__Changes_.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +16,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="44811c24fc66961c744b84b62a58e56502c87876" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
