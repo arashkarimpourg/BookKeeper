@@ -28,8 +28,8 @@ import java.util.Optional;
 public class BookKeeper extends Application {
 	private static final double RESIZE_SCALE_FACTOR = 0.005;
 
-	private final ArrayList<UserItem> importedUserItems = new ArrayList<>();
-	private final ArrayList<BookItem> importedBookItems = new ArrayList<>();
+	private final ArrayList<UserItem> userRecords = new ArrayList<>();
+	private final ArrayList<BookItem> bookRecords = new ArrayList<>();
 
 	private boolean isUserEditPaneVisible = false;
 	private boolean isBookEditPaneVisible = false;
@@ -77,14 +77,14 @@ public class BookKeeper extends Application {
 
 		// Create main window title
 		Label mainWindowTitle = new Label("Book Keeper");
-		mainWindowTitle.getStyleClass().add("main-window-title");
+		mainWindowTitle.getStyleClass().add("window-title");
 
 		// Create title bar
 		HBox titleBar = new HBox();
 		titleBar.getStyleClass().add("title-bar");
 		titleBar.getChildren().addAll(backButton, mainWindowTitle);
 
-		// Import active tab icon
+		// Import active tab icon for user tab
 		InputStream imageStreamActiveUser = getClass().getResourceAsStream("images/active.png");
 		if (imageStreamActiveUser != null) {
 			Image activeUserImage = new Image(imageStreamActiveUser);
@@ -95,7 +95,7 @@ public class BookKeeper extends Application {
 			System.err.println("Unable to load active.png");
 		}
 
-		// Import inactive tab icon
+		// Import inactive tab icon for user tab
 		InputStream imageStreamInactiveUser = getClass().getResourceAsStream("images/inactive.png");
 		if (imageStreamInactiveUser != null) {
 			Image inactiveUserImage = new Image(imageStreamInactiveUser);
@@ -126,7 +126,7 @@ public class BookKeeper extends Application {
 		userTab.getStyleClass().addAll("sidebar-tab", "active-tab");
 		userTab.getChildren().addAll(activeUserIcon, userIcon, userTabLabel);
 
-		// Import active tab icon
+		// Import active tab icon for book tab
 		InputStream imageStreamActiveBook = getClass().getResourceAsStream("images/active.png");
 		if (imageStreamActiveBook != null) {
 			Image activeBookImage = new Image(imageStreamActiveBook);
@@ -137,7 +137,7 @@ public class BookKeeper extends Application {
 			System.err.println("Unable to load active.png");
 		}
 
-		// Import inactive tab icon
+		// Import inactive tab icon for book tab
 		InputStream imageStreamInactiveBook = getClass().getResourceAsStream("images/inactive.png");
 		if (imageStreamInactiveBook != null) {
 			Image inactiveBookImage = new Image(imageStreamInactiveBook);
@@ -145,7 +145,7 @@ public class BookKeeper extends Application {
 			inactiveBookIcon.setFitWidth(10);
 			inactiveBookIcon.setFitHeight(16);
 		} else {
-			System.err.println("Unable to load active.png");
+			System.err.println("Unable to load inactive.png");
 		}
 
 		// Import book tab icon
@@ -180,7 +180,10 @@ public class BookKeeper extends Application {
 
 
 
-		//todo
+
+
+
+
 		StackPane root = new StackPane();
 
 		// Create main window in border window
@@ -189,14 +192,11 @@ public class BookKeeper extends Application {
 
 		// Create close window button
 		Button closeButton = new Button();
-		closeButton.getStyleClass().add("close-button");
-
-
-
-
+		closeButton.getStyleClass().addAll("window-button", "close-button");
+		
 		// Create minimize window button
 		Button minimizeButton = new Button();
-		minimizeButton.getStyleClass().add("window-controls-button");
+		minimizeButton.getStyleClass().add("window-button");
 
 		// Import minimize window button icon
 		InputStream imageStreamMinimize = getClass().getResourceAsStream("images/minimize.png");
@@ -215,7 +215,7 @@ public class BookKeeper extends Application {
 
 		// Create maximize window button
 		Button maximizeButton = new Button();
-		maximizeButton.getStyleClass().add("window-controls-button");
+		maximizeButton.getStyleClass().add("window-button");
 		InputStream imageStreamMaximize = getClass().getResourceAsStream("images/maximize.png");
 		if (imageStreamMaximize != null) {
 			Image maximizeImage = new Image(imageStreamMaximize);
@@ -235,14 +235,14 @@ public class BookKeeper extends Application {
 				primaryStage.setHeight(702);
 				root.setStyle("-fx-padding: 10;"); // Adds resizing border
 				appWindow.getStyleClass().add("round-corners");
-				closeButton.getStyleClass().remove("close-button-maximized");
+				closeButton.getStyleClass().remove("close-maximized");
 			} else {
 				primaryStage.setMaximized(true);
 				primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
 				//todo
 				root.setStyle("-fx-padding: 0;"); // Removes resizing border
 				appWindow.getStyleClass().remove("round-corners");
-				closeButton.getStyleClass().add("close-button-maximized");
+				closeButton.getStyleClass().add("close-maximized");
 			}
 		});
 
@@ -727,7 +727,7 @@ public class BookKeeper extends Application {
 			});
 			slideOut.play();
 			isUserEditPaneVisible = false;
-			updateUserTablePane(importedUserItems);
+			updateUserTablePane(userRecords);
 		}
 	}
 
@@ -905,8 +905,8 @@ public class BookKeeper extends Application {
 				// Create a new UserItem object
 				UserItem newUser = new UserItem(firstName, lastName, id, email, gender);
 
-				// Add the new user to the importedUserItems ArrayList
-				importedUserItems.add(newUser);
+				// Add the new user to the userRecords ArrayList
+				userRecords.add(newUser);
 				toggleUserEditPane(userPane);
 			});
 		}
@@ -1093,8 +1093,8 @@ public class BookKeeper extends Application {
 			Optional<ButtonType> result = confirmationAlert.showAndWait();
 			if (result.isPresent() && result.get() == ButtonType.OK) {
 				// User confirmed deletion, perform deletion action here
-				// Remove the userItem from the importedUserItems ArrayList
-				importedUserItems.remove(userItem);
+				// Remove the userItem from the userRecords ArrayList
+				userRecords.remove(userItem);
 
 				// Hide user edit pane
 				toggleUserEditPane(userPane);
@@ -1173,7 +1173,7 @@ public class BookKeeper extends Application {
 			});
 			slideOut.play();
 			isBookEditPaneVisible = false;
-			updateBookTablePane(importedBookItems);
+			updateBookTablePane(bookRecords);
 		}
 	}
 
@@ -1443,7 +1443,7 @@ public class BookKeeper extends Application {
 	}
 
 	private void importFromUserFile(File file) {
-		importedUserItems.clear(); // Clear the ArrayList before importing
+		userRecords.clear(); // Clear the ArrayList before importing
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			String line;
@@ -1455,13 +1455,12 @@ public class BookKeeper extends Application {
 					int id = Integer.parseInt(parts[2]);
 					String email = parts[3];
 					String gender = parts[4];
-					importedUserItems.add(new UserItem(firstName, lastName, id, email, gender));
+					userRecords.add(new UserItem(firstName, lastName, id, email, gender));
 				}
 			}
-			updateUserTablePane(importedUserItems);
-
+			updateUserTablePane(userRecords);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("Unable to import user items.");
 			openImportUserDialog();
 		}
 	}
@@ -1482,7 +1481,7 @@ public class BookKeeper extends Application {
 		File file = fileChooser.showSaveDialog(null);
 		if (file != null) {
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-				for (UserItem userItem : importedUserItems) {
+				for (UserItem userItem : userRecords) {
 					String line = String.format("%s,%s,%d,%s,%s",
 							userItem.getFirstName(),
 							userItem.getLastName(),
@@ -1493,7 +1492,7 @@ public class BookKeeper extends Application {
 					writer.newLine();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.err.println("Unable to export user items to file.");
 			}
 		}
 	}
@@ -1604,7 +1603,7 @@ public class BookKeeper extends Application {
 	}
 
 	private void importFromBookFile(File file) {
-		importedBookItems.clear(); // Clear the ArrayList before importing
+		bookRecords.clear(); // Clear the ArrayList before importing
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			String line;
@@ -1616,12 +1615,12 @@ public class BookKeeper extends Application {
 					int id = Integer.parseInt(parts[2]);
 					String email = parts[3];
 					String gender = parts[4];
-					importedBookItems.add(new BookItem(firstName, lastName, id, email, gender));
+					bookRecords.add(new BookItem(firstName, lastName, id, email, gender));
 				}
 			}
-			updateBookTablePane(importedBookItems);
+			updateBookTablePane(bookRecords);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.err.println("Unable to import book items from file.");
 			openImportBookDialog();
 		}
 	}
@@ -1642,7 +1641,7 @@ public class BookKeeper extends Application {
 		File file = fileChooser.showSaveDialog(null);
 		if (file != null) {
 			try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-				for (BookItem bookItem : importedBookItems) {
+				for (BookItem bookItem : bookRecords) {
 					String line = String.format("%s,%s,%d,%s,%s",
 							bookItem.getTitle(),
 							bookItem.getAuthor(),
@@ -1653,7 +1652,7 @@ public class BookKeeper extends Application {
 					writer.newLine();
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+				System.err.println("Unable to export book items to file.");
 			}
 		}
 	}

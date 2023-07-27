@@ -1,120 +1,82 @@
-@font-face {
-    font-family: "Segoe UI";
-    src: url("fonts/segoe-ui.ttf");
-}
-
-@font-face {
-    font-family: "Segoe UI Bold";
-    src: url("fonts/segoe-ui-bold.ttf");
-}
-
 .root {
     -fx-background-color: rgba(0, 0, 0, 0.01); /* Hides border window */
     -fx-padding: 10;
 }
 
 .main-window {
-    -fx-background-color: #202020;
+    -fx-background-color: #202020; /* Imitates Fluent design */
 }
 
 .round-corners {
-    -fx-background-radius: 7;
-    -fx-border-color: #3f3f3f;
-    -fx-border-width: 1;
-    -fx-border-radius: 7;
+    -fx-border-color: #3f3f3f; /* Imitates Fluent design */
+    -fx-background-radius: 7; /* Imitates Fluent design */
+    -fx-border-radius: 7; /* Imitates Fluent design */
+    -fx-border-width: 1; /* Imitates Fluent design */
 }
 
 .title-bar {
-    -fx-padding: 4;
+    -fx-padding: 4; /* Imitates Fluent design */
 }
 
 .back-button {
-    -fx-background-color: transparent;
-    -fx-background-radius: 4;
-    -fx-padding: 10 11 10 11;
+    -fx-background-color: transparent; /* Removes default background */
+    -fx-background-radius: 4; /* Imitates Fluent design */
+    -fx-padding: 10 11 10 11; /* Imitates Fluent design */
 }
 
 .back-button:hover {
-    -fx-background-color: #2d2d2d;
+    -fx-background-color: #2d2d2d; /* Imitates Fluent design */
 }
 
 .back-button:pressed {
-    -fx-background-color: #292929;
+    -fx-background-color: #292929; /* Imitates Fluent design */
 }
 
-.main-window-title {
-    -fx-font-family: "Segoe UI";
+.window-title {
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 12;
     -fx-text-fill: white;
     -fx-padding: 11 6 11 6;
 }
 
-.window-controls-button {
-    -fx-background-radius: 0;
-    -fx-background-color: transparent;
-    -fx-padding: 8 16 8 16;
+.window-button {
+    -fx-background-radius: 0; /* Removes default round corners */
+    -fx-background-color: transparent; /* Removes default background */
+    -fx-padding: 8 16 8 16; /* Imitates Fluent design */
 }
 
-.window-controls-button:hover {
-    -fx-background-color: #2D2D2D;
+.window-button:hover {
+    -fx-background-color: #2D2D2D; /* Imitates Fluent design */
 }
 
-.window-controls-button:pressed {
-     -fx-background-color: #292929;
+.window-button:pressed {
+     -fx-background-color: #292929; /* Imitates Fluent design */
 }
 
 .close-button {
-    -fx-background-radius: 0 7 0 0;
-    -fx-background-color: transparent;
-    -fx-padding: 8 16 8 16;
-}
-
-.close-button-maximized {
-    -fx-background-radius: 0;
+    -fx-background-radius: 0 7 0 0; /* Rounds off top right corner */
 }
 
 .close-button:hover {
-    -fx-background-color: #C42B1C;
+    -fx-background-color: #C42B1C; /* Imitates Fluent design */
 }
 
 .close-button:pressed {
-    -fx-background-color: #B3271C;
+    -fx-background-color: #B3271C; /* Imitates Fluent design */
+}
+
+.close-maximized {
+    -fx-background-radius: 0; /* Removes round corners when maximized */
 }
 
 .left-pane {
-    -fx-padding: 0 28 0 0;
-    -fx-pref-width: 250;
+    -fx-padding: 0 28 0 0; /* Adds space between sidebar and content */
+    -fx-pref-width: 250; /* Imitates Fluent design */
 }
 
 .side-bar {
     -fx-padding: 0 0 0 17;
     -fx-spacing: 4;
-}
-
-.sidebar-button {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 14;
-    -fx-text-fill: white;
-    -fx-alignment: baseline-left;
-    -fx-background-color: transparent;
-    -fx-background-radius: 5;
-    -fx-padding: 6 9 6 9;
-}
-
-.sidebar-button-selected {
-    -fx-background-color: #2d2d2d;
-    -fx-background-radius: 5;
-    -fx-border-color: transparent transparent transparent #4CC2FF;
-    -fx-border-radius: 5;
-    -fx-border-width: 0 0 0 3;
-}
-
-.sidebar-button:hover {
-    -fx-background-color: #2d2d2d;
-}
-
-.sidebar-button:pressed {
-    -fx-background-color: #282D3A;
 }
 
 .sidebar-tab {
@@ -125,7 +87,7 @@
 }
 
 .sidebar-tab .label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 14;
     -fx-text-fill: white;
 }
@@ -151,7 +113,7 @@
 }
 
 .main-title {
-    -fx-font-family: "Segoe UI Bold";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent font */
     -fx-font-size: 28;
     -fx-text-fill: white;
     -fx-padding: 28 10 16 0;
@@ -169,7 +131,7 @@
 }
 
 .normal-button {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 13;
     -fx-text-fill: white;
     -fx-background-color: #373737;
@@ -191,7 +153,7 @@
 }
 
 .important-button {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 13;
     -fx-text-fill: black;
     -fx-background-color: #4cc2ff;
@@ -248,14 +210,15 @@
 }
 
 .file-pane-label {
-    -fx-font-family: "Segoe UI Bold";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
+    -fx-font-weight: bold;
     -fx-font-size: 14;
     -fx-text-fill: white;
     -fx-padding: 0 0 4 10;
 }
 
 .file-pane-info-label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 12;
     -fx-text-fill: #a3a6ac;
     -fx-padding: 0 0 0 10;
@@ -267,14 +230,14 @@
 }
 
 .main-label, .main-label .label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 14;
     -fx-text-fill: white;
     -fx-pref-width: 210;
 }
 
 .detail-label, .detail-label .label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 12;
     -fx-text-fill: #C1C3C7;
 }
@@ -354,7 +317,7 @@
     -fx-border-size: 1 1 2 1;
     -fx-border-radius: 5;
     -fx-padding: 6 12 6 12;
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 13;
     -fx-text-fill: white;
     -fx-pref-width: 300;
@@ -391,7 +354,7 @@
 }
 
 .choice-box .label {
-    -fx-font-family: "Segoe UI";
+    -fx-font-family: 'Segoe UI Variable'; /* Default Fluent Font */
     -fx-font-size: 13;
     -fx-text-fill: white;
 }
@@ -494,7 +457,7 @@
 }
 
 .cancel-apply-spacing {
-    -fx-spacing: 10; /* Spacing between "Cancel" & "Add" buttons */
+    -fx-spacing: 10; /* Spacing between 'Cancel' & 'Add' buttons */
 }
 
 .image-spacer {
