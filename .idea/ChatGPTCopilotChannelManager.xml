@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChatGPTCopilotChannelManager">
+    <chatChannels>
+      <chatChannel>
+        <option name="continuousFlag" value="false" />
+        <option name="model" value="gpt-3.5-turbo" />
+        <option name="messages">
+          <Message>
+            <option name="content" value="hi" />
+            <option name="id" value="81d9c730-cc85-4baf-b7e2-c1bd84ae58c4" />
+            <option name="role" value="user" />
+          </Message>
+          <Message>
+            <option name="content" value="Hello! How can I assist you today?" />
+            <option name="id" value="9b21021e-9bcc-4b44-addc-7027fbf212c2" />
+            <option name="role" value="assistant" />
+          </Message>
+          <Message>
+            <option name="content" value="what's your name?" />
+            <option name="id" value="1d9fac30-27b2-409f-9ec1-7a53d7f72806" />
+            <option name="role" value="user" />
+          </Message>
+          <Message>
+            <option name="content" value="I am an AI language model called OpenAI." />
+            <option name="id" value="4a5453aa-2764-46d2-9784-dc2ccb06204c" />
+            <option name="role" value="assistant" />
+          </Message>
+        </option>
+      </chatChannel>
+    </chatChannels>
+  </component>
+</project>

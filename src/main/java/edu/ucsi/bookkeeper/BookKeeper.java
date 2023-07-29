@@ -1,8 +1,8 @@
 package edu.ucsi.bookkeeper;
 
 import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.*;
 import javafx.scene.layout.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,8 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Screen;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.IntegerProperty;
@@ -178,12 +176,7 @@ public class BookKeeper extends Application {
 		leftPane.getStyleClass().add("left-pane");
 		leftPane.getChildren().addAll(titleBar, sideBar);
 
-
-
-
-
-
-
+		// Create border window
 		StackPane root = new StackPane();
 
 		// Create main window in border window
@@ -245,7 +238,7 @@ public class BookKeeper extends Application {
 			}
 		});
 
-
+		// Import close window button icon
 		InputStream imageStreamClose = getClass().getResourceAsStream("images/close.png");
 		if (imageStreamClose != null) {
 			Image closeImage = new Image(imageStreamClose);
@@ -501,7 +494,6 @@ public class BookKeeper extends Application {
 		Button exportBookButton = new Button();
 		exportBookButton.getStyleClass().add("file-button");
 		exportBookButton.setGraphic(exportBookButtonContent);
-
 		exportBookButton.setOnAction(event -> exportToBookFile());
 
 		// Create HBox for Import and Export buttons
@@ -570,7 +562,7 @@ public class BookKeeper extends Application {
 		Scene scene = new Scene(root, 950, 702);
 		scene.setFill(Color.TRANSPARENT);
 
-		// Null checker for stylesR.css
+		// Null checker for styles.css
 		URL cssUrl = getClass().getResource("styles.css");
 		if (cssUrl != null) {
 			scene.getStylesheets().add(cssUrl.toExternalForm());
@@ -578,7 +570,8 @@ public class BookKeeper extends Application {
 			System.err.println("Unable to find styles.css");
 		}
 
-		String[] iconFiles = {
+		// Import main app icon
+		String[] iconFiles = new String[]{
 				"images/app-24.png",
 				"images/app-32.png",
 				"images/app-48.png",
@@ -586,6 +579,7 @@ public class BookKeeper extends Application {
 				"images/app-72.png"
 		};
 
+		// Null checker for main app icon
 		for (String iconFile : iconFiles) {
 			InputStream imageStream = getClass().getResourceAsStream(iconFile);
 			if (imageStream != null) {
@@ -596,16 +590,18 @@ public class BookKeeper extends Application {
 			}
 		}
 
+		// Set scene
+		primaryStage.setScene(scene);
+		primaryStage.show();
+
+		// Resize window
 		ResizeHelper.ResizeListener resizeListener = new ResizeHelper.ResizeListener(primaryStage);
 		root.setOnMousePressed(resizeListener::onMousePressed);
 		root.setOnMouseDragged(resizeListener::onMouseDragged);
 		root.setOnMouseMoved(resizeListener::onMouseMoved);
 
-		// Set scene
-		primaryStage.setScene(scene);
-		primaryStage.show();
 /*
-		// Dragging the window
+		// Drag window
 		windowControlsPane.setOnMousePressed(event -> {
 			xOffset = event.getSceneX();
 			yOffset = event.getSceneY();
@@ -757,11 +753,139 @@ public class BookKeeper extends Application {
 		TextField emailField = new TextField();
 		emailField.getStyleClass().add("text-field");
 		emailField.setText(String.valueOf(userItem.getEmail()));
-		
-		// Create choice box for gender
-		ChoiceBox<String> genderField = new ChoiceBox<>();
-		genderField.getItems().addAll("Male", "Female");		
-		
+
+		// Create gender dropdown label
+		Label genderDropdownLabel = new Label();
+		if (isEdit) {
+			genderDropdownLabel.setText(userItem.getGender());
+		} else {
+			genderDropdownLabel.setText("Male");
+		}
+
+		// Create spacer between gender dropdown label & button
+		Region genderDropdownSpacer = new Region();
+		HBox.setHgrow(genderDropdownSpacer, Priority.ALWAYS);
+
+		// Import arrow icon for gender dropdown button
+		ImageView arrowIcon = null;
+		InputStream imageStreamArrow = getClass().getResourceAsStream("images/arrow.png");
+		if (imageStreamArrow != null) {
+			Image arrowImage = new Image(imageStreamArrow);
+			arrowIcon = new ImageView(arrowImage);
+			arrowIcon.setFitWidth(10);
+			arrowIcon.setFitHeight(10);
+		} else {
+			System.err.println("Unable to load arrow.png");
+		}
+
+		// Create gender dropdown button
+		HBox genderDropdownButton = new HBox();
+		genderDropdownButton.setAlignment(Pos.CENTER_LEFT);
+		genderDropdownButton.getStyleClass().add("dropdown-button");
+		genderDropdownButton.getChildren().addAll(genderDropdownLabel, genderDropdownSpacer, arrowIcon);
+
+		// Display gender dropdown list on click
+		genderDropdownButton.setOnMouseClicked(e -> {
+			// Create popup for dropdown list
+			Popup popup = new Popup();
+			popup.setAutoHide(true);
+
+			// Create male option in dropdown list
+			Button maleOption = new Button("Male");
+			maleOption.setAlignment(Pos.CENTER_LEFT); // Default is centered
+			maleOption.getStyleClass().addAll("dropdown-option");
+
+			// Import active icon for male option
+			ImageView activeMaleOptionIcon = null;
+			InputStream imageStreamActiveMaleOption = getClass().getResourceAsStream("images/active.png");
+			if (imageStreamActiveMaleOption != null) {
+				Image activeMaleOptionImage = new Image(imageStreamActiveMaleOption);
+				activeMaleOptionIcon = new ImageView(activeMaleOptionImage);
+				activeMaleOptionIcon.setFitWidth(10);
+				activeMaleOptionIcon.setFitHeight(16);
+			} else {
+				System.err.println("Unable to load active.png");
+			}
+
+			// Import inactive icon for male option
+			ImageView inactiveMaleOptionIcon = null;
+			InputStream imageStreamInactiveMaleOption = getClass().getResourceAsStream("images/inactive.png");
+			if (imageStreamInactiveMaleOption != null) {
+				Image inactiveMaleOptionImage = new Image(imageStreamInactiveMaleOption);
+				inactiveMaleOptionIcon = new ImageView(inactiveMaleOptionImage);
+				inactiveMaleOptionIcon.setFitWidth(10);
+				inactiveMaleOptionIcon.setFitHeight(16);
+			} else {
+				System.err.println("Unable to load inactive.png");
+			}
+
+			// Set icon for male option in dropdown list
+ 			if (genderDropdownLabel.getText().equals("Male")) {
+				maleOption.setGraphic(activeMaleOptionIcon);
+				maleOption.getStyleClass().add("dropdown-selected");
+			} else {
+				maleOption.setGraphic(inactiveMaleOptionIcon);
+			}
+
+			// Create female option in dropdown list
+			Button femaleOption = new Button("Female");
+			femaleOption.setAlignment(Pos.CENTER_LEFT); // Default is centered
+			femaleOption.getStyleClass().add("dropdown-option");
+
+			// Import active icon for female option
+			ImageView activeFemaleOptionIcon = null;
+			InputStream imageStreamActiveFemaleOption = getClass().getResourceAsStream("images/active.png");
+			if (imageStreamActiveFemaleOption != null) {
+				Image activeFemaleOptionImage = new Image(imageStreamActiveFemaleOption);
+				activeFemaleOptionIcon = new ImageView(activeFemaleOptionImage);
+				activeFemaleOptionIcon.setFitWidth(10);
+				activeFemaleOptionIcon.setFitHeight(16);
+			} else {
+				System.err.println("Unable to load active.png");
+			}
+
+			// Import inactive icon for female option
+			ImageView inactiveFemaleOptionIcon = null;
+			InputStream imageStreamInactiveFemaleOption = getClass().getResourceAsStream("images/inactive.png");
+			if (imageStreamInactiveFemaleOption != null) {
+				Image inactiveFemaleOptionImage = new Image(imageStreamInactiveFemaleOption);
+				inactiveFemaleOptionIcon = new ImageView(inactiveFemaleOptionImage);
+				inactiveFemaleOptionIcon.setFitWidth(10);
+				inactiveFemaleOptionIcon.setFitHeight(16);
+			} else {
+				System.err.println("Unable to load inactive.png");
+			}
+
+			// Set icon for female option in dropdown list
+			if (genderDropdownLabel.getText().equals("Female")) {
+				femaleOption.setGraphic(activeFemaleOptionIcon);
+				femaleOption.getStyleClass().add("dropdown-selected");
+			} else {
+				femaleOption.setGraphic(inactiveFemaleOptionIcon);
+			}
+
+			// Create dropdown list for gender
+			VBox dropDownList = new VBox();
+			dropDownList.getStyleClass().add("dropdown-list");
+			dropDownList.getChildren().addAll(maleOption, femaleOption);
+
+			maleOption.setOnMouseClicked(event -> {
+				genderDropdownLabel.setText("Male");
+				popup.hide();
+			});
+
+			femaleOption.setOnMouseClicked(event -> {
+				genderDropdownLabel.setText("Female");
+				popup.hide();
+			});
+
+			// Add dropdown list to popup
+			popup.getContent().add(dropDownList);
+			popup.show(genderDropdownButton,
+					genderDropdownButton.localToScreen(genderDropdownButton.getBoundsInLocal()).getMinX(),
+					genderDropdownButton.localToScreen(genderDropdownButton.getBoundsInLocal()).getMinY() - 5);
+		});
+
 		// Clear the existing content
 		userEditFieldsPane.getChildren().clear();
 
@@ -884,7 +1008,7 @@ public class BookKeeper extends Application {
 				userItem.setLastName(lastNameField.getText());
 				userItem.setId(Integer.parseInt(userIdField.getText()));
 				userItem.setEmail(emailField.getText());
-				userItem.setGender(genderField.getValue());
+				userItem.setGender(genderDropdownLabel.getText());
 				toggleUserEditPane(userPane);
 			});
 		} else {
@@ -898,7 +1022,7 @@ public class BookKeeper extends Application {
 				String lastName = lastNameField.getText();
 				int id = Integer.parseInt(userIdField.getText());
 				String email = emailField.getText();
-				String gender = genderField.getValue();
+				String gender = genderDropdownLabel.getText();
 
 				// Create a new UserItem object
 				UserItem newUser = new UserItem(firstName, lastName, id, email, gender);
@@ -1054,15 +1178,8 @@ public class BookKeeper extends Application {
 		Region genderSpacer = new Region();
 		HBox.setHgrow(genderSpacer, Priority.ALWAYS);
 
-		// Set default value in choice box for gender
-		if (userItem.getGender().equals("Male")) {
-			genderField.setValue("Male");
-		} else {
-			genderField.setValue("Female");
-		}
-
 		// Create row for "Gender" label and choice box
-		HBox genderPane = new HBox(genderIcon, genderLabel, genderSpacer, genderField);
+		HBox genderPane = new HBox(genderIcon, genderLabel, genderSpacer, genderDropdownButton);
 		genderPane.setAlignment(Pos.CENTER_LEFT);
 		genderPane.getStyleClass().add("edit-row");
 
@@ -1105,12 +1222,13 @@ public class BookKeeper extends Application {
 			lastNameField.setText(userItem.getLastName());
 			userIdField.setText(String.valueOf(userItem.getId()));
 			emailField.setText(userItem.getEmail());
-			genderField.setValue(userItem.getGender());
+			genderDropdownLabel.setText(userItem.getGender());
 
 			// Hide user edit pane
 			toggleUserEditPane(userPane);
 		});
 	}
+
 
 	private static class BookItem {
 		private final StringProperty title;
@@ -1415,7 +1533,7 @@ public class BookKeeper extends Application {
 		}
 
 		// Create gender label
-		Label genderLabel = new Label("Gender");
+		Label genderLabel = new Label("   Gender");
 		genderLabel.getStyleClass().add("main-label");
 
 		if (bookItem.getSubject().equals("Male")) { // Set default selection
@@ -1569,6 +1687,7 @@ public class BookKeeper extends Application {
 			Label lastNameLabel = new Label(userItem.getLastName());
 			lastNameLabel.getStyleClass().add("detail-label");
 
+			// Add first & last names to name field
 			VBox nameField = new VBox(firstNameLabel, lastNameLabel);
 			nameField.getStyleClass().add("first-column");
 
@@ -1767,7 +1886,7 @@ public class BookKeeper extends Application {
 				this.stage = stage;
 			}
 
-			void onMousePressed(javafx.scene.input.MouseEvent event) {
+			void onMousePressed(MouseEvent event) {
 				if (cursor != null) {
 					resizing = true;
 					initialX = event.getScreenX();
@@ -1775,7 +1894,7 @@ public class BookKeeper extends Application {
 				}
 			}
 
-			void onMouseDragged(javafx.scene.input.MouseEvent event) {
+			void onMouseDragged(MouseEvent event) {
 				if (resizing) {
 					double offsetX = event.getScreenX() - initialX;
 					double offsetY = event.getScreenY() - initialY;

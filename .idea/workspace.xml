@@ -7,7 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Code cleanup">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Style: Close button curved corner in edit pane">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
@@ -57,11 +58,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ToolWindowChatGPT.ShowToolbar": "false",
-    "didalgo.chatgpt.ToolWindow.ACTIVE": "GPT_3_5",
+    "didalgo.chatgpt.ToolWindow.ACTIVE": "ONLINE",
     "full.screen.before.presentation.mode": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Arash/OneDrive/Repository/ASH/BookKeeper",
+    "last_opened_file_path": "C:/Users/Arash/OneDrive/Documents/ASH/demo",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -373,7 +374,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690459611672</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Style: Close button curved corner in edit pane">
+      <option name="closed" value="true" />
+      <created>1690613581033</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1690613581033</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -389,7 +398,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added two buttons to the sidebar." />
     <MESSAGE value="Cleaned up the code." />
     <MESSAGE value="Tab functionality done." />
     <MESSAGE value="Fixed content not using the full width of window bug." />
@@ -414,7 +422,8 @@
     <MESSAGE value="Refactor: Move setPrefWidth properties to CSS" />
     <MESSAGE value="Fix: Maximize button doesn't hide taskbar anymore" />
     <MESSAGE value="Code cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Code cleanup" />
+    <MESSAGE value="Style: Close button curved corner in edit view&#10;&#10;Removed unnecessary round corner from edit page." />
+    <option name="LAST_COMMIT_MESSAGE" value="Style: Close button curved corner in edit view&#10;&#10;Removed unnecessary round corner from edit page." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
