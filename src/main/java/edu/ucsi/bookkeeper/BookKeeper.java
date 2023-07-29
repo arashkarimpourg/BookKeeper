@@ -239,7 +239,6 @@ public class BookKeeper extends Application {
 			} else {
 				primaryStage.setMaximized(true);
 				primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
-				//todo
 				root.setStyle("-fx-padding: 0;"); // Removes resizing border
 				appWindow.getStyleClass().remove("round-corners");
 				closeButton.getStyleClass().add("close-maximized");
@@ -651,7 +650,6 @@ public class BookKeeper extends Application {
 		File defaultUserFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Users.txt"); // Specify the path to your default text file
 		importFromUserFile(defaultUserFile);
 
-		// FIXME - Import books.txt on startup
         File defaultBookFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Books.txt"); // Specify the path to your default text file
         importFromBookFile(defaultBookFile);
 	}
@@ -1082,7 +1080,7 @@ public class BookKeeper extends Application {
 		}
 		userEditFieldsPane.getStyleClass().add("edit-pane");
 
-		// TODO - Use custom layout for confirmation dialog
+		// TODO - Style confirmation dialog in Fluent design
 		deleteUserButton.setOnAction(event -> {
 			// Display a confirmation dialog to ask for deletion confirmation
 			Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
