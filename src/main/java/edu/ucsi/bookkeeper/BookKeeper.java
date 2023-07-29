@@ -595,6 +595,8 @@ public class BookKeeper extends Application {
 
 		// Set scene
 		primaryStage.setScene(scene);
+		primaryStage.setMinWidth(850);
+		primaryStage.setMinHeight(298);
 		primaryStage.show();
 
 		// Resize window
