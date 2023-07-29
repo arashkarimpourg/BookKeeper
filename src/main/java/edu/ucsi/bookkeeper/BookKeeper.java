@@ -48,6 +48,9 @@ public class BookKeeper extends Application {
 	ImageView activeBookIcon;
 	ImageView inactiveBookIcon;
 
+	private double xOffset;
+	private double yOffset;
+
 	private int generateId() {
 		return  (int) (Math.random() * 900000) + 100000;
 	}
@@ -599,8 +602,12 @@ public class BookKeeper extends Application {
 		root.setOnMousePressed(resizeListener::onMousePressed);
 		root.setOnMouseDragged(resizeListener::onMouseDragged);
 		root.setOnMouseMoved(resizeListener::onMouseMoved);
+		root.setOnMouseReleased(resizeListener::onMouseReleased);
 
-/*
+		windowControlsPane.setOnMousePressed(resizeListener::onMousePressed);
+		windowControlsPane.setOnMouseDragged(resizeListener::onMouseDragged);
+		windowControlsPane.setOnMouseMoved(resizeListener::onMouseMoved);
+
 		// Drag window
 		windowControlsPane.setOnMousePressed(event -> {
 			xOffset = event.getSceneX();
@@ -608,8 +615,10 @@ public class BookKeeper extends Application {
 		});
 
 		windowControlsPane.setOnMouseDragged(event -> {
-			primaryStage.setX(event.getScreenX() - xOffset);
-			primaryStage.setY(event.getScreenY() - yOffset);
+			if (ResizeHelper.isNotResizing()) {
+				primaryStage.setX(event.getScreenX() - xOffset);
+				primaryStage.setY(event.getScreenY() - yOffset);
+			}
 		});
 
 		leftPane.setOnMousePressed(event -> {
@@ -618,8 +627,10 @@ public class BookKeeper extends Application {
 		});
 
 		leftPane.setOnMouseDragged(event -> {
-			primaryStage.setX(event.getScreenX() - xOffset);
-			primaryStage.setY(event.getScreenY() - yOffset);
+			if (ResizeHelper.isNotResizing()) {
+				primaryStage.setX(event.getScreenX() - xOffset);
+				primaryStage.setY(event.getScreenY() - yOffset);
+			}
 		});
 
 		userViewTitlePane.setOnMousePressed(event -> {
@@ -628,8 +639,10 @@ public class BookKeeper extends Application {
 		});
 
 		userViewTitlePane.setOnMouseDragged(event -> {
-			primaryStage.setX(event.getScreenX() - xOffset);
-			primaryStage.setY(event.getScreenY() - yOffset);
+			if (ResizeHelper.isNotResizing()) {
+				primaryStage.setX(event.getScreenX() - xOffset);
+				primaryStage.setY(event.getScreenY() - yOffset);
+			}
 		});
 
 		bookViewTitlePane.setOnMousePressed(event -> {
@@ -638,9 +651,11 @@ public class BookKeeper extends Application {
 		});
 
 		bookViewTitlePane.setOnMouseDragged(event -> {
-			primaryStage.setX(event.getScreenX() - xOffset);
-			primaryStage.setY(event.getScreenY() - yOffset);
-		});*/
+			if (ResizeHelper.isNotResizing()) {
+				primaryStage.setX(event.getScreenX() - xOffset);
+				primaryStage.setY(event.getScreenY() - yOffset);
+			}
+		});
 
 		// Import items from files on application startup
 		File defaultUserFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Users.txt"); // Specify the path to your default text file
@@ -1874,7 +1889,11 @@ public class BookKeeper extends Application {
 	private static class ResizeHelper {
 
 		private static final int RESIZE_MARGIN = 10;
-		private static boolean resizing;
+		private static boolean resizing = false;
+
+		public static boolean isNotResizing() {
+			return !resizing;
+		}
 
 		static class ResizeListener {
 			private final Stage stage;
@@ -1928,6 +1947,10 @@ public class BookKeeper extends Application {
 				} else {
 					stage.getScene().setCursor(Cursor.DEFAULT);
 				}
+			}
+
+			void onMouseReleased(MouseEvent event) {
+				resizing = false;
 			}
 
 			private boolean isResizeZone(javafx.scene.input.MouseEvent event) {
