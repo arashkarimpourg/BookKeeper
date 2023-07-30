@@ -68,7 +68,8 @@ public class BookKeeper extends Application {
 		backButton.getStyleClass().add("back-button");
 
 		// Import back button icon
-		InputStream imageStreamBack = getClass().getResourceAsStream("images/back.png");
+		InputStream imageStreamBack =
+				getClass().getResourceAsStream("images/back.png");
 		if (imageStreamBack != null) {
 			Image backImage = new Image(imageStreamBack);
 			ImageView backIcon = new ImageView(backImage);
@@ -89,7 +90,8 @@ public class BookKeeper extends Application {
 		titleBar.getChildren().addAll(backButton, mainWindowTitle);
 
 		// Import active tab icon for user tab
-		InputStream imageStreamActiveUser = getClass().getResourceAsStream("images/active.png");
+		InputStream imageStreamActiveUser =
+				getClass().getResourceAsStream("images/active.png");
 		if (imageStreamActiveUser != null) {
 			Image activeUserImage = new Image(imageStreamActiveUser);
 			activeUserIcon = new ImageView(activeUserImage);
@@ -100,7 +102,8 @@ public class BookKeeper extends Application {
 		}
 
 		// Import inactive tab icon for user tab
-		InputStream imageStreamInactiveUser = getClass().getResourceAsStream("images/inactive.png");
+		InputStream imageStreamInactiveUser =
+				getClass().getResourceAsStream("images/inactive.png");
 		if (imageStreamInactiveUser != null) {
 			Image inactiveUserImage = new Image(imageStreamInactiveUser);
 			inactiveUserIcon = new ImageView(inactiveUserImage);
@@ -111,7 +114,8 @@ public class BookKeeper extends Application {
 		}
 
 		// Import user tab icon
-		InputStream imageStreamUser = getClass().getResourceAsStream("images/user.png");
+		InputStream imageStreamUser =
+				getClass().getResourceAsStream("images/user.png");
 		if (imageStreamUser != null) {
 			Image userImage = new Image(imageStreamUser);
 			userIcon = new ImageView(userImage);
@@ -131,7 +135,8 @@ public class BookKeeper extends Application {
 		userTab.getChildren().addAll(activeUserIcon, userIcon, userTabLabel);
 
 		// Import active tab icon for book tab
-		InputStream imageStreamActiveBook = getClass().getResourceAsStream("images/active.png");
+		InputStream imageStreamActiveBook =
+				getClass().getResourceAsStream("images/active.png");
 		if (imageStreamActiveBook != null) {
 			Image activeBookImage = new Image(imageStreamActiveBook);
 			activeBookIcon = new ImageView(activeBookImage);
@@ -142,7 +147,8 @@ public class BookKeeper extends Application {
 		}
 
 		// Import inactive tab icon for book tab
-		InputStream imageStreamInactiveBook = getClass().getResourceAsStream("images/inactive.png");
+		InputStream imageStreamInactiveBook =
+				getClass().getResourceAsStream("images/inactive.png");
 		if (imageStreamInactiveBook != null) {
 			Image inactiveBookImage = new Image(imageStreamInactiveBook);
 			inactiveBookIcon = new ImageView(inactiveBookImage);
@@ -153,7 +159,8 @@ public class BookKeeper extends Application {
 		}
 
 		// Import book tab icon
-		InputStream imageStreamBook = getClass().getResourceAsStream("images/book.png");
+		InputStream imageStreamBook =
+				getClass().getResourceAsStream("images/book.png");
 		if (imageStreamBook != null) {
 			Image bookImage = new Image(imageStreamBook);
 			bookIcon = new ImageView(bookImage);
@@ -198,7 +205,8 @@ public class BookKeeper extends Application {
 		minimizeButton.getStyleClass().add("window-button");
 
 		// Import minimize window button icon
-		InputStream imageStreamMinimize = getClass().getResourceAsStream("images/minimize.png");
+		InputStream imageStreamMinimize =
+				getClass().getResourceAsStream("images/minimize.png");
 		if (imageStreamMinimize != null) {
 			Image minimizeImage = new Image(imageStreamMinimize);
 			ImageView minimizeIcon = new ImageView(minimizeImage);
@@ -215,7 +223,8 @@ public class BookKeeper extends Application {
 		// Create maximize window button
 		Button maximizeButton = new Button();
 		maximizeButton.getStyleClass().add("window-button");
-		InputStream imageStreamMaximize = getClass().getResourceAsStream("images/maximize.png");
+		InputStream imageStreamMaximize =
+				getClass().getResourceAsStream("images/maximize.png");
 		if (imageStreamMaximize != null) {
 			Image maximizeImage = new Image(imageStreamMaximize);
 			ImageView maximizeIcon = new ImageView(maximizeImage);
@@ -245,7 +254,8 @@ public class BookKeeper extends Application {
 		});
 
 		// Import close window button icon
-		InputStream imageStreamClose = getClass().getResourceAsStream("images/close.png");
+		InputStream imageStreamClose =
+				getClass().getResourceAsStream("images/close.png");
 		if (imageStreamClose != null) {
 			Image closeImage = new Image(imageStreamClose);
 			ImageView closeIcon = new ImageView(closeImage);
@@ -281,7 +291,8 @@ public class BookKeeper extends Application {
 
 		// Create import icon
 		ImageView importUserIcon = null;
-		InputStream imageStreamImportUser = getClass().getResourceAsStream("images/import.png");
+		InputStream imageStreamImportUser =
+				getClass().getResourceAsStream("images/import.png");
 		if (imageStreamImportUser != null) {
 			Image importUserImage = new Image(imageStreamImportUser);
 			importUserIcon = new ImageView(importUserImage);
@@ -300,7 +311,10 @@ public class BookKeeper extends Application {
 
 		// Create HBox to hold icon and labels
 		HBox importUserButtonContent = new HBox();
-		importUserButtonContent.getChildren().addAll(importUserIcon, new VBox(importUserLabel, importUserInfoLabel));
+		importUserButtonContent.getChildren().addAll(
+				importUserIcon,
+				new VBox(importUserLabel, importUserInfoLabel)
+		);
 		importUserButtonContent.setAlignment(Pos.CENTER_LEFT);
 
 		// Create button and set its content to the HBox
@@ -311,7 +325,8 @@ public class BookKeeper extends Application {
 
 		// Create export icon
 		ImageView exportUserIcon = null;
-		InputStream imageStreamExportUser = getClass().getResourceAsStream("images/export.png");
+		InputStream imageStreamExportUser =
+				getClass().getResourceAsStream("images/export.png");
 		if (imageStreamExportUser != null) {
 			Image exportUserImage = new Image(imageStreamExportUser);
 			exportUserIcon = new ImageView(exportUserImage);
@@ -330,7 +345,10 @@ public class BookKeeper extends Application {
 
 		// Create HBox to hold icon and labels
 		HBox exportUserButtonContent = new HBox();
-		exportUserButtonContent.getChildren().addAll(exportUserIcon, new VBox(exportUserLabel, exportUserInfoLabel));
+		exportUserButtonContent.getChildren().addAll(
+				exportUserIcon,
+				new VBox(exportUserLabel, exportUserInfoLabel)
+		);
 		exportUserButtonContent.setAlignment(Pos.CENTER_LEFT);
 
 		// Create button and set its content to the HBox
@@ -363,7 +381,8 @@ public class BookKeeper extends Application {
 
 		// Create add icon
 		ImageView AddIcon;
-		InputStream imageStreamAdd = getClass().getResourceAsStream("images/add.png");
+		InputStream imageStreamAdd =
+				getClass().getResourceAsStream("images/add.png");
 		if (imageStreamAdd != null) {
 			Image AddImage = new Image(imageStreamAdd);
 			AddIcon = new ImageView(AddImage);
@@ -389,7 +408,13 @@ public class BookKeeper extends Application {
 		userEmptySpace.setPrefHeight(40);
 
 		// Create scroll pane
-		VBox inUserScrollPane = new VBox(userFilePane, plusButtonPane, plusEmptySpace, userTablePane, userEmptySpace);
+		VBox inUserScrollPane = new VBox(
+				userFilePane,
+				plusButtonPane,
+				plusEmptySpace,
+				userTablePane,
+				userEmptySpace
+		);
 		inUserScrollPane.getStyleClass().add("scroll-content");
 		ScrollPane userScrollPane = new ScrollPane(inUserScrollPane);
 		userScrollPane.setFitToWidth(true); // Match parent width
@@ -444,7 +469,8 @@ public class BookKeeper extends Application {
 
 		// Create import icon
 		ImageView importBookIcon = null;
-		InputStream imageStreamImportBook = getClass().getResourceAsStream("images/import.png");
+		InputStream imageStreamImportBook =
+				getClass().getResourceAsStream("images/import.png");
 		if (imageStreamImportBook != null) {
 			Image importBookImage = new Image(imageStreamImportBook);
 			importBookIcon = new ImageView(importBookImage);
@@ -463,7 +489,9 @@ public class BookKeeper extends Application {
 
 		// Create HBox to hold icon and labels
 		HBox importBookButtonContent = new HBox();
-		importBookButtonContent.getChildren().addAll(importBookIcon, new VBox(importBookLabel, importBookInfoLabel));
+		importBookButtonContent.getChildren().addAll(
+				importBookIcon,
+				new VBox(importBookLabel, importBookInfoLabel));
 		importBookButtonContent.setAlignment(Pos.CENTER_LEFT);
 
 		// Create button and set its content to the HBox
@@ -474,7 +502,8 @@ public class BookKeeper extends Application {
 
 		// Create export icon
 		ImageView exportBookIcon = null;
-		InputStream imageStreamExportBook = getClass().getResourceAsStream("images/export.png");
+		InputStream imageStreamExportBook =
+				getClass().getResourceAsStream("images/export.png");
 		if (imageStreamExportBook != null) {
 			Image exportBookImage = new Image(imageStreamExportBook);
 			exportBookIcon = new ImageView(exportBookImage);
@@ -493,7 +522,10 @@ public class BookKeeper extends Application {
 
 		// Create HBox to hold icon and labels
 		HBox exportBookButtonContent = new HBox();
-		exportBookButtonContent.getChildren().addAll(exportBookIcon, new VBox(exportBookLabel, exportBookInfoLabel));
+		exportBookButtonContent.getChildren().addAll(
+				exportBookIcon,
+				new VBox(exportBookLabel, exportBookInfoLabel)
+		);
 		exportBookButtonContent.setAlignment(Pos.CENTER_LEFT);
 
 		// Create button and set its content to the HBox
@@ -517,7 +549,8 @@ public class BookKeeper extends Application {
 		bookEmptySpace.setPrefHeight(40);
 
 		// Create scroll pane
-		VBox inBookScrollPane = new VBox(bookFilePane, addBookPane, bookTablePane, bookEmptySpace);
+		VBox inBookScrollPane = new VBox(bookFilePane, addBookPane,
+				bookTablePane, bookEmptySpace);
 		inBookScrollPane.getStyleClass().add("scroll-content");
 		ScrollPane bookScrollPane = new ScrollPane(inBookScrollPane);
 		bookScrollPane.setFitToWidth(true); // Match parent width
@@ -605,7 +638,8 @@ public class BookKeeper extends Application {
 		primaryStage.setMinHeight(298);
 
 		// Resize window
-		ResizeHelper.ResizeListener resizeListener = new ResizeHelper.ResizeListener(primaryStage);
+		ResizeHelper.ResizeListener resizeListener =
+				new ResizeHelper.ResizeListener(primaryStage);
 		root.setOnMousePressed(resizeListener::onMousePressed);
 		root.setOnMouseDragged(resizeListener::onMouseDragged);
 		root.setOnMouseMoved(resizeListener::onMouseMoved);
@@ -665,10 +699,12 @@ public class BookKeeper extends Application {
 		});
 
 		// Import items from files on application startup
-		File defaultUserFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Users.txt"); // Specify the path to your default text file
+		String userFilePath = "src/main/resources/edu/ucsi/bookkeeper/files/Users.txt";
+		File defaultUserFile = new File(userFilePath);
 		importFromUserFile(defaultUserFile);
 
-        File defaultBookFile = new File("src/main/resources/edu/ucsi/bookkeeper/files/Books.txt"); // Specify the path to your default text file
+		String bookFilePath = "src/main/resources/edu/ucsi/bookkeeper/files/Books.txt";
+        File defaultBookFile = new File(bookFilePath);
         importFromBookFile(defaultBookFile);
 	}
 
@@ -679,7 +715,8 @@ public class BookKeeper extends Application {
 		private final StringProperty email;
 		private final StringProperty gender;
 
-		public UserItem(String firstName, String lastName, int id, String email, String gender) {
+		public UserItem(String firstName, String lastName, int id,
+		                String email, String gender) {
 			this.firstName = new SimpleStringProperty(firstName);
 			this.lastName = new SimpleStringProperty(lastName);
 			this.id = new SimpleIntegerProperty(id);
@@ -723,7 +760,8 @@ public class BookKeeper extends Application {
 		if (!isUserEditPaneVisible) {
 			userEditPane.setVisible(true);
 
-			TranslateTransition slideIn = new TranslateTransition(Duration.millis(1000), userEditPane);
+			TranslateTransition slideIn = new TranslateTransition(
+					Duration.millis(1000), userEditPane);
 			slideIn.setFromX(userViewPane.getWidth());
 			slideIn.setToX(0);
 			slideIn.play();
@@ -732,7 +770,8 @@ public class BookKeeper extends Application {
 			// Clear existing text fields
 			clearUserEditFields(userEditPane);
 		} else {
-			TranslateTransition slideOut = new TranslateTransition(Duration.millis(1000), userEditPane);
+			TranslateTransition slideOut = new TranslateTransition(
+					Duration.millis(1000), userEditPane);
 			slideOut.setFromX(0);
 			slideOut.setToX(userViewPane.getWidth());
 			slideOut.setOnFinished(e -> {
@@ -755,7 +794,10 @@ public class BookKeeper extends Application {
 		}
 	}
 
-	private void populateUserEditFields(VBox userEditFieldsPane, UserItem userItem, boolean isEdit) {
+	private void populateUserEditFields(
+			VBox userEditFieldsPane,
+			UserItem userItem,
+			boolean isEdit) {
 		// Create text field for first name
 		TextField firstNameField = new TextField();
 		firstNameField.getStyleClass().add("text-field");
@@ -790,7 +832,8 @@ public class BookKeeper extends Application {
 
 		// Import arrow icon for gender dropdown button
 		ImageView arrowIcon = null;
-		InputStream imageStreamArrow = getClass().getResourceAsStream("images/arrow.png");
+		InputStream imageStreamArrow =
+				getClass().getResourceAsStream("images/arrow.png");
 		if (imageStreamArrow != null) {
 			Image arrowImage = new Image(imageStreamArrow);
 			arrowIcon = new ImageView(arrowImage);
@@ -801,13 +844,13 @@ public class BookKeeper extends Application {
 		}
 
 		// Create gender dropdown button
-		HBox genderDropdownButton = new HBox();
-		genderDropdownButton.setAlignment(Pos.CENTER_LEFT);
-		genderDropdownButton.getStyleClass().add("dropdown-button");
-		genderDropdownButton.getChildren().addAll(genderDropdownLabel, genderDropdownSpacer, arrowIcon);
+		HBox genderButton = new HBox();
+		genderButton.setAlignment(Pos.CENTER_LEFT);
+		genderButton.getStyleClass().add("dropdown-button");
+		genderButton.getChildren().addAll(genderDropdownLabel, genderDropdownSpacer, arrowIcon);
 
 		// Display gender dropdown list on click
-		genderDropdownButton.setOnMouseClicked(e -> {
+		genderButton.setOnMouseClicked(e -> {
 			// Create popup for dropdown list
 			Popup popup = new Popup();
 			popup.setAutoHide(true);
@@ -819,7 +862,8 @@ public class BookKeeper extends Application {
 
 			// Import active icon for male option
 			ImageView activeMaleOptionIcon = null;
-			InputStream imageStreamActiveMaleOption = getClass().getResourceAsStream("images/active.png");
+			InputStream imageStreamActiveMaleOption
+					= getClass().getResourceAsStream("images/active.png");
 			if (imageStreamActiveMaleOption != null) {
 				Image activeMaleOptionImage = new Image(imageStreamActiveMaleOption);
 				activeMaleOptionIcon = new ImageView(activeMaleOptionImage);
@@ -831,7 +875,8 @@ public class BookKeeper extends Application {
 
 			// Import inactive icon for male option
 			ImageView inactiveMaleOptionIcon = null;
-			InputStream imageStreamInactiveMaleOption = getClass().getResourceAsStream("images/inactive.png");
+			InputStream imageStreamInactiveMaleOption
+					= getClass().getResourceAsStream("images/inactive.png");
 			if (imageStreamInactiveMaleOption != null) {
 				Image inactiveMaleOptionImage = new Image(imageStreamInactiveMaleOption);
 				inactiveMaleOptionIcon = new ImageView(inactiveMaleOptionImage);
@@ -856,7 +901,8 @@ public class BookKeeper extends Application {
 
 			// Import active icon for female option
 			ImageView activeFemaleOptionIcon = null;
-			InputStream imageStreamActiveFemaleOption = getClass().getResourceAsStream("images/active.png");
+			InputStream imageStreamActiveFemaleOption
+					= getClass().getResourceAsStream("images/active.png");
 			if (imageStreamActiveFemaleOption != null) {
 				Image activeFemaleOptionImage = new Image(imageStreamActiveFemaleOption);
 				activeFemaleOptionIcon = new ImageView(activeFemaleOptionImage);
@@ -868,7 +914,8 @@ public class BookKeeper extends Application {
 
 			// Import inactive icon for female option
 			ImageView inactiveFemaleOptionIcon = null;
-			InputStream imageStreamInactiveFemaleOption = getClass().getResourceAsStream("images/inactive.png");
+			InputStream imageStreamInactiveFemaleOption
+					= getClass().getResourceAsStream("images/inactive.png");
 			if (imageStreamInactiveFemaleOption != null) {
 				Image inactiveFemaleOptionImage = new Image(imageStreamInactiveFemaleOption);
 				inactiveFemaleOptionIcon = new ImageView(inactiveFemaleOptionImage);
@@ -903,9 +950,11 @@ public class BookKeeper extends Application {
 
 			// Add dropdown list to popup
 			popup.getContent().add(dropDownList);
-			popup.show(genderDropdownButton,
-					genderDropdownButton.localToScreen(genderDropdownButton.getBoundsInLocal()).getMinX(),
-					genderDropdownButton.localToScreen(genderDropdownButton.getBoundsInLocal()).getMinY() - 5);
+			popup.show(genderButton,
+					genderButton.localToScreen(genderButton.getBoundsInLocal()).getMinX(),
+					genderButton.localToScreen(
+							genderButton.getBoundsInLocal()).getMinY() - 5
+			);
 		});
 
 		// Clear the existing content
@@ -922,7 +971,8 @@ public class BookKeeper extends Application {
 
 		// Import icon for "Delete" button
 		ImageView deleteUserIcon = null;
-		InputStream imageStreamDeleteUser = getClass().getResourceAsStream("images/delete.png");
+		InputStream imageStreamDeleteUser =
+				getClass().getResourceAsStream("images/delete.png");
 		if (imageStreamDeleteUser != null) {
 			Image deleteUserImage = new Image(imageStreamDeleteUser);
 			deleteUserIcon = new ImageView(deleteUserImage);
@@ -964,7 +1014,8 @@ public class BookKeeper extends Application {
 		VBox userEditLabelPane;
 		if (isEdit) {
 			// Import icon for editing user
-			InputStream imageStreamUserEdit = getClass().getResourceAsStream("images/edit.png");
+			InputStream imageStreamUserEdit =
+					getClass().getResourceAsStream("images/edit.png");
 			if (imageStreamUserEdit != null) {
 				Image editImage = new Image(imageStreamUserEdit);
 				userEditIcon = new ImageView(editImage);
@@ -979,7 +1030,8 @@ public class BookKeeper extends Application {
 			userEditLabel.getStyleClass().add("main-label");
 
 			// Create "Edit user" details label
-			Label userEditDetailLabel = new Label("  Proceed with caution: No undo or history");
+			Label userEditDetailLabel =
+					new Label("  Proceed with caution: No undo or history");
 			userEditDetailLabel.getStyleClass().add("detail-label");
 
 			// Create pane for "Edit user" labels
@@ -987,7 +1039,8 @@ public class BookKeeper extends Application {
 
 		} else {
 			// Import icon for adding user
-			InputStream imageStreamUserEdit = getClass().getResourceAsStream("images/add.png");
+			InputStream imageStreamUserEdit =
+					getClass().getResourceAsStream("images/add.png");
 			if (imageStreamUserEdit != null) {
 				Image editImage = new Image(imageStreamUserEdit);
 				userEditIcon = new ImageView(editImage);
@@ -1002,7 +1055,8 @@ public class BookKeeper extends Application {
 			userEditLabel.getStyleClass().add("main-label");
 
 			// Create "Add user" details label
-			Label userEditDetailLabel = new Label("  Caution: Data will not be saved automatically");
+			Label userEditDetailLabel =
+					new Label("  Caution: Data will not be saved automatically");
 			userEditDetailLabel.getStyleClass().add("detail-label");
 
 			// Create pane for "Edit user" labels
@@ -1060,13 +1114,15 @@ public class BookKeeper extends Application {
 		userCancelOKPane.getStyleClass().add("cancel-apply-spacing");
 
 		// Create row for edit user
-		HBox userEditPane = new HBox(userEditIcon, userEditLabelPane, userCancelApplySpacer, userCancelOKPane);
+		HBox userEditPane = new HBox(userEditIcon, userEditLabelPane,
+				userCancelApplySpacer, userCancelOKPane);
 		userEditPane.setAlignment(Pos.CENTER_LEFT);
 		userEditPane.getStyleClass().add("edit-row");
 
 		// Import icon for first name
 		ImageView firstNameIcon = null;
-		InputStream imageStreamFirstName = getClass().getResourceAsStream("images/first-name.png");
+		InputStream imageStreamFirstName =
+				getClass().getResourceAsStream("images/first-name.png");
 		if (imageStreamFirstName != null) {
 			Image firstNameImage = new Image(imageStreamFirstName);
 			firstNameIcon = new ImageView(firstNameImage);
@@ -1086,13 +1142,15 @@ public class BookKeeper extends Application {
 		HBox.setHgrow(firstNameSpacer, Priority.ALWAYS);
 
 		// Create row for first name
-		HBox firstNamePane = new HBox(firstNameIcon, firstNameLabel, firstNameSpacer, firstNameField);
+		HBox firstNamePane = new HBox(firstNameIcon, firstNameLabel,
+				firstNameSpacer, firstNameField);
 		firstNamePane.setAlignment(Pos.CENTER_LEFT);
 		firstNamePane.getStyleClass().add("edit-row");
 
 		// Import icon for last name
 		ImageView lastNameIcon = null;
-		InputStream imageStreamLastName = getClass().getResourceAsStream("images/last-name.png");
+		InputStream imageStreamLastName =
+				getClass().getResourceAsStream("images/last-name.png");
 		if (imageStreamLastName != null) {
 			Image lastNameImage = new Image(imageStreamLastName);
 			lastNameIcon = new ImageView(lastNameImage);
@@ -1112,13 +1170,15 @@ public class BookKeeper extends Application {
 		HBox.setHgrow(lastNameSpacer, Priority.ALWAYS);
 
 		// Create row for last name
-		HBox lastNamePane = new HBox(lastNameIcon, lastNameLabel, lastNameSpacer, lastNameField);
+		HBox lastNamePane = new HBox(lastNameIcon, lastNameLabel,
+				lastNameSpacer, lastNameField);
 		lastNamePane.setAlignment(Pos.CENTER_LEFT);
 		lastNamePane.getStyleClass().add("edit-row");
 
 		// Import icon for user ID
 		ImageView userIdIcon = null;
-		InputStream imageStreamUserId = getClass().getResourceAsStream("images/id.png");
+		InputStream imageStreamUserId =
+				getClass().getResourceAsStream("images/id.png");
 		if (imageStreamUserId != null) {
 			Image userIdImage = new Image(imageStreamUserId);
 			userIdIcon = new ImageView(userIdImage);
@@ -1133,7 +1193,8 @@ public class BookKeeper extends Application {
 		userIdLabel.getStyleClass().add("main-label");
 
 		// Create "ID" details label
-		Label userIdDetailLabel = new Label("  Use the official ID provided by the university");
+		Label userIdDetailLabel =
+				new Label("  Use the official ID provided by the university");
 		userIdDetailLabel.getStyleClass().add("detail-label");
 
 		// Create pane for "ID" labels
@@ -1165,7 +1226,8 @@ public class BookKeeper extends Application {
 		emailLabel.getStyleClass().add("main-label");
 
 		// Create "Email" details label
-		Label emailDetailLabel = new Label("  Use the official email provided by the university");
+		Label emailDetailLabel =
+				new Label("  Use the official email provided by the university");
 		emailDetailLabel.getStyleClass().add("detail-label");
 
 		// Create pane for "Email" labels
@@ -1182,7 +1244,8 @@ public class BookKeeper extends Application {
 
 		// Import icon for gender
 		ImageView genderIcon = null;
-		InputStream imageStreamGender = getClass().getResourceAsStream("images/gender.png");
+		InputStream imageStreamGender =
+				getClass().getResourceAsStream("images/gender.png");
 		if (imageStreamGender != null) {
 			Image genderImage = new Image(imageStreamGender);
 			genderIcon = new ImageView(genderImage);
@@ -1201,18 +1264,26 @@ public class BookKeeper extends Application {
 		HBox.setHgrow(genderSpacer, Priority.ALWAYS);
 
 		// Create row for "Gender" label and choice box
-		HBox genderPane = new HBox(genderIcon, genderLabel, genderSpacer, genderDropdownButton);
+		HBox genderPane = new HBox(genderIcon, genderLabel, genderSpacer, genderButton);
 		genderPane.setAlignment(Pos.CENTER_LEFT);
 		genderPane.getStyleClass().add("edit-row");
 
 		// Create table for user edit rows
-		VBox userEditTable = new VBox(userEditPane, firstNamePane, lastNamePane, userIdPane, emailPane, genderPane);
+		VBox userEditTable = new VBox(
+				userEditPane,
+				firstNamePane,
+				lastNamePane,
+				userIdPane,
+				emailPane,
+				genderPane
+		);
 		userEditTable.setAlignment(Pos.CENTER_LEFT);
 		userEditTable.getStyleClass().add("fields-pane");
 
 		if (isEdit) {
 			// Create pane for user edit
-			userEditFieldsPane.getChildren().addAll(userEditTitle, userEditFilePane, userEditTable);
+			userEditFieldsPane.getChildren().addAll(userEditTitle,
+					userEditFilePane, userEditTable);
 		} else {
 			// Create pane for user edit
 			userEditFieldsPane.getChildren().addAll(userEditTitle, userEditTable);
@@ -1353,7 +1424,8 @@ public class BookKeeper extends Application {
 		if (!isBookEditPaneVisible) {
 			bookEditPane.setVisible(true);
 
-			TranslateTransition slideIn = new TranslateTransition(Duration.millis(1000), bookEditPane);
+			TranslateTransition slideIn = new TranslateTransition(
+					Duration.millis(1000), bookEditPane);
 			slideIn.setFromX(bookViewPane.getWidth());
 			slideIn.setToX(0);
 			slideIn.play();
@@ -1362,7 +1434,8 @@ public class BookKeeper extends Application {
 			// Clear existing text fields
 			clearBookEditFields(bookEditPane);
 		} else {
-			TranslateTransition slideOut = new TranslateTransition(Duration.millis(1000), bookEditPane);
+			TranslateTransition slideOut = new TranslateTransition(
+					Duration.millis(1000), bookEditPane);
 			slideOut.setFromX(0);
 			slideOut.setToX(bookViewPane.getWidth());
 			slideOut.setOnFinished(e -> {
@@ -1427,7 +1500,8 @@ public class BookKeeper extends Application {
 
 		// Create delete icon
 		ImageView deleteBookIcon = null;
-		InputStream imageStreamDeleteBook = getClass().getResourceAsStream("images/delete.png");
+		InputStream imageStreamDeleteBook =
+				getClass().getResourceAsStream("images/delete.png");
 		if (imageStreamDeleteBook != null) {
 			Image deleteBookImage = new Image(imageStreamDeleteBook);
 			deleteBookIcon = new ImageView(deleteBookImage);
@@ -1446,7 +1520,10 @@ public class BookKeeper extends Application {
 
 		// Create HBox to hold icon and labels
 		HBox deleteButtonContent = new HBox();
-		deleteButtonContent.getChildren().addAll(deleteBookIcon, new VBox(deleteBookLabel, deleteBookInfoLabel));
+		deleteButtonContent.getChildren().addAll(
+				deleteBookIcon,
+				new VBox(deleteBookLabel, deleteBookInfoLabel)
+		);
 		deleteButtonContent.setAlignment(Pos.CENTER_LEFT);
 
 		// Create button and set its content to the HBox
@@ -1499,7 +1576,8 @@ public class BookKeeper extends Application {
 
 		// Create first name icon
 		ImageView titleIcon = null;
-		InputStream imageStreamTitle = getClass().getResourceAsStream("images/first-name.png");
+		InputStream imageStreamTitle =
+				getClass().getResourceAsStream("images/first-name.png");
 		if (imageStreamTitle != null) {
 			Image titleImage = new Image(imageStreamTitle);
 			titleIcon = new ImageView(titleImage);
@@ -1522,7 +1600,8 @@ public class BookKeeper extends Application {
 
 		// Create last name icon
 		ImageView authorIcon = null;
-		InputStream imageStreamAuthor = getClass().getResourceAsStream("images/last-name.png");
+		InputStream imageStreamAuthor =
+				getClass().getResourceAsStream("images/last-name.png");
 		if (imageStreamAuthor != null) {
 			Image authorImage = new Image(imageStreamAuthor);
 			authorIcon = new ImageView(authorImage);
@@ -1575,7 +1654,8 @@ public class BookKeeper extends Application {
 
 		// Create email icon
 		ImageView emailIcon = null;
-		InputStream imageStreamEmail = getClass().getResourceAsStream("images/email.png");
+		InputStream imageStreamEmail =
+				getClass().getResourceAsStream("images/email.png");
 		if (imageStreamEmail != null) {
 			Image emailImage = new Image(imageStreamEmail);
 			emailIcon = new ImageView(emailImage);
@@ -1605,7 +1685,8 @@ public class BookKeeper extends Application {
 
 		// Create gender icon
 		ImageView genderIcon = null;
-		InputStream imageStreamGender = getClass().getResourceAsStream("images/gender.png");
+		InputStream imageStreamGender =
+				getClass().getResourceAsStream("images/gender.png");
 		if (imageStreamGender != null) {
 			Image genderImage = new Image(imageStreamGender);
 			genderIcon = new ImageView(genderImage);
@@ -1638,7 +1719,12 @@ public class BookKeeper extends Application {
 		fieldsPane.getStyleClass().add("fields-pane");
 		fieldsPane.setAlignment(Pos.CENTER_LEFT);
 
-		bookEditFieldsPane.getChildren().addAll(bookEditTitleLabel, bookFilePane, bookEditButtonPane, fieldsPane);
+		bookEditFieldsPane.getChildren().addAll(
+				bookEditTitleLabel,
+				bookFilePane,
+				bookEditButtonPane,
+				fieldsPane
+		);
 		bookEditFieldsPane.getStyleClass().add("edit-pane");
 	}
 
@@ -1698,12 +1784,18 @@ public class BookKeeper extends Application {
 	}
 
 	private void addUser() {
-		UserItem userItem = new UserItem("First Name", "Last Name", generateId(), "Email", "Gender");
-		openUserEditPane(userItem, false); // Pass the flag 'false' to indicate adding a new user
+		UserItem userItem = new UserItem(
+				"First Name",
+				"Last Name",
+				generateId(),
+				"Email",
+				"Gender"
+		);
+		openUserEditPane(userItem, false);
 	}
 
 	private void editUser(UserItem userItem) {
-		openUserEditPane(userItem, true); // Pass the flag 'true' to indicate editing an existing user
+		openUserEditPane(userItem, true);
 	}
 
 	private void openUserEditPane(UserItem userItem, boolean isEdit) {
@@ -1719,7 +1811,8 @@ public class BookKeeper extends Application {
 
 			// Create male icon
 			ImageView maleIcon = null;
-			InputStream imageStreamMale = getClass().getResourceAsStream("images/male.png");
+			InputStream imageStreamMale =
+					getClass().getResourceAsStream("images/male.png");
 			if (imageStreamMale != null) {
 				Image maleImage = new Image(imageStreamMale);
 				maleIcon = new ImageView(maleImage);
@@ -1731,7 +1824,8 @@ public class BookKeeper extends Application {
 
 			// Create female icon
 			ImageView femaleIcon = null;
-			InputStream imageStreamFemale = getClass().getResourceAsStream("images/female.png");
+			InputStream imageStreamFemale =
+					getClass().getResourceAsStream("images/female.png");
 			if (imageStreamFemale != null) {
 				Image femaleImage = new Image(imageStreamFemale);
 				femaleIcon = new ImageView(femaleImage);
@@ -1751,7 +1845,8 @@ public class BookKeeper extends Application {
 
 			// Create forward icon
 			ImageView forwardIcon = null;
-			InputStream imageStreamForward = getClass().getResourceAsStream("images/forward.png");
+			InputStream imageStreamForward =
+					getClass().getResourceAsStream("images/forward.png");
 			if (imageStreamForward != null) {
 				Image forwardImage = new Image(imageStreamForward);
 				forwardIcon = new ImageView(forwardImage);
@@ -1787,7 +1882,14 @@ public class BookKeeper extends Application {
 			HBox.setHgrow(spacer, Priority.ALWAYS);
 
 			// Create row pane
-			HBox rowPane = new HBox(genderIcon, userImageSpacer, nameField, idEmailField, spacer, forwardIcon);
+			HBox rowPane = new HBox(
+					genderIcon,
+					userImageSpacer,
+					nameField,
+					idEmailField,
+					spacer,
+					forwardIcon
+			);
 			rowPane.getStyleClass().add("view-row");
 			rowPane.setAlignment(Pos.CENTER_LEFT); // Vertically centers forward icon
 
@@ -1859,7 +1961,12 @@ public class BookKeeper extends Application {
 	}
 
 	private void addBook() {
-		BookItem bookItem = new BookItem("First Name", "Last Name", generateId(), "Email", "Gender");
+		BookItem bookItem = new BookItem(
+				"First Name",
+				"Last Name",
+				generateId(),
+				"Email",
+				"Gender");
 		editBookItem(bookItem);
 	}
 
@@ -1876,7 +1983,8 @@ public class BookKeeper extends Application {
 		for (BookItem bookItem : bookItems) {
 			// Create male icon
 			ImageView maleIcon = null;
-			InputStream imageStreamMale = getClass().getResourceAsStream("images/male.png");
+			InputStream imageStreamMale =
+					getClass().getResourceAsStream("images/male.png");
 			if (imageStreamMale != null) {
 				Image maleImage = new Image(imageStreamMale);
 				maleIcon = new ImageView(maleImage);
@@ -1888,7 +1996,8 @@ public class BookKeeper extends Application {
 
 			// Create female icon
 			ImageView femaleIcon = null;
-			InputStream imageStreamFemale = getClass().getResourceAsStream("images/female.png");
+			InputStream imageStreamFemale =
+					getClass().getResourceAsStream("images/female.png");
 			if (imageStreamFemale != null) {
 				Image femaleImage = new Image(imageStreamFemale);
 				femaleIcon = new ImageView(femaleImage);
@@ -1908,7 +2017,8 @@ public class BookKeeper extends Application {
 
 			// Create forward icon
 			ImageView forwardIcon = null;
-			InputStream imageStreamForward = getClass().getResourceAsStream("images/forward.png");
+			InputStream imageStreamForward =
+					getClass().getResourceAsStream("images/forward.png");
 			if (imageStreamForward != null) {
 				Image forwardImage = new Image(imageStreamForward);
 				forwardIcon = new ImageView(forwardImage);
@@ -2005,8 +2115,8 @@ public class BookKeeper extends Application {
 						resizeSE(offsetX, offsetY);
 					}
 
-					initialX = event.getScreenX(); // Update the initial position for the next drag
-					initialY = event.getScreenY(); // Update the initial position for the next drag
+					initialX = event.getScreenX(); // Update initial position for next drag
+					initialY = event.getScreenY(); // Update initial position for next drag
 				}
 			}
 
@@ -2117,15 +2227,24 @@ public class BookKeeper extends Application {
 
 			private double calculateScalingFactor() {
 				// Calculate a scaling factor based on the current window size
-				double scalingFactor = Math.max(RESIZE_SCALE_FACTOR * stage.getWidth(), RESIZE_SCALE_FACTOR * stage.getHeight());
-				return Math.min(scalingFactor, 1.0); // Limit the scaling factor to a maximum of 1.0
+				double scalingFactor = Math.max(
+						RESIZE_SCALE_FACTOR * stage.getWidth(),
+						RESIZE_SCALE_FACTOR * stage.getHeight()
+				);
+
+				// Limit the scaling factor to a maximum of 1.0
+				return Math.min(scalingFactor, 1.0);
 			}
 
 			private void resize(double width, double height, double x, double y) {
-				double minWidth = stage.getMinWidth() > 0 ? stage.getMinWidth() : 0;
-				double minHeight = stage.getMinHeight() > 0 ? stage.getMinHeight() : 0;
-				double maxWidth = stage.getMaxWidth() > 0 ? stage.getMaxWidth() : Double.MAX_VALUE;
-				double maxHeight = stage.getMaxHeight() > 0 ? stage.getMaxHeight() : Double.MAX_VALUE;
+				double minWidth =
+						stage.getMinWidth() > 0 ? stage.getMinWidth() : 0;
+				double minHeight =
+						stage.getMinHeight() > 0 ? stage.getMinHeight() : 0;
+				double maxWidth =
+						stage.getMaxWidth() > 0 ? stage.getMaxWidth() : Double.MAX_VALUE;
+				double maxHeight =
+						stage.getMaxHeight() > 0 ? stage.getMaxHeight() : Double.MAX_VALUE;
 
 				width = Math.min(Math.max(width, minWidth), maxWidth);
 				height = Math.min(Math.max(height, minHeight), maxHeight);

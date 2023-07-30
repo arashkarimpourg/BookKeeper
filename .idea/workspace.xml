@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Style: Custom layout for confirm dialog">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: Confirm dialog delete button works.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
     </list>
@@ -63,7 +63,7 @@
     "full.screen.before.presentation.mode": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/Arash/OneDrive/Documents/ASH/demo",
+    "last_opened_file_path": "C:/Users/Arash/OneDrive/Documents/GTD/BookKeeper",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -415,7 +415,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690697224229</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Fix: Confirm dialog delete button works.">
+      <option name="closed" value="true" />
+      <created>1690711019426</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1690711019427</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -431,7 +439,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Edit and delete functionality for users." />
     <MESSAGE value="Edit and delete functionalities for users." />
     <MESSAGE value="Back button functionality for users." />
     <MESSAGE value="Add button for users works." />
@@ -456,7 +463,8 @@
     <MESSAGE value="Fix: Dragging &amp; resizing of main window" />
     <MESSAGE value="Add: Set minimum window size during resize" />
     <MESSAGE value="Style: Custom layout for confirm dialog" />
-    <option name="LAST_COMMIT_MESSAGE" value="Style: Custom layout for confirm dialog" />
+    <MESSAGE value="Fix: Confirm dialog delete button works." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: Confirm dialog delete button works." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
