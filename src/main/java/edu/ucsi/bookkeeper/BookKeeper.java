@@ -21,7 +21,6 @@ import javafx.beans.property.StringProperty;
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class BookKeeper extends Application {
 	private static final double RESIZE_SCALE_FACTOR = 0.005;
@@ -51,6 +50,9 @@ public class BookKeeper extends Application {
 	private double xOffset;
 	private double yOffset;
 
+	// This will hold a reference to the main stage
+	public static Stage mainStage;
+
 	private int generateId() {
 		return  (int) (Math.random() * 900000) + 100000;
 	}
@@ -59,6 +61,7 @@ public class BookKeeper extends Application {
 	public void start(Stage primaryStage) {
 		// Remove default window decorations
 		primaryStage.initStyle(StageStyle.TRANSPARENT);
+		mainStage = primaryStage;
 
 		// Create back button
 		Button backButton = new Button();
@@ -595,9 +598,11 @@ public class BookKeeper extends Application {
 
 		// Set scene
 		primaryStage.setScene(scene);
+		primaryStage.show();
+
+		// Set minimum window size
 		primaryStage.setMinWidth(850);
 		primaryStage.setMinHeight(298);
-		primaryStage.show();
 
 		// Resize window
 		ResizeHelper.ResizeListener resizeListener = new ResizeHelper.ResizeListener(primaryStage);
@@ -1214,24 +1219,8 @@ public class BookKeeper extends Application {
 		}
 		userEditFieldsPane.getStyleClass().add("edit-pane");
 
-		// TODO - Style confirmation dialog in Fluent design
-		deleteUserButton.setOnAction(event -> {
-			// Display a confirmation dialog to ask for deletion confirmation
-			Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-			confirmationAlert.setTitle("Confirm");
-			confirmationAlert.setHeaderText("Delete user");
-			confirmationAlert.setContentText("Are you sure you want to delete this user?");
-
-			Optional<ButtonType> result = confirmationAlert.showAndWait();
-			if (result.isPresent() && result.get() == ButtonType.OK) {
-				// User confirmed deletion, perform deletion action here
-				// Remove the userItem from the userRecords ArrayList
-				userRecords.remove(userItem);
-
-				// Hide user edit pane
-				toggleUserEditPane(userPane);
-			}
-		});
+		// Set action for "Delete" button
+		deleteUserButton.setOnAction(event -> showDelConfirm(mainStage, userItem));
 
 		// Set action for "Cancel" button
 		userCancelButton.setOnAction(event -> {
@@ -2069,6 +2058,85 @@ public class BookKeeper extends Application {
 				stage.setHeight(height);
 			}
 		}
+	}
+
+	public void showDelConfirm(Stage primaryStage, UserItem userItem) {
+		Stage dialogStage = new Stage();
+
+		// Specify the main window as the owner of the dialog
+		dialogStage.initOwner(primaryStage);
+
+		dialogStage.initStyle(StageStyle.TRANSPARENT);
+		dialogStage.setWidth(360);
+		dialogStage.setHeight(200);
+
+		double centerXPosition = primaryStage.getX() + primaryStage.getWidth() / 2d;
+		double centerYPosition = primaryStage.getY() + primaryStage.getHeight() / 2d;
+
+		dialogStage.setX(centerXPosition - dialogStage.getWidth() / 2d);
+		dialogStage.setY(centerYPosition - dialogStage.getHeight() / 2d);
+
+		Label dialogTitle = new Label("Delete User");
+		dialogTitle.getStyleClass().add("dialog-title");
+
+		Label dialogText = new Label("Are you sure you want to delete this user?");
+		dialogText.getStyleClass().add("dialog-text");
+
+		VBox dialogTextPane = new VBox();
+		dialogTextPane.getStyleClass().add("dialog-text-pane");
+		dialogTextPane.getChildren().addAll(dialogTitle, dialogText);
+
+		Button delButton = new Button("Delete");
+		delButton.getStyleClass().add("confirm-button");
+		delButton.setOnAction(e -> {
+			// Delete user
+			userRecords.remove(userItem);
+
+			// Close dialog
+			dialogStage.close();
+
+			// Hide user edit pane
+			toggleUserEditPane(userPane);
+		});
+
+		Region spacer = new Region();
+		HBox.setHgrow(spacer, Priority.ALWAYS);
+
+		Button cancelButton = new Button("Cancel");
+		cancelButton.getStyleClass().add("normal-button");
+		cancelButton.setOnAction(e -> dialogStage.close());
+
+		HBox delConfirmButtons = new HBox(delButton, spacer, cancelButton);
+		delConfirmButtons.getStyleClass().add("dialog-button-pane");
+
+		VBox delConfirmRoot = new VBox(dialogTextPane, delConfirmButtons);
+		delConfirmRoot.getStyleClass().add("confirm-dialog");
+
+		Scene delConfirmScene = new Scene(delConfirmRoot, Color.TRANSPARENT);
+		dialogStage.setScene(delConfirmScene);
+
+		// After dialogStage is created
+		primaryStage.xProperty().addListener((obs, oldVal, newVal)
+				-> dialogStage.setX(newVal.doubleValue()
+				+ primaryStage.getWidth() / 2d
+				- dialogStage.getWidth() / 2d
+		));
+
+		primaryStage.yProperty().addListener((obs, oldVal, newVal)
+				-> dialogStage.setY(newVal.doubleValue()
+				+ primaryStage.getHeight() / 2d
+				- dialogStage.getHeight() / 2d
+		));
+
+		// Null checker for styles.css
+		URL cssUrl = getClass().getResource("styles.css");
+		if (cssUrl != null) {
+			delConfirmScene.getStylesheets().add(cssUrl.toExternalForm());
+		} else {
+			System.err.println("Unable to find styles.css");
+		}
+
+		dialogStage.show();
 	}
 
 	public static void main(String[] args) { launch(args); }

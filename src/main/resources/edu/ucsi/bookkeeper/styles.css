@@ -181,6 +181,36 @@
     -fx-text-fill: #23526b;
 }
 
+.confirm-button {
+    -fx-font-family: 'Segoe UI Variable';
+    -fx-font-size: 13;
+    -fx-text-fill: black;
+    -fx-background-color: #f38a91;
+    -fx-background-radius: 5;
+    -fx-border-color: #f4939a #f4939a #d2777d #f4939a;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 7 15 7 15;
+    -fx-pref-width: 90;
+}
+
+.confirm-button:hover {
+    -fx-background-color: #dd7f85;
+    -fx-border-color: #e0898f #e0898f #bf6e73 #e0898f;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 7 15 7 15;
+}
+
+.confirm-button:pressed {
+    -fx-background-color: #c8747a;
+    -fx-border-color: #c8747a;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-padding: 7 15 7 15;
+    -fx-text-fill: #643a3d;
+}
+
 .file-button {
     -fx-background-color: transparent;
     -fx-background-radius: 5;
@@ -588,4 +618,38 @@
 
 .choice-box .arrow { /* DEFAULT ARROW */
     -fx-background-color: white;
+}
+
+.confirm-dialog {
+    -fx-background-color: transparent;
+    -fx-border-color: #e74856;
+    -fx-border-size: 2;
+    -fx-border-radius: 9;
+    -fx-padding: 0;
+}
+
+.dialog-title {
+    -fx-font-family: 'Segoe UI Variable';
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
+.dialog-text {
+    -fx-font-family: 'Segoe UI Variable';
+    -fx-font-size: 14;
+    -fx-text-fill: white;
+}
+
+.dialog-text-pane {
+    -fx-background-color: #2b2b2b;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 25;
+    -fx-spacing: 10;
+}
+
+.dialog-button-pane {
+    -fx-background-color: #202020;
+    -fx-background-radius: 0 0 10 10;
+    -fx-padding: 25;
 }

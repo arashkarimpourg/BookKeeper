@@ -7,9 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: Dragging &amp; resizing of main window">
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Add: Set minimum window size during resize">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/edu/ucsi/bookkeeper/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +37,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
@@ -399,7 +400,15 @@
       <option name="project" value="LOCAL" />
       <updated>1690664093140</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Add: Set minimum window size during resize">
+      <option name="closed" value="true" />
+      <created>1690664824285</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1690664824286</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -415,7 +424,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed content not using the full width of window bug." />
     <MESSAGE value="Sliding pane fixed." />
     <MESSAGE value="Edit and delete functionality for users." />
     <MESSAGE value="Edit and delete functionalities for users." />
@@ -440,7 +448,8 @@
     <MESSAGE value="Style: Close button curved corner in edit view&#10;&#10;Removed unnecessary round corner from edit page." />
     <MESSAGE value="Add: Custom dropdown list&#10;&#10;Replaced choice box with custom layout." />
     <MESSAGE value="Fix: Dragging &amp; resizing of main window" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: Dragging &amp; resizing of main window" />
+    <MESSAGE value="Add: Set minimum window size during resize" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add: Set minimum window size during resize" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
