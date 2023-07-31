@@ -7,10 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: Confirm dialog delete button works.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
-    </list>
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: Books works the same as Users now" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +65,7 @@
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "editing.templates"
+    "settings.editor.selected.configurable": "preferences.editor"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -423,7 +420,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690711019427</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Code cleanup.">
+      <option name="closed" value="true" />
+      <created>1690716522804</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1690716522804</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Fix: Books works the same as Users now">
+      <option name="closed" value="true" />
+      <created>1690793069098</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1690793069098</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -439,8 +452,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Edit and delete functionalities for users." />
-    <MESSAGE value="Back button functionality for users." />
     <MESSAGE value="Add button for users works." />
     <MESSAGE value="List view is functional." />
     <MESSAGE value="Changed list view to table view." />
@@ -464,7 +475,9 @@
     <MESSAGE value="Add: Set minimum window size during resize" />
     <MESSAGE value="Style: Custom layout for confirm dialog" />
     <MESSAGE value="Fix: Confirm dialog delete button works." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix: Confirm dialog delete button works." />
+    <MESSAGE value="Code cleanup." />
+    <MESSAGE value="Fix: Books works the same as Users now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix: Books works the same as Users now" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

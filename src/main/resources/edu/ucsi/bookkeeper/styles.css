@@ -491,10 +491,12 @@
 
 .image-spacer {
     -fx-pref-width: 18;
+    -fx-min-width: 18;
 }
 
 .first-column {
     -fx-pref-width: 210;
+    -fx-min-width: 210;
 }
 
 /////////////////////////////////////////////////

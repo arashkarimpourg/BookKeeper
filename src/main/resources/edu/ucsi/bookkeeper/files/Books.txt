@@ -1,3 +1,32 @@
-1984,George Orwell,1949,Dystopian novel about a totalitarian regime,Male
-To Kill a Mockingbird,Harper Lee,1960,Novel about racial injustice in a small Southern town,Female
-The Great Gatsby,F. Scott Fitzgerald,1925,Story about the decay of American Dream in the 1920s,Male
+Tech Titans,John Doe,9780132,A comprehensive history of the tech industry and its influential figures,Technology
+The Immortal Life of Henrietta Lacks,Rebecca Skloot,9781400,An intriguing account of the remarkable story behind HeLa cells,Medicine
+Art & Beauty,Alice Green,9780691,Philosophical reflections on aesthetics and the nature of beauty in art,Arts
+Being Mortal,Atul Gawande,9780805,A thought-provoking exploration of mortality and end-of-life care,Medicine
+To Kill a Mockingbird,Harper Lee,9780061,A powerful story of racial injustice and moral growth in the American South,Literature
+The Anatomy of Being,Shinji Moon,9780692,A collection of evocative poetry exploring themes of identity and existence,Medicine
+Digital Revolution,Robert White,9780195,Analyzing the transformative impact of the digital age on society,Technology
+Brave New World,Aldous Huxley,9780060,A thought-provoking dystopian fiction envisioning a futuristic society,Literature
+Code Breakers,Jane Smith,9780385,Unraveling the secrets of cryptography and its impact on history,Technology
+The Finch,Chris Turner,9780316,A captivating novel inspired by a renowned painting and its enigmatic history,Arts
+Masterpiece Mysteries,Sara Clark,9780767,A collection of thrilling mysteries centered around famous works of art,Arts
+Great Expectations,Charles Dickens,9780141,A classic novel exploring themes of social class, ambition, and love,Literature
+Design Basics,Adam Lee,9781631,Exploring the fundamental principles of good design in various fields,Technology
+Gray's Anatomy,Henry Gray,9781512,A comprehensive anatomy textbook used by students and medical professionals,Medicine
+AI & You,Lisa Brown,9780262,An accessible introduction to the world of artificial intelligence and its applications,Technology
+Pride and Prejudice,Jane Austen,9780486,A timeless romance featuring themes of societal norms and personal values,Literature
+Art History 101,Eva Hall,9780500,An overview of art history, from ancient to contemporary, and its evolution,Arts
+1984,George Orwell,9780451,A chilling portrayal of a totalitarian regime and its impact on individual freedom,Literature
+War Strategies,Max Stone,9780199,A comprehensive survey of military tactics and strategies throughout history,Arts
+The Emperor of All Maladies,Siddhartha Mukherjee,9781439,An engaging history of cancer and its impact on society,Medicine
+Tech Titans,John Doe,9780132,History of the tech industry and its influential figures,Technology
+AI & You,Lisa Brown,9780262,Intro to artificial intelligence and its applications,Technology
+Code Breakers,Jane Smith,9780385,Cryptography and its impact on history,Technology
+The Anatomy of Being,Shinji Moon,9780692,Evocative poetry exploring themes of identity and existence,Medicine
+Being Mortal,Atul Gawande,9780805,Exploration of mortality and end-of-life care,Medicine
+To Kill a Mockingbird,Harper Lee,9780061,Racial injustice and moral growth in the American South,Literature
+Great Expectations,Charles Dickens,9780141,Themes of social class, ambition, and love,Literature
+Design Basics,Adam Lee,9781631,Fundamental principles of good design in various fields,Technology
+Art & Beauty,Alice Green,9780691,Reflections on aesthetics and the nature of beauty in art,Arts
+Masterpiece Mysteries,Sara Clark,9780767,Thrilling mysteries centered around famous works of art,Arts
+Art History 101,Eva Hall,9780500,Overview of art history, from ancient to contemporary,Arts
+Digital Revolution,Robert White,9780195,Transformative impact of the digital age on society,Technology
