@@ -7,7 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: Books works the same as Users now" />
+    <list default="true" id="d0faf292-e43f-4aa4-b8d8-3b1230a145ee" name="Changes" comment="Fix: Books works the same as Users now">
+      <change beforePath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/edu/ucsi/bookkeeper/BookKeeper.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -436,7 +438,23 @@
       <option name="project" value="LOCAL" />
       <updated>1690793069098</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Fix: Books works the same as Users now">
+      <option name="closed" value="true" />
+      <created>1690793129962</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1690793129962</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Fix: Books works the same as Users now">
+      <option name="closed" value="true" />
+      <created>1690793147099</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1690793147100</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
