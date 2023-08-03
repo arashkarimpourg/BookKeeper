@@ -66,13 +66,6 @@ public class BookKeeper extends Application {
 		// Create back button
 		Button backButton = new Button();
 		backButton.getStyleClass().add("back-button");
-		backButton.setOnAction(event -> {
-			if (isUserEditPaneVisible) {
-				toggleUserEditPane(userPane);
-			} else if (isBookEditPaneVisible) {
-				toggleBookEditPane(bookPane);
-			}
-		});
 
 		// Import back button icon
 		InputStream imageStreamBack = getClass().getResourceAsStream("images/back.png");
